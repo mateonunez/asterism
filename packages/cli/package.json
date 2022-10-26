@@ -1,0 +1,45 @@
+{
+  "name": "@mateonunez/asterism",
+  "version": "0.0.1",
+  "description": "Asterism CLI",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "asterism": "index.js"
+  },
+  "homepage": "https://github.com/mateonunez/asterism",
+  "scripts": {
+    "lint": "standard",
+    "test": "standard | snazzy && c8 --100 tap --no-coverage test/**/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/platformatic/platformatic.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "lyra",
+    "asterism",
+    "SQLite",
+    "PostgreSQL",
+    "MySQL",
+    "MariaDB"
+  ],
+  "dependencies": {
+    "commander": "^9.4.1",
+    "ora": "^6.1.2"
+  },
+  "devDependencies": {
+    "@asterism/drill": "^0.0.1",
+    "@asterism/rocket": "^0.0.1",
+    "c8": "^7.11.0",
+    "snazzy": "^9.0.0",
+    "standard": "^17.0.0",
+    "tap": "^16.0.0"
+  },
+  "author": {
+    "email": "mateonunez95@gmail.com",
+    "name": "Mateo Nunez",
+    "url": "https://github.com/mateonunez"
+  }
+}

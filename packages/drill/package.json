@@ -1,0 +1,33 @@
+{
+  "name": "@asterism/drill",
+  "version": "0.0.1",
+  "description": "Drill is a helper to comunicates databases",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "standard | snazzy && c8 --100 tap --no-coverage test/**/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mateonunez/asterism.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mateonunez/asterism/issues"
+  },
+  "homepage": "https://github.com/mateonunez/asterism#readme",
+  "devDependencies": {
+    "@databases/mysql": "^5.2.1",
+    "@databases/pg": "^5.4.1",
+    "@databases/sqlite": "^4.0.1",
+    "c8": "^7.11.0",
+    "snazzy": "^9.0.0",
+    "standard": "^17.0.0",
+    "tap": "^16.0.0"
+  },
+  "author": {
+    "email": "mateonunez95@gmail.com",
+    "name": "Mateo Nunez",
+    "url": "https://github.com/mateonunez"
+  }
+}

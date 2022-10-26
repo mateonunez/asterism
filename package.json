@@ -1,0 +1,18 @@
+{
+  "name": "@mateonunez/asterism",
+  "version": "0.0.1",
+  "description": "Asterism is a library that provides a set of tools to build a Lyra instance from your favorite database.",
+  "scripts": {
+    "asterism": "node ./packages/cli/index.js",
+    "prepare": "husky install",
+    "test": "pnpm -r --workspace-concurrency=1 test"
+  },
+  "devDependencies": {
+    "husky": "^8.0.1"
+  },
+  "author": {
+    "email": "mateonunez95@gmail.com",
+    "name": "Mateo Nunez",
+    "url": "https://github.com/mateonunez"
+  }
+}
