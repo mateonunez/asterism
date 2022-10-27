@@ -20,14 +20,40 @@ yarn add -g @mateonunez/asterism
 pnpm add -g @mateonunez/asterism
 ```
 
-## Cli
+## Usage
 
-## Rocket
+Asterism provides a CLI that can be used to generate a Lyra instance from a database. The CLI can be used as follows:
 
-## Drill
+```bash
+asterism --help
+```
 
-## Rover
+```bash
+Usage: asterism [options] [command] [database]
 
-## License
+Initialize a new Lyra instance from your current database
+
+Arguments:
+  database                           The database to migrate
+
+Options:
+  -v, --version                      output the current version
+  -H, --host <host>                  Database host (default: "localhost")
+  -h, --port <port>                  Port to run the server on (default: "3306")
+  -d, --databaseName <databaseName>  Database connection string (default: "asterism")
+  -u, --user <user>                  Database user (default: "root")
+  -w, --password <password>          Database password (default: "toor")
+  -o, --output <output>              Output directory (default: "lyra")
+  --help                             display help for command
+
+Commands:
+  migrate|m                          Start a database migration to a Lyra instance
+```
+
+The CLI provides a `migrate` command that can be used to generate a Lyra instance from a database. The command can be used as follows:
+
+```bash
+> asterism mysql -H localhost -u root -w toor -d asterism -o lyra
+```
 
 [MIT](/LICENSE)

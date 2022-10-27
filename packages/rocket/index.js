@@ -12,7 +12,7 @@ const logger = pino(
 
 export default async function (database, options) {
   if (!database) {
-    logger.warn(`Database argument is not provided. Defaulting to 'mysql'. Allowed values are ${allowedDatabases.join(', ')}.`)
+    logger.warn(`The argument "${database}" is not valid. Defaulting to 'mysql'. Allowed values are ${allowedDatabases.join(', ')}.`)
     database = 'mysql'
   }
 
