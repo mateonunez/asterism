@@ -1,6 +1,7 @@
 import pino from 'pino'
 import pretty from 'pino-pretty'
-import { allowedDatabases, generateConnectionString } from '@asterism/drill/lib/database.js'
+import setupDatabase from '@asterism/drill'
+import { allowedDatabases } from '@asterism/drill/lib/database.js'
 import validateOptions from '@asterism/drill/lib/validate-options.js'
 
 const logger = pino(
@@ -19,7 +20,7 @@ export default async function (database, options) {
   // is this really necessary?
   validateOptions(logger, options)
 
-  const { [database]: connectionString } = generateConnectionString(options)
+  const { db, sql } = await setupDatabase(logger, database, options)
 
-  logger.info(`Connecting to database at ${connectionString}`)
+  console.log(db, sql)
 }
