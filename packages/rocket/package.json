@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "standard | snazzy && c8 --100 tap --no-coverage test/**/*.test.js"
+    "lint": "standard --fix | snazzy",
+    "test": "npm run lint && c8 --100 tap --no-coverage test/**/*.test.js"
   },
   "repository": {
     "type": "git",

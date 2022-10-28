@@ -5,6 +5,7 @@
   "scripts": {
     "asterism": "node ./packages/cli/index.js",
     "prepare": "husky install",
+    "lint": "pnpm -r --workspace-concurrency=1 lint",
     "test": "pnpm -r --workspace-concurrency=1 test"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 import { generateConnectionString } from './lib/database.js'
 
-export default function setupDatabase (logger, database, options) {
-  const { db, sql } = buildDatabase(logger, database, options)
+export default async function setupDatabase (logger, database, options) {
+  const { db, sql } = await buildDatabase(logger, database, options)
 
   return { db, sql }
 }
@@ -21,19 +21,13 @@ async function buildDatabase (logger, database, options) {
 async function resolveConnectionPool (logger, database) {
   if (database === 'mysql') {
     logger.info('Importing mysql from @databases/mysql')
-    return await (
-      await import('@databases/mysql')
-    ).default
+    return (await import('@databases/mysql')).default
   } else if (database === 'postgres') {
     logger.info('Importing postgres from @databases/postgres')
-    return await (
-      await import('@databases/pg')
-    ).default
+    return (await import('@databases/pg')).default
   } else if (database === 'sqlite') {
     logger.info('Importing sqlite from @databases/sqlite')
-    return await (
-      await import('@databases/sqlite')
-    ).default
+    return (await import('@databases/sqlite')).default
   } else {
     throw new Error(`The database "${database}" is not supported.`)
   }
