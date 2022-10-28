@@ -22,5 +22,5 @@ export default async function (database, options) {
 
   const { db, sql } = await setupDatabase(logger, database, options)
 
-  console.log({db, sql})
+  console.log({ db, sql })
 }
