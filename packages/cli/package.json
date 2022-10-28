@@ -9,7 +9,7 @@
   },
   "homepage": "https://github.com/mateonunez/asterism",
   "scripts": {
-    "lint": "standard --fix | snazzy",
+    "lint": "standard | snazzy",
     "test": "npm run lint && c8 --100 tap --no-coverage test/**/*.test.js"
   },
   "repository": {
