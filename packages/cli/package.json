@@ -1,5 +1,5 @@
 {
-  "name": "@mateonunez/asterism",
+  "name": "@asterism/cli",
   "version": "0.0.1",
   "description": "Asterism CLI",
   "main": "cli.mjs",

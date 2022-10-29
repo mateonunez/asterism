@@ -6,6 +6,10 @@ export default async function setupDatabase (logger, database, options) {
   return { db, sql }
 }
 
+export async function kill (db) {
+  await db.dispose()
+}
+
 async function buildDatabase (logger, database, options) {
   const connectionPool = await resolveConnectionPool(logger, database)
   const { sql } = connectionPool
