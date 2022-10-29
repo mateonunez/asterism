@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 18
           cache: 'pnpm'
-      - run: pnpm install
+      - run: pnpm fetch
 
   ci-cli:
     needs: setup-dependencies
