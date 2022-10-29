@@ -19,13 +19,4 @@ program
   .option('-o, --output <output>', 'Output directory', './lyra.json')
   .action(rocket)
 
-program
-  .command('search')
-  .description('Search a term using Lyra')
-  .argument('<term>', 'The term to search')
-  .option('-p --path <path>', 'Path to the Lyra instance', './lyra.json')
-  .action((term, options) => {
-    console.log('search', term, options)
-  })
-
 program.parse()

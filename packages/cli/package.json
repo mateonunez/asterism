@@ -31,6 +31,7 @@
     "@asterism/drill": "^0.0.1",
     "@asterism/rocket": "^0.0.1",
     "c8": "^7.11.0",
+    "execa": "^6.1.0",
     "snazzy": "^9.0.0",
     "standard": "^17.0.0",
     "tap": "^16.0.0"
