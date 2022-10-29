@@ -3,18 +3,34 @@ name: ci
 on: [push, pull_request]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  setup-dependencies:
+    runs-on: ${{matrix.os}}
     strategy:
       matrix:
+        os: [ubuntu-latest, windows-latest]
         node-version: [16, 18]
     steps:
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2.2.4
       - uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
-      - uses: pnpm/action-setup@v2.2.2
+          node-version: 18
+          cache: 'pnpm'
+      - run: pnpm fetch
+
+  ci-cli:
+    needs: setup-dependencies
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node-version: [16, 18]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2.2.4
+      - uses: actions/setup-node@v3
         with:
-          version: 7
+          node-version: 18
+          cache: 'pnpm'
       - run: pnpm install
-      - run: pnpm test
+      - run: cd packages/cli && pnpm test
