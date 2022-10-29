@@ -15,5 +15,6 @@
     "email": "mateonunez95@gmail.com",
     "name": "Mateo Nunez",
     "url": "https://github.com/mateonunez"
-  }
+  },
+  "packageManager": "pnpm@7.14.1"
 }
