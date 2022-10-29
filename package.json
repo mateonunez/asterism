@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Asterism is a library that provides a set of tools to build a Lyra instance from your favorite database.",
   "scripts": {
-    "asterism": "node ./packages/cli/index.js",
+    "asterism": "node ./packages/cli/index.mjs",
     "prepare": "husky install",
     "lint": "pnpm -r --workspace-concurrency=1 lint",
     "test": "pnpm -r --workspace-concurrency=1 test"

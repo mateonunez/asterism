@@ -2,15 +2,14 @@
   "name": "@mateonunez/asterism",
   "version": "0.0.1",
   "description": "Asterism CLI",
-  "main": "index.js",
-  "type": "module",
+  "main": "index.mjs",
   "bin": {
-    "asterism": "index.js"
+    "asterism": "index.mjs"
   },
   "homepage": "https://github.com/mateonunez/asterism",
   "scripts": {
     "lint": "standard | snazzy",
-    "test": "npm run lint && c8 --100 tap --no-coverage test/**/*.test.js"
+    "test": "npm run lint && c8 --100 tap --no-coverage test/**/*.test.mjs"
   },
   "repository": {
     "type": "git",
