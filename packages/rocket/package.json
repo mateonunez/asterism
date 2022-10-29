@@ -2,7 +2,7 @@
   "name": "@asterism/rocket",
   "version": "0.0.1",
   "description": "Rocket migrates your database data to a Lyra instance",
-  "main": "index.js",
+  "main": "rocket.js",
   "type": "module",
   "scripts": {
     "lint": "standard | snazzy",

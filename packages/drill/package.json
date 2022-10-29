@@ -2,7 +2,7 @@
   "name": "@asterism/drill",
   "version": "0.0.1",
   "description": "Drill is a helper to comunicates databases",
-  "main": "index.js",
+  "main": "drill.js",
   "type": "module",
   "scripts": {
     "lint": "standard | snazzy",

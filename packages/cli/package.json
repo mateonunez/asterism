@@ -2,9 +2,9 @@
   "name": "@mateonunez/asterism",
   "version": "0.0.1",
   "description": "Asterism CLI",
-  "main": "index.mjs",
+  "main": "cli.mjs",
   "bin": {
-    "asterism": "index.mjs"
+    "asterism": "cli.mjs"
   },
   "homepage": "https://github.com/mateonunez/asterism",
   "scripts": {

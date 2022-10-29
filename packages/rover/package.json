@@ -2,7 +2,7 @@
   "name": "@asterism/rover",
   "version": "0.0.1",
   "description": "Rover is the tool to explore Lyra",
-  "main": "index.js",
+  "main": "rover.js",
   "type": "module",
   "scripts": {
     "lint": "standard | snazzy",
