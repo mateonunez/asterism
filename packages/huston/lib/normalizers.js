@@ -1,0 +1,24 @@
+'use strict'
+
+function removeNulls (obj) {
+  if (typeof obj !== 'object') {
+    return obj
+  }
+
+  if (Array.isArray(obj)) {
+    return obj.map(removeNulls)
+  }
+
+  const newObj = {}
+  for (const [key, value] of Object.entries(obj)) {
+    if (value !== null) {
+      newObj[key] = removeNulls(value)
+    }
+  }
+
+  return newObj
+}
+
+module.exports = {
+  removeNulls
+}

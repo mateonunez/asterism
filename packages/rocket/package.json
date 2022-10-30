@@ -19,6 +19,7 @@
   "homepage": "https://github.com/mateonunez/asterism#readme",
   "devDependencies": {
     "@asterism/drill": "^0.0.1",
+    "@asterism/rover": "^0.0.1",
     "c8": "^7.11.0",
     "snazzy": "^9.0.0",
     "standard": "^17.0.0",

@@ -1,8 +1,9 @@
 import pino from 'pino'
 import pretty from 'pino-pretty'
-import setupDatabase, { resolveTables } from '@asterism/drill'
+import setupDatabase, { killDatabase } from '@asterism/drill'
 import { allowedDatabases } from '@asterism/drill/lib/database.js'
 import validateOptions from '@asterism/drill/lib/validate-options.js'
+import { resolveSchema } from '@asterism/rover'
 
 const logger = pino(
   pretty({
@@ -17,12 +18,28 @@ export default async function (database, options) {
     database = 'mysql'
   }
 
-  // is this really necessary?
   validateOptions(logger, options)
 
-  const { db, sql, queryer } = await setupDatabase(logger, database, options)
-  const tables = await resolveTables(logger, db, sql, queryer)
-  console.log(tables)
+  const { db, queryer } = await setupDatabase(logger, database, options)
 
-  return { db, sql }
+  let tables
+  if (!options.tableName) {
+    tables = await queryer.getTables()
+  } else {
+    tables = [await queryer.getTable(options.tableName)]
+  }
+
+  const data = {}
+  for (const table of tables) {
+    data[table] = await queryer.selectData(table)
+  }
+
+  await killDatabase(db)
+
+  const schema = {}
+  for (const entity in data) {
+    schema[entity] = resolveSchema(logger, data[entity], entity)
+  }
+
+  return { db, schema }
 }

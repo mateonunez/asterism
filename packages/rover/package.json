@@ -3,10 +3,9 @@
   "version": "0.0.1",
   "description": "Rover is the tool to explore Lyra",
   "main": "rover.js",
-  "type": "module",
   "scripts": {
     "lint": "standard | snazzy",
-    "test": "npm run lint && c8 --100 tap --no-coverage test/**/*.test.js"
+    "test": "npm run lint && c8 --100 tap --no-coverage test/**/*.test.mjs"
   },
   "repository": {
     "type": "git",
@@ -17,7 +16,11 @@
     "url": "https://github.com/mateonunez/asterism/issues"
   },
   "homepage": "https://github.com/mateonunez/asterism#readme",
+  "dependencies": {
+    "@mateonunez/lyra-schema-resolver": "^0.0.3"
+  },
   "devDependencies": {
+    "@asterism/huston": "^0.0.1",
     "@databases/mysql": "^5.2.1",
     "@databases/pg": "^5.4.1",
     "@databases/sqlite": "^4.0.1",

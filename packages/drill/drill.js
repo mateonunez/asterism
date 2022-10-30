@@ -2,24 +2,12 @@ import { generateConnectionString } from './lib/database.js'
 import queries from './lib/queries/index.js'
 
 export default async function setupDatabase (logger, database, options) {
-  const { db, sql, queryer } = await buildDatabase(logger, database, options)
+  const { db, queryer } = await buildDatabase(logger, database, options)
 
-  return { db, sql, queryer }
+  return { db, queryer }
 }
 
-export async function resolveTables (logger, db, sql, queryer) {
-  let tables
-  try {
-    tables = await queryer.getTables()
-  } catch (err) {
-    kill(db)
-    throw err
-  }
-
-  return tables
-}
-
-export async function kill (db) {
+export async function killDatabase (db) {
   await db.dispose()
 }
 
