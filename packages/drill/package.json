@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/mateonunez/asterism#readme",
   "devDependencies": {
+    "@asterism/huston": "^0.0.1",
     "@databases/mysql": "^5.2.1",
     "@databases/pg": "^5.4.1",
     "@databases/sqlite": "^4.0.1",

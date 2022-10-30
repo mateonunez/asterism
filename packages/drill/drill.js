@@ -1,9 +1,22 @@
 import { generateConnectionString } from './lib/database.js'
+import queries from './lib/queries/index.js'
 
 export default async function setupDatabase (logger, database, options) {
-  const { db, sql } = await buildDatabase(logger, database, options)
+  const { db, sql, queryer } = await buildDatabase(logger, database, options)
 
-  return { db, sql }
+  return { db, sql, queryer }
+}
+
+export async function resolveTables (logger, db, sql, queryer) {
+  let tables
+  try {
+    tables = await queryer.getTables()
+  } catch (err) {
+    kill(db)
+    throw err
+  }
+
+  return tables
 }
 
 export async function kill (db) {
@@ -18,8 +31,9 @@ async function buildDatabase (logger, database, options) {
 
   let db = await connect(logger, connectionPool, database, connectionString)
   db = await resolveMeta(logger, database, db, sql)
+  const queryer = await queries(logger, db, sql)
 
-  return { db, sql }
+  return { db, sql, queryer }
 }
 
 async function resolveConnectionPool (logger, database) {

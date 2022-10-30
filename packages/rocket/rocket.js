@@ -1,6 +1,6 @@
 import pino from 'pino'
 import pretty from 'pino-pretty'
-import setupDatabase from '@asterism/drill'
+import setupDatabase, { resolveTables } from '@asterism/drill'
 import { allowedDatabases } from '@asterism/drill/lib/database.js'
 import validateOptions from '@asterism/drill/lib/validate-options.js'
 
@@ -20,7 +20,9 @@ export default async function (database, options) {
   // is this really necessary?
   validateOptions(logger, options)
 
-  const { db, sql } = await setupDatabase(logger, database, options)
+  const { db, sql, queryer } = await setupDatabase(logger, database, options)
+  const tables = await resolveTables(logger, db, sql, queryer)
+  console.log(tables)
 
   return { db, sql }
 }
