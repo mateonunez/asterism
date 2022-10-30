@@ -1,9 +1,11 @@
 import pino from 'pino'
 import pretty from 'pino-pretty'
-import setupDatabase, { killDatabase } from '@asterism/drill'
+import setupDatabase, { killDatabase, resolveTables, resolveData } from '@asterism/drill'
 import { allowedDatabases } from '@asterism/drill/lib/database.js'
 import validateOptions from '@asterism/drill/lib/validate-options.js'
-import { resolveSchema } from '@asterism/rover'
+import { generateSchema, generateAsterism } from '@asterism/rover'
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 const logger = pino(
   pretty({
@@ -21,25 +23,15 @@ export default async function (database, options) {
   validateOptions(logger, options)
 
   const { db, queryer } = await setupDatabase(logger, database, options)
-
-  let tables
-  if (!options.tableName) {
-    tables = await queryer.getTables()
-  } else {
-    tables = [await queryer.getTable(options.tableName)]
-  }
-
-  const data = {}
-  for (const table of tables) {
-    data[table] = await queryer.selectData(table)
-  }
+  const tables = await resolveTables(logger, queryer, options)
+  const data = await resolveData(logger, queryer, tables, options)
 
   await killDatabase(db)
 
-  const schema = {}
-  for (const entity in data) {
-    schema[entity] = resolveSchema(logger, data[entity], entity)
-  }
+  const schema = generateSchema(logger, data)
+  const asterism = generateAsterism(logger, data, schema)
 
-  return { db, schema }
+  await sleep(100)
+
+  return { db, asterism }
 }

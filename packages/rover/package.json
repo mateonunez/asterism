@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/mateonunez/asterism#readme",
   "dependencies": {
+    "@lyrasearch/lyra": "^0.2.8",
     "@mateonunez/lyra-schema-resolver": "^0.0.3"
   },
   "devDependencies": {

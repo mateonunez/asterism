@@ -94,12 +94,14 @@ importers:
       '@databases/mysql': ^5.2.1
       '@databases/pg': ^5.4.1
       '@databases/sqlite': ^4.0.1
+      '@lyrasearch/lyra': ^0.2.8
       '@mateonunez/lyra-schema-resolver': ^0.0.3
       c8: ^7.11.0
       snazzy: ^9.0.0
       standard: ^17.0.0
       tap: ^16.0.0
     dependencies:
+      '@lyrasearch/lyra': 0.2.8
       '@mateonunez/lyra-schema-resolver': 0.0.3
     devDependencies:
       '@asterism/huston': link:../huston

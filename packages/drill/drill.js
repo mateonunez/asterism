@@ -1,14 +1,37 @@
 import { generateConnectionString } from './lib/database.js'
 import queries from './lib/queries/index.js'
+import { removeNulls, removeReservedWords } from '@asterism/huston/lib/normalizers.js'
 
 export default async function setupDatabase (logger, database, options) {
+  if (logger) logger.info(`Setting up ${database} database.`)
   const { db, queryer } = await buildDatabase(logger, database, options)
-
   return { db, queryer }
 }
 
 export async function killDatabase (db) {
   await db.dispose()
+}
+
+export async function resolveTables (logger, queryer, options) {
+  if (logger) logger.info('Resolving tables.')
+
+  let tables
+  if (!options.tableName) {
+    tables = await queryer.getTables()
+  } else {
+    tables = [await queryer.getTable(options.tableName)]
+  }
+  return tables
+}
+
+export async function resolveData (logger, queryer, tables, options) {
+  if (logger) logger.info('Resolving tables.')
+
+  const data = {}
+  for (const table of tables) {
+    data[table] = removeReservedWords(removeNulls(await queryer.selectData(table)))
+  }
+  return data
 }
 
 async function buildDatabase (logger, database, options) {
@@ -26,13 +49,13 @@ async function buildDatabase (logger, database, options) {
 
 async function resolveConnectionPool (logger, database) {
   if (database === 'mysql') {
-    logger.info('Importing mysql from @databases/mysql')
+    if (logger) logger.info('Importing mysql from @databases/mysql')
     return (await import('@databases/mysql')).default
   } else if (database === 'postgres') {
-    logger.info('Importing postgres from @databases/postgres')
+    if (logger) logger.info('Importing postgres from @databases/postgres')
     return (await import('@databases/pg')).default
   } else if (database === 'sqlite') {
-    logger.info('Importing sqlite from @databases/sqlite')
+    if (logger) logger.info('Importing sqlite from @databases/sqlite')
     return (await import('@databases/sqlite')).default
   } else {
     throw new Error(`The database "${database}" is not supported.`)
@@ -40,7 +63,7 @@ async function resolveConnectionPool (logger, database) {
 }
 
 function connect (logger, connectionPool, database, connectionString) {
-  logger.info(`Connecting to ${database} database at ${connectionString}`)
+  if (logger) logger.info(`Connecting to ${database} database at ${connectionString}`)
 
   let db
   try {
@@ -75,6 +98,6 @@ async function resolveMeta (logger, database, db, sql) {
   const isEngine = `is${engine.charAt(0).toUpperCase()}${engine.slice(1)}`
   db[isEngine] = true
 
-  logger.info(`Meta resolved for ${database} database. Version: ${version}, Engine: ${engine}`)
+  if (logger) logger.info(`Meta resolved for ${database} database. Version: ${version}, Engine: ${engine}`)
   return db
 }

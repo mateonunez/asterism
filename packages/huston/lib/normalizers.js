@@ -11,7 +11,9 @@ function removeNulls (obj) {
 
   const newObj = {}
   for (const [key, value] of Object.entries(obj)) {
-    if (value !== null) {
+    if (value === null) {
+      newObj[key] = ''
+    } else {
       newObj[key] = removeNulls(value)
     }
   }
@@ -19,6 +21,26 @@ function removeNulls (obj) {
   return newObj
 }
 
+function removeReservedWords (obj) {
+  if (typeof obj !== 'object') {
+    return obj
+  }
+
+  if (Array.isArray(obj)) {
+    return obj.map(removeReservedWords)
+  }
+
+  const newObj = {}
+  for (const [key, value] of Object.entries(obj)) {
+    if (key !== 'id') {
+      newObj[key] = removeReservedWords(value)
+    }
+  }
+
+  return newObj
+}
+
 module.exports = {
-  removeNulls
+  removeNulls,
+  removeReservedWords
 }
