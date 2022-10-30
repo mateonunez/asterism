@@ -14,9 +14,9 @@ program
   .option('-H, --host <host>', 'Database host', '127.0.0.1')
   .option('-h, --port <port>', 'Port to run the server on', '3306')
   .option('-d, --databaseName <databaseName>', 'Database connection string', 'asterism')
-  .option('-u, --user <user>', 'Database user', 'asterism')
-  .option('-w, --password <password>', 'Database password', 'asterism')
-  .option('-o, --output <output>', 'Output directory', './lyra.json')
+  .option('-u, --user <user>', 'Database user', 'root')
+  .option('-w, --password <password>', 'Database password', 'toor')
+  .option('-o, --output <output>', 'Output directory', './out')
   .action(rocket)
 
 program.parse()
