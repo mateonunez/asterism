@@ -3,7 +3,6 @@ export default async function (logger, db, sql) {
 
   if (db.isMysql) {
     queryer = await (await import('./mysql.js')).default(logger, db, sql)
-    console.log({queryer})
   } else if (db.isPostgres) {
     queryer = (await import('./postgres.js')).default(logger, db, sql)
   } else if (db.isSqlite) {

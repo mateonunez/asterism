@@ -1,10 +1,9 @@
 const defaultOptions = {
   host: '127.0.0.1',
   port: '3306',
-  databaseName: 'asterism',
-  user: 'user',
+  user: 'root',
   // deepcode ignore NoHardcodedPasswords/test: example data
-  password: 'pass',
+  password: 'toor',
   output: './lyra.json'
 }
 

@@ -8,12 +8,12 @@ t.before(async () => {
 })
 
 t.test('no database selected should default to mysql', async ({ ok }) => {
-  const { db } = await rocket(undefined, { ...defaultOptions, tableName: 'users' })
+  const { db } = await rocket(undefined, defaultOptions)
   ok(db.isMysql)
 })
 
 t.test('table name', async ({ ok }) => {
-  const { db } = await rocket('mysql', { ...defaultOptions, tableName: 'users' })
+  const { db } = await rocket('mysql', defaultOptions)
   ok(db.isMysql)
 })
 

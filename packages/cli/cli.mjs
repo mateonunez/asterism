@@ -13,7 +13,7 @@ program
   .argument('[database]', 'The database to migrate', (value) => (allowedDatabases.includes(value) ? value : undefined))
   .option('-H, --host <host>', 'Database host', '127.0.0.1')
   .option('-h, --port <port>', 'Port to run the server on', '3306')
-  .option('-d, --databaseName <databaseName>', 'Database connection string', 'asterism')
+  .option('-d, --databaseName <databaseName>', 'Database connection string')
   .option('-t --tableName <tableName>', 'Table name')
   .option('-u, --user <user>', 'Database user', 'root')
   .option('-w, --password <password>', 'Database password', 'toor')

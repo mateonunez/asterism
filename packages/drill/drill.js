@@ -37,15 +37,10 @@ export async function resolveData (logger, queryer, tables, options) {
 async function buildDatabase (logger, database, options) {
   const connectionPool = await resolveConnectionPool(logger, database)
   const { sql } = connectionPool
-
   const { [database]: connectionString } = generateConnectionString(options)
-
   let db = await connect(logger, connectionPool, database, connectionString)
   db = await resolveMeta(logger, database, db, sql)
   const queryer = await queries(logger, db, sql)
-
-  console.log({db})
-
   return { db, sql, queryer }
 }
 

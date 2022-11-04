@@ -9,8 +9,6 @@ services:
     environment:
       MYSQL_DATABASE: db
       MYSQL_ROOT_PASSWORD: toor
-      MYSQL_USER: user
-      MYSQL_PASSWORD: pass
     networks:
       - asterism_network
   
@@ -20,8 +18,8 @@ services:
       - 5432:5432
     environment:
       POSTGRES_DB: db
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: pass
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: toor
     networks:
       - asterism_network
 
