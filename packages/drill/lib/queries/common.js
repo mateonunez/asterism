@@ -5,7 +5,7 @@ import symbols from '../../lib/symbols.js'
 export default async function (logger, db, sql) {
   return {
     getTables: () => getTables(db, sql),
-    getTable: (tableName) => getTable(db, sql, tableName),
+    getTable: (tableName) => getTable(logger, db, sql, tableName),
     selectData: (tableName, columns, where) => selectData(logger, db, sql, tableName, columns, where),
     [symbols.privateMethods]: {
       createDatabase: (database, options) => createDatabase(logger, db, sql, database),
@@ -35,15 +35,16 @@ async function getTables (db, sql) {
   return tables
 }
 
-async function getTable (db, sql, tableName) {
+async function getTable (logger, db, sql, tableName) {
   const response = await db.query(sql`
     SELECT TABLE_NAME
     FROM information_schema.tables
     WHERE table_schema = (SELECT DATABASE())
-    AND TABLE_NAME = ${sql.ident(tableName)}
+    AND TABLE_NAME = ${tableName}
   `)
   if (response.length === 0) {
-    throw new Error(`The table "${tableName}" does not exist.`)
+    if (logger) logger.warn(`Table "${tableName}" does not exist.`)
+    return null
   }
   const { TABLE_NAME: table } = response[0]
   return table
@@ -93,7 +94,12 @@ async function createTable (logger, db, sql, tableName, columns, options) {
     const row = sql`${sql.ident(name)} ${dangerousRaw}`
     columnDefinitions.push(row)
   }
-  if (options?.dropTable) await dropTable(logger, db, sql, tableName)
+  if (options?.dropTable) {
+    const table = await getTable(logger, db, sql, tableName)
+    if (table) {
+      await dropTable(logger, db, sql, tableName)
+    }
+  }
   await db.query(sql`
     CREATE TABLE ${sql.ident(tableName)} (
       ${sql.join(columnDefinitions, sql`, `)})
