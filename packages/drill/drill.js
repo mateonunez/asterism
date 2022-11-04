@@ -44,6 +44,8 @@ async function buildDatabase (logger, database, options) {
   db = await resolveMeta(logger, database, db, sql)
   const queryer = await queries(logger, db, sql)
 
+  console.log({db})
+
   return { db, sql, queryer }
 }
 

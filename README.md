@@ -56,4 +56,18 @@ The CLI provides a `migrate` command that can be used to generate a Lyra instanc
 > asterism mysql -H localhost -u root -w toor -d asterism -o lyra
 ```
 
+## Testing
+
+Asterism needs a database to run the tests. At first run the `docker-compose` file.
+
+```bash
+docker-compose up -d
+```
+
+Then, run the tests using `npm`, `yarn` or `pnpm`:
+
+```bash
+npm run test
+```
+
 [MIT](/LICENSE)

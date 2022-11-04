@@ -1,7 +1,7 @@
-import shared from './common.js'
+import common from './common.js'
 
 export default async function (logger, db, sql) {
   return {
-    ...shared
+    ...(await common(logger, db, sql)),
   }
 }
