@@ -25,11 +25,11 @@ pnpm add -g @mateonunez/asterism
 Asterism provides a CLI that can be used to generate a Lyra instance from a database. The CLI can be used as follows:
 
 ```bash
-asterism --help
+asterism migrate --help
 ```
 
 ```bash
-Usage: asterism [options] [command] [database]
+Usage: asterism migrate [options] [database]
 
 Initialize a new Lyra instance from your current database
 
@@ -37,23 +37,20 @@ Arguments:
   database                           The database to migrate
 
 Options:
-  -v, --version                      output the current version
-  -H, --host <host>                  Database host (default: "localhost")
+  -H, --host <host>                  Database host (default: "127.0.0.1")
   -h, --port <port>                  Port to run the server on (default: "3306")
-  -d, --databaseName <databaseName>  Database connection string (default: "asterism")
+  -d, --databaseName <databaseName>  Database connection string
+  -t, --tableName <tableName>        Table name
   -u, --user <user>                  Database user (default: "root")
   -w, --password <password>          Database password (default: "toor")
-  -o, --output <output>              Output directory (default: "lyra")
+  -o, --output <output>              Output directory (default: "./out")
   --help                             display help for command
-
-Commands:
-  migrate|m                          Start a database migration to a Lyra instance
 ```
 
 The CLI provides a `migrate` command that can be used to generate a Lyra instance from a database. The command can be used as follows:
 
 ```bash
-> asterism mysql -H localhost -u root -w toor -d asterism -o lyra
+> asterism migrate
 ```
 
 ## Testing
