@@ -34,3 +34,21 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install
       - run: cd packages/cli && pnpm test
+
+  ci-rocket:
+    needs: setup-dependencies
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node-version: [16, 18]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2.2.4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'pnpm'
+      - run: docker-compose up
+      - run: pnpm install
+      - run: cd packages/rocket && pnpm test
