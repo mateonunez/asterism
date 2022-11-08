@@ -7,4 +7,10 @@ const defaultOptions = {
   output: './lyra.json'
 }
 
-export { defaultOptions }
+const postgresOptions = {
+  ...defaultOptions,
+  user: 'postgres',
+  port: '5432'
+}
+
+export { defaultOptions, postgresOptions }
