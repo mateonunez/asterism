@@ -1,14 +1,14 @@
 import seeder, { dropSeed } from '@asterism/drill/lib/seeder.js'
 import t from 'tap'
 import rocket from '../rocket.js'
-import { defaultOptions, postgresOptions } from './helper.js'
+import { mysqlOptions, postgresOptions } from '@asterism/huston'
 
 t.before(async () => {
-  await seeder(undefined, 'mysql', defaultOptions)
+  await seeder(undefined, 'mysql', mysqlOptions)
 })
 
 t.test('no database selected should default to mysql', async ({ ok }) => {
-  const { db } = await rocket(undefined, defaultOptions)
+  const { db } = await rocket(undefined, mysqlOptions)
   ok(db.isMysql)
 })
 
@@ -18,5 +18,5 @@ t.test('postgres database selected', async ({ ok }) => {
 })
 
 t.on('end', async () => {
-  await dropSeed(undefined, 'mysql', defaultOptions)
+  await dropSeed(undefined, 'mysql', mysqlOptions)
 })

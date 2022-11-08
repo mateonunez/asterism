@@ -66,6 +66,7 @@ importers:
   packages/rocket:
     specifiers:
       '@asterism/drill': ^0.0.1
+      '@asterism/huston': ^0.0.1
       '@asterism/rover': ^0.0.1
       c8: ^7.11.0
       pino: ^8.4.1
@@ -78,6 +79,7 @@ importers:
       pino-pretty: 9.1.1
     devDependencies:
       '@asterism/drill': link:../drill
+      '@asterism/huston': link:../huston
       '@asterism/rover': link:../rover
       c8: 7.12.0
       snazzy: 9.0.0
