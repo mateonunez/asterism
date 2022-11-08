@@ -52,5 +52,4 @@ jobs:
           cache: 'pnpm'
       - run: docker-compose up -d
       - run: pnpm install
-      - run: sleep 10
       - run: cd packages/rocket && pnpm test
