@@ -22,9 +22,6 @@
   },
   "devDependencies": {
     "@asterism/huston": "^0.0.1",
-    "@databases/mysql": "^5.2.1",
-    "@databases/pg": "^5.4.1",
-    "@databases/sqlite": "^4.0.1",
     "c8": "^7.11.0",
     "snazzy": "^9.0.0",
     "standard": "^17.0.0",

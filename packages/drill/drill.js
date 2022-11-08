@@ -51,9 +51,6 @@ async function resolveConnectionPool (logger, database) {
   } else if (database === 'postgres') {
     if (logger) logger.info('Importing postgres from @databases/postgres')
     return (await import('@databases/pg')).default
-  } else if (database === 'sqlite') {
-    if (logger) logger.info('Importing sqlite from @databases/sqlite')
-    return (await import('@databases/sqlite')).default
   } else {
     throw new Error(`The database "${database}" is not supported.`)
   }
@@ -84,9 +81,6 @@ async function resolveMeta (logger, database, db, sql) {
   } else if (database === 'postgres') {
     version = await db.query(sql`SELECT VERSION()`).version
     engine = 'postgres'
-  } else if (database === 'sqlite') {
-    version = await db.query(sql`SELECT SQLITE_VERSION()`)[0][0].sqlite_version
-    engine = 'sqlite'
   } else {
     throw new Error(`The database "${database}" is not supported.`)
   }

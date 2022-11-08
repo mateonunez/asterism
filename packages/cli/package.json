@@ -19,10 +19,8 @@
   "keywords": [
     "lyra",
     "asterism",
-    "SQLite",
-    "PostgreSQL",
     "MySQL",
-    "MariaDB"
+    "PostgreSQL"
   ],
   "dependencies": {
     "commander": "^9.4.1"
