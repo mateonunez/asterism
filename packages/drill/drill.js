@@ -82,7 +82,7 @@ async function resolveMeta (logger, database, db, sql) {
     version = (await db.query(sql`SELECT VERSION()`))[0]['VERSION()']
     engine = 'mysql'
   } else if (database === 'postgres') {
-    version = await db.query(sql`SELECT VERSION()`)[0][0].version
+    version = await db.query(sql`SELECT VERSION()`).version
     engine = 'postgres'
   } else if (database === 'sqlite') {
     version = await db.query(sql`SELECT SQLITE_VERSION()`)[0][0].sqlite_version
