@@ -7,7 +7,7 @@ jobs:
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest]
         node-version: [16, 18]
     steps:
       - uses: actions/checkout@v3
@@ -23,7 +23,7 @@ jobs:
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest]
         node-version: [16, 18]
     steps:
       - uses: actions/checkout@v3
@@ -38,9 +38,10 @@ jobs:
   ci-rocket:
     needs: setup-dependencies
     runs-on: ${{matrix.os}}
+    timeout-minutes: 20
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest]
         node-version: [16, 18]
     steps:
       - uses: actions/checkout@v3
@@ -49,6 +50,7 @@ jobs:
         with:
           node-version: 18
           cache: 'pnpm'
-      - run: docker-compose up
+      - run: docker-compose up -d
       - run: pnpm install
+      - run: sleep 10
       - run: cd packages/rocket && pnpm test
