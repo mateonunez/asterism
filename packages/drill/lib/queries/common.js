@@ -4,7 +4,6 @@ import symbols from '../../lib/symbols.js'
 
 export default async function (logger, db, sql) {
   return {
-    getTables: () => getTables(db, sql),
     getTable: (tableName) => getTable(logger, db, sql, tableName),
     selectData: (tableName, columns, where) => selectData(logger, db, sql, tableName, columns, where),
     [symbols.privateMethods]: {
@@ -17,22 +16,6 @@ export default async function (logger, db, sql) {
       updateData: (tableName, data, where, options) => updateData(logger, db, sql, tableName, data, where)
     }
   }
-}
-
-async function getTables (db, sql) {
-  const response = await db.query(sql`
-    SELECT TABLE_NAME
-    FROM information_schema.tables
-    WHERE table_schema = (SELECT DATABASE())
-  `)
-  if (response.length === 0) {
-    throw new Error('There are no tables.')
-  }
-  const tables = []
-  for (const { TABLE_NAME } of response) {
-    tables.push(TABLE_NAME)
-  }
-  return tables
 }
 
 async function getTable (logger, db, sql, tableName) {
