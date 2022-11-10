@@ -18,3 +18,45 @@ test('should create a new database', async ({ ok, end }) => {
   ok(_db)
   end()
 })
+
+test('should retrieve tables', async ({ ok, end }) => {
+  const { db, queryer } = await setupDatabase(logger, 'postgres', postgresOptions)
+  const tableName = 'test'
+  await queryer[privateMethods].createTable(tableName, {
+    id: {
+      type: 'int',
+      primaryKey: true
+    },
+    name: {
+      type: 'varchar',
+      length: 255
+    }
+  }, { dropIfExists: true })
+
+  const tables = await queryer.getTables()
+  await killDatabase(db)
+
+  ok(tables.length > 0)
+  end()
+})
+
+test('should retrieve single table', async ({ ok, end }) => {
+  const { db, queryer } = await setupDatabase(logger, 'postgres', postgresOptions)
+  const tableName = 'test'
+  await queryer[privateMethods].createTable(tableName, {
+    id: {
+      type: 'int',
+      primaryKey: true
+    },
+    name: {
+      type: 'varchar',
+      length: 255
+    }
+  }, { dropIfExists: true })
+
+  const tables = await queryer.getTable('test')
+  await killDatabase(db)
+
+  ok(tables)
+  end()
+})
