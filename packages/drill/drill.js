@@ -61,7 +61,10 @@ function connect (logger, connectionPool, database, connectionString) {
 
   let db
   try {
-    db = connectionPool({ connectionString })
+    const options = {
+      ...(database === 'postgres' && { bigIntMode: 'string' })
+    }
+    db = connectionPool({ connectionString, ...options })
   } catch (error) {
     throw new Error(`Could not connect to ${database} database at ${connectionString}`)
   }
