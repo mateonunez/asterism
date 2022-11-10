@@ -26,7 +26,12 @@ function formatTime (time) {
   return `${time / 1e9}s`
 }
 
+function sleep (ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
 module.exports = {
   getNanoTime,
-  formatTime
+  formatTime,
+  sleep
 }
