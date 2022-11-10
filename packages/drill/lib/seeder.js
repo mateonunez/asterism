@@ -6,7 +6,8 @@ const { privateMethods } = symbols
 export default async function (logger, database, options) {
   const { db, queryer } = await setupDatabase(logger, database, options)
   await queryer[privateMethods].createDatabase(options.databaseName)
-  await queryer[privateMethods].createTable('example', {
+  const table = queryer.getTable('example')
+  await queryer[privateMethods].createTable(table, {
     id: {
       type: 'int',
       primaryKey: true,
