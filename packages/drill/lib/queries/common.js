@@ -4,33 +4,17 @@ import symbols from '../../lib/symbols.js'
 
 export default async function (logger, db, sql) {
   return {
-    getTable: (tableName) => getTable(logger, db, sql, tableName),
     selectData: (tableName, columns, where) => selectData(logger, db, sql, tableName, columns, where),
     [symbols.privateMethods]: {
       createDatabase: (database, options) => createDatabase(logger, db, sql, database),
       dropDatabase: (database, options) => dropDatabase(logger, db, sql, database),
-      createTable: (tableName, columns, options) => createTable(logger, db, sql, tableName, columns, options),
+      createTable: (table, columns, options) => createTable(logger, db, sql, table, columns, options),
       dropTable: (tableName, options) => dropTable(logger, db, sql, tableName),
       insertData: (tableName, data, options) => insertData(logger, db, sql, tableName, data),
       deleteData: (tableName, where, options) => deleteData(logger, db, sql, tableName, where),
       updateData: (tableName, data, where, options) => updateData(logger, db, sql, tableName, data, where)
     }
   }
-}
-
-async function getTable (logger, db, sql, tableName) {
-  const response = await db.query(sql`
-    SELECT TABLE_NAME
-    FROM information_schema.tables
-    WHERE table_schema = (SELECT DATABASE())
-    AND TABLE_NAME = ${tableName}
-  `)
-  if (response.length === 0) {
-    if (logger) logger.warn(`Table "${tableName}" does not exist.`)
-    return null
-  }
-  const { TABLE_NAME: table } = response[0]
-  return table
 }
 
 async function selectData (logger, db, sql, tableName, columns = '*', where = {}) {
@@ -69,8 +53,8 @@ async function dropDatabase (logger, db, sql, database) {
   await db.query(sql`DROP DATABASE ${sql.ident(database)}`)
 }
 
-async function createTable (logger, db, sql, tableName, columns, options) {
-  if (logger) logger.info(`Creating table "${tableName}".`)
+async function createTable (logger, db, sql, table, columns, options) {
+  if (logger) logger.info(`Creating table "${table}".`)
   const columnDefinitions = []
   for (const [name, definition] of Object.entries(columns)) {
     const dangerousRaw = sql.__dangerous__rawValue(`${definition.type + (definition.length ? `(${definition.length})` : '')} ${definition.autoIncrement ? 'AUTO_INCREMENT' : ''} ${definition.primaryKey ? 'PRIMARY KEY' : ''}`)
@@ -78,13 +62,12 @@ async function createTable (logger, db, sql, tableName, columns, options) {
     columnDefinitions.push(row)
   }
   if (options?.dropTable) {
-    const table = await getTable(logger, db, sql, tableName)
     if (table) {
-      await dropTable(logger, db, sql, tableName)
+      await dropTable(logger, db, sql, table)
     }
   }
   await db.query(sql`
-    CREATE TABLE ${sql.ident(tableName)} (
+    CREATE TABLE ${sql.ident(table)} (
       ${sql.join(columnDefinitions, sql`, `)})
     `)
 }
