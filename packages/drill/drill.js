@@ -38,7 +38,7 @@ async function buildDatabase (logger, database, options) {
   const connectionPool = await resolveConnectionPool(logger, database)
   const { sql } = connectionPool
   const { [database]: connectionString } = generateConnectionString(options)
-  let db = connect(logger, connectionPool, database, connectionString)
+  let db = await connect(logger, connectionPool, database, connectionString)
   db = await resolveMeta(logger, database, db, sql)
   const queryer = await queries(logger, db, sql)
   return { db, sql, queryer }
@@ -56,7 +56,7 @@ async function resolveConnectionPool (logger, database) {
   }
 }
 
-function connect (logger, connectionPool, database, connectionString) {
+async function connect (logger, connectionPool, database, connectionString) {
   if (logger) logger.info(`Connecting to ${database} database at ${connectionString}`)
 
   let db
@@ -64,7 +64,7 @@ function connect (logger, connectionPool, database, connectionString) {
     const options = {
       ...(database === 'postgres' && { bigIntMode: 'string' })
     }
-    db = connectionPool({ connectionString, ...options })
+    db = await connectionPool({ connectionString, ...options })
   } catch (error) {
     throw new Error(`Could not connect to ${database} database at ${connectionString}`)
   }

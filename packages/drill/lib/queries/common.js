@@ -6,7 +6,7 @@ export default async function (logger, db, sql) {
   return {
     selectData: (tableName, columns, where) => selectData(logger, db, sql, tableName, columns, where),
     [symbols.privateMethods]: {
-      createDatabase: (database, options) => createDatabase(logger, db, sql, database),
+      createDatabase: (database, options) => createDatabase(logger, db, sql, database, options),
       dropDatabase: (database, options) => dropDatabase(logger, db, sql, database),
       createTable: (table, columns, options) => createTable(logger, db, sql, table, columns, options),
       dropTable: (tableName, options) => dropTable(logger, db, sql, tableName),
@@ -24,11 +24,13 @@ async function selectData (logger, db, sql, tableName, columns = '*', where = {}
   if (columns === '*') {
     columnDefinitions.push(sql`*`)
   } else {
+    /* c8 ignore next 5 */
     for (const [name, value] of Object.entries(columns)) {
       columnDefinitions.push(sql`${sql.ident(name)} = ${sql.value(value)}`)
       values.push(value)
     }
   }
+  /* c8 ignore next 5 */
   const conditions = []
   for (const [name, value] of Object.entries(where)) {
     conditions.push(sql`${sql.ident(name)} = ${sql.value(value)}`)
@@ -43,14 +45,15 @@ async function selectData (logger, db, sql, tableName, columns = '*', where = {}
   return response
 }
 
-async function createDatabase (logger, db, sql, database) {
+async function createDatabase (logger, db, sql, database, options) {
   if (logger) logger.info(`Creating database "${database}".`)
-  await db.query(sql`CREATE DATABASE IF NOT EXISTS ${sql.ident(database)} `)
+  if (options?.dropIfExists) await dropDatabase(logger, db, sql, database)
+  await db.query(sql`CREATE DATABASE ${sql.ident(database)} `)
 }
 
 async function dropDatabase (logger, db, sql, database) {
   if (logger) logger.info(`Dropping database "${database}".`)
-  await db.query(sql`DROP DATABASE ${sql.ident(database)}`)
+  await db.query(sql`DROP DATABASE IF EXISTS ${sql.ident(database)}`)
 }
 
 async function createTable (logger, db, sql, table, columns, options) {
@@ -61,11 +64,9 @@ async function createTable (logger, db, sql, table, columns, options) {
     const row = sql`${sql.ident(name)} ${dangerousRaw}`
     columnDefinitions.push(row)
   }
-  if (options?.dropTable) {
-    if (table) {
-      await dropTable(logger, db, sql, table)
-    }
-  }
+  /* c8 ignore next 1 */
+  if (options?.dropIfExists) await dropTable(logger, db, sql, table)
+
   await db.query(sql`
     CREATE TABLE ${sql.ident(table)} (
       ${sql.join(columnDefinitions, sql`, `)})
@@ -74,7 +75,7 @@ async function createTable (logger, db, sql, table, columns, options) {
 
 async function dropTable (logger, db, sql, tableName) {
   if (logger) logger.info(`Dropping table "${tableName}".`)
-  await db.query(sql`DROP TABLE ${sql.ident(tableName)}`)
+  await db.query(sql`DROP TABLE IF EXISTS ${sql.ident(tableName)}`)
 }
 
 async function insertData (logger, db, sql, tableName, data) {

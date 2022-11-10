@@ -1,10 +1,19 @@
 import common from './common.js'
+import symbols from '../symbols.js'
 
 export default async function (logger, db, sql) {
+  const commonMethods = await common(logger, db, sql)
+  const privateMethods = commonMethods[symbols.privateMethods]
+  delete commonMethods[symbols.privateMethods]
+
   return {
-    ...(await common(logger, db, sql)),
+    ...commonMethods,
     getTables: () => getTables(logger, db, sql),
-    getTable: (tableName) => getTable(logger, db, sql, tableName)
+    getTable: (tableName) => getTable(logger, db, sql, tableName),
+    [symbols.privateMethods]: {
+      // createDatabase: (database, options) => createDatabase(logger, db, sql, database, options),
+      ...privateMethods
+    }
   }
 }
 

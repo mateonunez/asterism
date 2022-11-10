@@ -18,7 +18,7 @@ export default async function (logger, database, options) {
       length: 255
     }
   }, {
-    dropTable: true
+    dropIfExists: true
   })
 
   await queryer[privateMethods].insertData('example', { name: 'John' })

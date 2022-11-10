@@ -1,15 +1,9 @@
 import { test, beforeEach, afterEach } from 'tap'
 import setupDatabase, { killDatabase, resolveTables, resolveData } from '../drill.js'
 import huston from '@asterism/huston'
+import logger from './helpers/logger.js'
 
 const { mysqlOptions, postgresOptions } = huston
-
-// put this mock into a separate module
-const logger = {
-  info: () => {},
-  warn: () => {},
-  error: () => {}
-}
 
 let dbMysql, queryerMysql
 let dbPostgres, queryerPostgres
