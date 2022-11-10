@@ -38,7 +38,7 @@ async function buildDatabase (logger, database, options) {
   const connectionPool = await resolveConnectionPool(logger, database)
   const { sql } = connectionPool
   const { [database]: connectionString } = generateConnectionString(options)
-  let db = await connect(logger, connectionPool, database, connectionString)
+  let db = connect(logger, connectionPool, database, connectionString)
   db = await resolveMeta(logger, database, db, sql)
   const queryer = await queries(logger, db, sql)
   return { db, sql, queryer }
@@ -61,13 +61,10 @@ function connect (logger, connectionPool, database, connectionString) {
 
   let db
   try {
-    db = connectionPool({
-      connectionString
-    })
+    db = connectionPool({ connectionString })
   } catch (error) {
     throw new Error(`Could not connect to ${database} database at ${connectionString}`)
   }
-
   return db
 }
 
@@ -81,8 +78,6 @@ async function resolveMeta (logger, database, db, sql) {
   } else if (database === 'postgres') {
     version = await db.query(sql`SELECT VERSION()`).version
     engine = 'postgres'
-  } else {
-    throw new Error(`The database "${database}" is not supported.`)
   }
 
   db.version = version
