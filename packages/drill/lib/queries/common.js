@@ -21,16 +21,16 @@ async function selectData (logger, db, sql, tableName, columns = '*', where = {}
   if (logger) logger.info(`Selecting data from "${tableName}".`)
   const columnDefinitions = []
   const values = []
+  /* c8 ignore next 8 */
   if (columns === '*') {
     columnDefinitions.push(sql`*`)
   } else {
-    /* c8 ignore next 5 */
     for (const [name, value] of Object.entries(columns)) {
       columnDefinitions.push(sql`${sql.ident(name)} = ${sql.value(value)}`)
       values.push(value)
     }
   }
-  /* c8 ignore next 5 */
+  /* c8 ignore next 10 */
   const conditions = []
   for (const [name, value] of Object.entries(where)) {
     conditions.push(sql`${sql.ident(name)} = ${sql.value(value)}`)
@@ -59,12 +59,12 @@ async function dropDatabase (logger, db, sql, database) {
 async function createTable (logger, db, sql, table, columns, options) {
   if (logger) logger.info(`Creating table "${table}".`)
   const columnDefinitions = []
+  /* c8 ignore next 6 */
   for (const [name, definition] of Object.entries(columns)) {
     const dangerousRaw = sql.__dangerous__rawValue(`${definition.type + (definition.length ? `(${definition.length})` : '')} ${definition.autoIncrement ? 'AUTO_INCREMENT' : ''} ${definition.primaryKey ? 'PRIMARY KEY' : ''}`)
     const row = sql`${sql.ident(name)} ${dangerousRaw}`
     columnDefinitions.push(row)
   }
-  /* c8 ignore next 1 */
   if (options?.dropIfExists) await dropTable(logger, db, sql, table)
 
   await db.query(sql`
