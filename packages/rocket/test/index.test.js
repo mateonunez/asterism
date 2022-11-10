@@ -1,7 +1,9 @@
 import seeder, { dropSeed } from '@asterism/drill/lib/seeder.js'
 import t from 'tap'
 import rocket from '../rocket.js'
-import { mysqlOptions, postgresOptions } from '@asterism/huston'
+import huston from '@asterism/huston'
+
+const { mysqlOptions, postgresOptions } = huston
 
 t.before(async () => {
   await seeder(undefined, 'mysql', mysqlOptions)
