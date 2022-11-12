@@ -3,6 +3,10 @@
 const { removeNulls } = require('@mateonunez/asterism-huston')
 const { default: lyraSchemaResolver } = require('@mateonunez/lyra-schema-resolver')
 const { create, insert } = require('@lyrasearch/lyra')
+const { persistToFile } = require('@lyrasearch/plugin-data-persistence')
+const fs = require('fs')
+const path = require('path')
+const { join } = path
 
 function generateSchema (logger, data) {
   if (logger) logger.info('Generating schema.')
@@ -21,7 +25,7 @@ function generateSchema (logger, data) {
 }
 
 function generateAsterism (logger, data, schema) {
-  logger.info('Generating asterism.')
+  if (logger) logger.info('Generating asterism.')
 
   const asterism = {}
   for (const key of Object.keys(schema)) {
@@ -36,7 +40,20 @@ function generateAsterism (logger, data, schema) {
   return asterism
 }
 
+function populateAsterism (logger, asterism, options) {
+  if (logger) logger.info('Populating asterism.')
+  const filePath = path.resolve(join(process.cwd(), options.outputDir))
+  /* c8 ignore next */
+  if (!fs.existsSync(filePath)) fs.mkdirSync(filePath, { recursive: true })
+
+  for (const key of Object.keys(asterism)) {
+    if (logger) logger.info(`Persisting "${key}.json" to disk: ${filePath}`)
+    persistToFile(asterism[key], 'json', `${filePath}/${key}.json`)
+  }
+}
+
 module.exports = {
   generateSchema,
-  generateAsterism
+  generateAsterism,
+  populateAsterism
 }
