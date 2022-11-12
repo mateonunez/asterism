@@ -21,14 +21,14 @@
     "@mateonunez/asterism-drill": "^0.0.1",
     "@mateonunez/asterism-huston": "^0.0.1",
     "@mateonunez/asterism-rover": "^0.0.1",
-    "pino": "^8.4.1",
-    "pino-pretty": "^9.0.0"
+    "pino": "^8.7.0",
+    "pino-pretty": "^9.1.1"
   },
   "devDependencies": {
-    "c8": "^7.11.0",
+    "c8": "^7.12.0",
     "snazzy": "^9.0.0",
     "standard": "^17.0.0",
-    "tap": "^16.0.0"
+    "tap": "^16.3.0"
   },
   "author": {
     "email": "mateonunez95@gmail.com",

@@ -9,12 +9,12 @@
     "test": "pnpm -r --workspace-concurrency=1 test"
   },
   "devDependencies": {
-    "husky": "^8.0.1"
+    "husky": "^8.0.2"
   },
   "author": {
     "email": "mateonunez95@gmail.com",
     "name": "Mateo Nunez",
     "url": "https://github.com/mateonunez"
   },
-  "packageManager": "pnpm@7.14.1"
+  "packageManager": "pnpm@7.15.0"
 }
