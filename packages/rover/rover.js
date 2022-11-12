@@ -15,12 +15,7 @@ function generateSchema (logger, data) {
       continue
     }
 
-    try {
-      schema[entry] = lyraSchemaResolver(data[entry])
-    } catch (err) {
-      if (logger) logger.error(`Error generating schema for ${entry}: ${err.message}`)
-      throw err
-    }
+    schema[entry] = lyraSchemaResolver(data[entry])
   }
   return schema
 }
