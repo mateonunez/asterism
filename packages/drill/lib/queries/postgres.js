@@ -47,10 +47,8 @@ async function getTable (logger, db, sql, tableName) {
   `)
   if (response.length === 0) {
     if (logger) logger.warn(`Table "${tableName}" does not exist.`)
+    return null
   }
-  const tables = []
-  for (const { table_name: tableName } of response) {
-    tables.push(tableName)
-  }
-  return tables
+  const { table_name: table } = response[0]
+  return table
 }

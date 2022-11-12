@@ -6,8 +6,8 @@ const { privateMethods } = symbols
 export default async function (logger, database, options) {
   const { db, queryer } = await setupDatabase(logger, database, options)
   await queryer[privateMethods].createDatabase(options.databaseName)
-  const table = queryer.getTable('example')
-  await queryer[privateMethods].createTable(table, {
+  const tableName = 'seeder_example'
+  await queryer[privateMethods].createTable(tableName, {
     id: {
       type: 'int',
       primaryKey: true,
@@ -17,13 +17,11 @@ export default async function (logger, database, options) {
       type: 'varchar',
       length: 255
     }
-  }, {
-    dropIfExists: true
-  })
+  }, { dropIfExists: true })
 
-  await queryer[privateMethods].insertData('example', { name: 'John' })
-  await queryer[privateMethods].insertData('example', { name: 'Jane' })
-  await queryer[privateMethods].insertData('example', { name: 'Jack' })
+  await queryer[privateMethods].insertData(tableName, { name: 'John' })
+  await queryer[privateMethods].insertData(tableName, { name: 'Jane' })
+  await queryer[privateMethods].insertData(tableName, { name: 'Jack' })
 
   killDatabase(db)
 }
