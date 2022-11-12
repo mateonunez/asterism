@@ -54,8 +54,8 @@ test('should drop a database', ({ end }) => {
 test('should create a new table', ({ end }) => {
   test('mysql', async ({ ok }) => {
     const { db, queryer } = await setupDatabase(logger, 'mysql', mysqlOptions)
-    const tableName = 'test'
-    await createTable(queryer, 'test')
+    const tableName = 'common_table_test'
+    await createTable(queryer, tableName)
     await queryer[privateMethods].dropTable(tableName)
     await killDatabase(db)
 
@@ -64,8 +64,8 @@ test('should create a new table', ({ end }) => {
 
   test('postgres', async ({ ok }) => {
     const { db, queryer } = await setupDatabase(logger, 'postgres', postgresOptions)
-    const tableName = 'test'
-    await createTable(queryer, 'test')
+    const tableName = 'common_table_test'
+    await createTable(queryer, tableName)
     await queryer[privateMethods].dropTable(tableName)
     await killDatabase(db)
 
@@ -78,9 +78,9 @@ test('should create a new table', ({ end }) => {
 test('should insert data into a table', ({ end }) => {
   test('mysql', async ({ ok }) => {
     const { db, queryer } = await setupDatabase(logger, 'mysql', mysqlOptions)
-    const tableName = 'test'
-    await createTable(queryer, 'test')
-    await insertIntoTable(queryer, 'test')
+    const tableName = 'common_table_test'
+    await createTable(queryer, tableName)
+    await insertIntoTable(queryer, tableName)
     await queryer[privateMethods].dropTable(tableName)
     await killDatabase(db)
 
@@ -89,7 +89,7 @@ test('should insert data into a table', ({ end }) => {
 
   test('postgres', async ({ ok }) => {
     const { db, queryer } = await setupDatabase(logger, 'postgres', postgresOptions)
-    const tableName = 'test'
+    const tableName = 'common_table_test'
     await createTable(queryer, tableName)
     await insertIntoTable(queryer, tableName)
     await queryer[privateMethods].dropTable(tableName)
@@ -104,7 +104,7 @@ test('should insert data into a table', ({ end }) => {
 test('should delete data', ({ end }) => {
   test('mysql', async ({ ok }) => {
     const { db, queryer } = await setupDatabase(logger, 'mysql', mysqlOptions)
-    const tableName = 'test'
+    const tableName = 'common_table_test'
     await createTable(queryer, tableName)
     await insertIntoTable(queryer, tableName)
     await queryer[privateMethods].deleteData(tableName, { id: 1 })
@@ -116,7 +116,7 @@ test('should delete data', ({ end }) => {
 
   test('postgres', async ({ ok }) => {
     const { db, queryer } = await setupDatabase(logger, 'postgres', postgresOptions)
-    const tableName = 'test'
+    const tableName = 'common_table_test'
     await createTable(queryer, tableName)
     await insertIntoTable(queryer, tableName)
     await queryer[privateMethods].deleteData(tableName, { id: 1 })
@@ -132,7 +132,7 @@ test('should delete data', ({ end }) => {
 test('should update data', ({ end }) => {
   test('mysql', async ({ ok }) => {
     const { db, queryer } = await setupDatabase(logger, 'mysql', mysqlOptions)
-    const tableName = 'test'
+    const tableName = 'common_table_test'
     await createTable(queryer, tableName)
     await insertIntoTable(queryer, tableName)
     await queryer[privateMethods].updateData(tableName, { id: 1 }, { name: 'test2' })
@@ -144,7 +144,7 @@ test('should update data', ({ end }) => {
 
   test('postgres', async ({ ok }) => {
     const { db, queryer } = await setupDatabase(logger, 'postgres', postgresOptions)
-    const tableName = 'test'
+    const tableName = 'common_table_test'
     await createTable(queryer, tableName)
     await insertIntoTable(queryer, tableName)
     await queryer[privateMethods].updateData(tableName, { id: 1 }, { name: 'test2' })
