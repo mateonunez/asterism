@@ -3,9 +3,7 @@ import pretty from 'pino-pretty'
 import setupDatabase, { killDatabase, resolveTables, resolveData } from '@mateonunez/asterism-drill'
 import { allowedDatabases } from '@mateonunez/asterism-drill/lib/database.js'
 import validateOptions from '@mateonunez/asterism-drill/lib/validate-options.js'
-import { generateSchema, generateAsterism } from '@mateonunez/asterism-rover'
-
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+import { generateSchema, generateAsterism, populateAsterism } from '@mateonunez/asterism-rover'
 
 const logger = pino(
   pretty({
@@ -31,7 +29,9 @@ export default async function (database, options) {
   const schema = generateSchema(logger, data)
   const asterism = generateAsterism(logger, data, schema)
 
-  await sleep(100)
+  populateAsterism(logger, asterism, options)
+
+  logger.info('Done!')
 
   return { db, asterism }
 }
