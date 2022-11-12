@@ -5,7 +5,7 @@ const { privateMethods } = symbols
 
 export default async function (logger, database, options) {
   const { db, queryer } = await setupDatabase(logger, database, options)
-  await queryer[privateMethods].createDatabase(options.databaseName)
+  await queryer[privateMethods].createDatabase('drill', { dropIfExists: true })
   const tableName = 'seeder_example'
   await queryer[privateMethods].createTable(tableName, {
     id: {
