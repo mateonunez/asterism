@@ -10,8 +10,8 @@ importers:
 
   packages/cli:
     specifiers:
-      '@mateonunez/asterism-drill': ^0.0.1
-      '@mateonunez/asterism-falcon': ^0.0.1
+      '@mateonunez/asterism-drill': ^0.0.1-alpha.0
+      '@mateonunez/asterism-falcon': ^0.0.1-alpha.0
       c8: ^7.12.0
       commander: ^9.4.1
       execa: ^6.1.0
@@ -33,7 +33,7 @@ importers:
     specifiers:
       '@databases/mysql': ^5.2.1
       '@databases/pg': ^5.4.1
-      '@mateonunez/asterism-huston': ^0.0.1
+      '@mateonunez/asterism-huston': ^0.0.1-alpha.0
       c8: ^7.12.0
       snazzy: ^9.0.0
       standard: ^17.0.0
@@ -50,9 +50,9 @@ importers:
 
   packages/falcon:
     specifiers:
-      '@mateonunez/asterism-drill': ^0.0.1
-      '@mateonunez/asterism-huston': ^0.0.1
-      '@mateonunez/asterism-rover': ^0.0.1
+      '@mateonunez/asterism-drill': ^0.0.1-alpha.0
+      '@mateonunez/asterism-huston': ^0.0.1-alpha.0
+      '@mateonunez/asterism-rover': ^0.0.1-alpha.0
       c8: ^7.12.0
       pino: ^8.7.0
       pino-pretty: ^9.1.1
@@ -86,7 +86,7 @@ importers:
   packages/rover:
     specifiers:
       '@lyrasearch/lyra': ^0.2.8
-      '@mateonunez/asterism-huston': ^0.0.1
+      '@mateonunez/asterism-huston': ^0.0.1-alpha.0
       '@mateonunez/lyra-schema-resolver': ^0.0.3
       c8: ^7.12.0
       snazzy: ^9.0.0

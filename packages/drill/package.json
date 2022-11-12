@@ -1,6 +1,6 @@
 {
   "name": "@mateonunez/asterism-drill",
-  "version": "0.0.1",
+  "version": "0.0.1-alpha.0",
   "description": "Drill is a helper to comunicates with databases",
   "main": "drill.js",
   "type": "module",
@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/mateonunez/asterism#readme",
   "dependencies": {
-    "@mateonunez/asterism-huston": "^0.0.1"
+    "@mateonunez/asterism-huston": "^0.0.1-alpha.0"
   },
   "devDependencies": {
     "@databases/mysql": "^5.2.1",
