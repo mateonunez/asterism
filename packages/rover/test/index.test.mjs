@@ -1,5 +1,5 @@
 import { test } from 'tap'
 
-test('rocket', async ({ ok }) => {
+test('rover', async ({ ok }) => {
   ok(true)
 })

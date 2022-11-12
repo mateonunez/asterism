@@ -1,5 +1,5 @@
 {
-  "name": "@asterism/cli",
+  "name": "@mateonunez/asterism",
   "version": "0.0.1",
   "description": "Asterism CLI",
   "main": "cli.mjs",
@@ -23,11 +23,11 @@
     "PostgreSQL"
   ],
   "dependencies": {
+    "@mateonunez/asterism-drill": "^0.0.1",
+    "@mateonunez/asterism-falcon": "^0.0.1",
     "commander": "^9.4.1"
   },
   "devDependencies": {
-    "@asterism/drill": "^0.0.1",
-    "@asterism/rocket": "^0.0.1",
     "c8": "^7.11.0",
     "execa": "^6.1.0",
     "snazzy": "^9.0.0",

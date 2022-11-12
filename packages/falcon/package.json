@@ -1,8 +1,8 @@
 {
-  "name": "@asterism/rocket",
+  "name": "@mateonunez/asterism-falcon",
   "version": "0.0.1",
-  "description": "Rocket migrates your database data to a Lyra instance",
-  "main": "rocket.js",
+  "description": "falcon migrates your database data to a Lyra instance",
+  "main": "falcon.js",
   "type": "module",
   "scripts": {
     "lint": "standard | snazzy",
@@ -17,18 +17,18 @@
     "url": "https://github.com/mateonunez/asterism/issues"
   },
   "homepage": "https://github.com/mateonunez/asterism#readme",
+  "dependencies": {
+    "@mateonunez/asterism-drill": "^0.0.1",
+    "@mateonunez/asterism-huston": "^0.0.1",
+    "@mateonunez/asterism-rover": "^0.0.1",
+    "pino": "^8.4.1",
+    "pino-pretty": "^9.0.0"
+  },
   "devDependencies": {
-    "@asterism/drill": "^0.0.1",
-    "@asterism/huston": "^0.0.1",
-    "@asterism/rover": "^0.0.1",
     "c8": "^7.11.0",
     "snazzy": "^9.0.0",
     "standard": "^17.0.0",
     "tap": "^16.0.0"
-  },
-  "dependencies": {
-    "pino": "^8.4.1",
-    "pino-pretty": "^9.0.0"
   },
   "author": {
     "email": "mateonunez95@gmail.com",

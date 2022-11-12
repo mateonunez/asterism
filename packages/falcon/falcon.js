@@ -1,9 +1,9 @@
 import pino from 'pino'
 import pretty from 'pino-pretty'
-import setupDatabase, { killDatabase, resolveTables, resolveData } from '@asterism/drill'
-import { allowedDatabases } from '@asterism/drill/lib/database.js'
-import validateOptions from '@asterism/drill/lib/validate-options.js'
-import { generateSchema, generateAsterism } from '@asterism/rover'
+import setupDatabase, { killDatabase, resolveTables, resolveData } from '@mateonunez/asterism-drill'
+import { allowedDatabases } from '@mateonunez/asterism-drill/lib/database.js'
+import validateOptions from '@mateonunez/asterism-drill/lib/validate-options.js'
+import { generateSchema, generateAsterism } from '@mateonunez/asterism-rover'
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 

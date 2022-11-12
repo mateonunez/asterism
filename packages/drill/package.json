@@ -1,7 +1,7 @@
 {
-  "name": "@asterism/drill",
+  "name": "@mateonunez/asterism-drill",
   "version": "0.0.1",
-  "description": "Drill is a helper to comunicates databases",
+  "description": "Drill is a helper to comunicates with databases",
   "main": "drill.js",
   "type": "module",
   "scripts": {
@@ -17,8 +17,10 @@
     "url": "https://github.com/mateonunez/asterism/issues"
   },
   "homepage": "https://github.com/mateonunez/asterism#readme",
+  "dependencies": {
+    "@mateonunez/asterism-huston": "^0.0.1"
+  },
   "devDependencies": {
-    "@asterism/huston": "^0.0.1",
     "@databases/mysql": "^5.2.1",
     "@databases/pg": "^5.4.1",
     "c8": "^7.11.0",

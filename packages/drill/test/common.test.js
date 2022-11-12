@@ -2,7 +2,7 @@ import { test } from 'tap'
 import setupDatabase, { killDatabase } from './../drill.js'
 import logger from './helpers/logger.js'
 import symbols from '../lib/symbols.js'
-import huston from '@asterism/huston'
+import huston from '@mateonunez/asterism-huston'
 
 const { mysqlOptions, postgresOptions } = huston
 const { privateMethods } = symbols

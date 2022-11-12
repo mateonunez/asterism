@@ -35,7 +35,7 @@ jobs:
       - run: pnpm install
       - run: cd packages/cli && pnpm test
 
-  ci-rocket:
+  ci-falcon:
     needs: setup-dependencies
     runs-on: ${{matrix.os}}
     timeout-minutes: 20
@@ -53,4 +53,4 @@ jobs:
       - run: docker-compose up -d
       - run: pnpm install
       - run: sleep 10
-      - run: cd packages/rocket && pnpm test
+      - run: cd packages/falcon && pnpm test

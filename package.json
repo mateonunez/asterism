@@ -1,5 +1,5 @@
 {
-  "name": "@asterism/asterism",
+  "name": "@masteonunez/asterism",
   "version": "0.0.1",
   "description": "Asterism is a library that provides a set of tools to build a Lyra instance from your favorite database.",
   "scripts": {

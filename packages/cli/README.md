@@ -1,0 +1,5 @@
+# Asterism
+
+## License
+
+[MIT](/LICENSE)

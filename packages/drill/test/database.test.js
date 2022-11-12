@@ -1,6 +1,6 @@
 import { test } from 'tap'
 import { generateConnectionString } from '../lib/database.js'
-import huston from '@asterism/huston'
+import huston from '@mateonunez/asterism-huston'
 
 const { mysqlOptions, postgresOptions } = huston
 

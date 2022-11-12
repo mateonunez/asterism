@@ -2,8 +2,8 @@
 
 import { program } from 'commander'
 import version from './lib/version.js'
-import { allowedDatabases } from '@asterism/drill/lib/database.js'
-import rocket from '@asterism/rocket'
+import { allowedDatabases } from '@mateonunez/asterism-drill/lib/database.js'
+import falcon from '@mateonunez/asterism-falcon'
 
 program.name('asterism').description('Asterism CLI').version(version, '-v, --version', 'output the current version')
 
@@ -18,6 +18,6 @@ program
   .option('-u, --user <user>', 'Database user', 'root')
   .option('-w, --password <password>', 'Database password', 'toor')
   .option('-o, --output <output>', 'Output directory', './out')
-  .action(rocket)
+  .action(falcon)
 
 program.parse()
