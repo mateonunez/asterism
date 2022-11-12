@@ -4,11 +4,12 @@ function getNanoTime () {
   if (typeof process !== 'undefined' && process.hrtime !== undefined) {
     return process.hrtime.bigint()
   }
-
+  /* c8 ignore next */
   return BigInt(0)
 }
 
 function formatTime (time) {
+  /* c8 ignore start */
   if (typeof time === 'number') {
     time = BigInt(time)
   }
@@ -22,14 +23,13 @@ function formatTime (time) {
   } else if (time < BigInt(1e9)) {
     return `${time / BigInt(1e6)}ms`
   }
-
-  return `${time / 1e9}s`
+  /* c8 ignore stop */
+  return `${time / BigInt(1e9)}s`
 }
 
 function sleep (ms) {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
-
 module.exports = {
   getNanoTime,
   formatTime,
