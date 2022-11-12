@@ -5,6 +5,7 @@ function removeNulls (obj) {
     return obj
   }
 
+  /* c8 ignore next 3 */
   if (Array.isArray(obj)) {
     return obj.map(removeNulls)
   }
@@ -26,6 +27,7 @@ function removeReservedWords (obj) {
     return obj
   }
 
+  /* c8 ignore next 3 */
   if (Array.isArray(obj)) {
     return obj.map(removeReservedWords)
   }
