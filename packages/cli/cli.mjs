@@ -17,7 +17,7 @@ program
   .option('-t, --tableName <tableName>', 'Table name')
   .option('-u, --user <user>', 'Database user', 'root')
   .option('-w, --password <password>', 'Database password', 'toor')
-  .option('-o, --output <output>', 'Output directory', './out')
+  .option('-o, --outputDir <outputDir>', 'Output directory', './out')
   .action(falcon)
 
 program.parse()
