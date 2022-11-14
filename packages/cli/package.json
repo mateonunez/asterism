@@ -1,6 +1,6 @@
 {
   "name": "@mateonunez/asterism",
-  "version": "0.0.1-beta.0",
+  "version": "0.0.1-beta.1",
   "description": "Asterism CLI",
   "main": "cli.mjs",
   "bin": {
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/platformatic/platformatic.git"
+    "url": "git+https://github.com/mateonunez/asterism.git"
   },
   "license": "MIT",
   "keywords": [
