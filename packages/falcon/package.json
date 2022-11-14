@@ -1,6 +1,6 @@
 {
   "name": "@mateonunez/asterism-falcon",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.1-beta.0",
   "description": "falcon migrates your database data to a Lyra instance",
   "main": "falcon.js",
   "type": "module",
@@ -18,9 +18,9 @@
   },
   "homepage": "https://github.com/mateonunez/asterism#readme",
   "dependencies": {
-    "@mateonunez/asterism-drill": "^0.0.1-alpha.0",
-    "@mateonunez/asterism-huston": "^0.0.1-alpha.0",
-    "@mateonunez/asterism-rover": "^0.0.1-alpha.0",
+    "@mateonunez/asterism-drill": "^0.0.1-beta.0",
+    "@mateonunez/asterism-huston": "^0.0.1-beta.0",
+    "@mateonunez/asterism-rover": "^0.0.1-beta.0",
     "pino": "^8.7.0",
     "pino-pretty": "^9.1.1"
   },

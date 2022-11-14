@@ -1,6 +1,6 @@
 {
   "name": "@mateonunez/asterism",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.1-beta.0",
   "description": "Asterism CLI",
   "main": "cli.mjs",
   "bin": {
@@ -23,8 +23,8 @@
     "PostgreSQL"
   ],
   "dependencies": {
-    "@mateonunez/asterism-drill": "^0.0.1-alpha.0",
-    "@mateonunez/asterism-falcon": "^0.0.1-alpha.0",
+    "@mateonunez/asterism-drill": "^0.0.1-beta.0",
+    "@mateonunez/asterism-falcon": "^0.0.1-beta.0",
     "commander": "^9.4.1"
   },
   "devDependencies": {

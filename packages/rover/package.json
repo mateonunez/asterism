@@ -1,6 +1,6 @@
 {
   "name": "@mateonunez/asterism-rover",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.1-beta.0",
   "description": "Rover is the tool to explore Lyra",
   "main": "rover.js",
   "scripts": {
@@ -19,7 +19,7 @@
   "dependencies": {
     "@lyrasearch/lyra": "^0.2.8",
     "@lyrasearch/plugin-data-persistence": "^0.0.3",
-    "@mateonunez/asterism-huston": "^0.0.1-alpha.0",
+    "@mateonunez/asterism-huston": "^0.0.1-beta.0",
     "@mateonunez/lyra-schema-resolver": "^0.0.3"
   },
   "devDependencies": {
