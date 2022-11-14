@@ -45,6 +45,7 @@ export function falconSearch (term, options) {
   const asterism = resolveAsterism(logger, options)
   const results = searchOnAsterism(logger, asterism, term)
 
+  logger.info(results)
   logger.info('Done!')
   return results
 }
