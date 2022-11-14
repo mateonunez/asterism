@@ -23,7 +23,7 @@
     "PostgreSQL"
   ],
   "dependencies": {
-    "@mateonunez/asterism-drill": "^0.0.1-beta.0",
+    "@mateonunez/asterism-drill": "^0.0.1-beta.1",
     "@mateonunez/asterism-falcon": "^0.0.1-beta.0",
     "commander": "^9.4.1"
   },
