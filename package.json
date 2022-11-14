@@ -1,6 +1,6 @@
 {
   "name": "@masteonunez/asterism",
-  "version": "0.0.1-beta.1",
+  "version": "0.0.1-beta.2",
   "description": "Asterism is a library that provides a set of tools to build a Lyra instance from your favorite database.",
   "scripts": {
     "asterism": "node ./packages/cli/cli.mjs",
