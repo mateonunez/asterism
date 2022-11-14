@@ -2,8 +2,8 @@
 
 const { removeNulls } = require('@mateonunez/asterism-huston')
 const { default: lyraSchemaResolver } = require('@mateonunez/lyra-schema-resolver')
-const { create, insert } = require('@lyrasearch/lyra')
-const { persistToFile } = require('@lyrasearch/plugin-data-persistence')
+const { create, insert, search } = require('@lyrasearch/lyra')
+const { persistToFile, restoreFromFile } = require('@lyrasearch/plugin-data-persistence')
 const fs = require('fs')
 const path = require('path')
 const { join } = path
@@ -52,8 +52,37 @@ function populateAsterism (logger, asterism, options) {
   }
 }
 
+function resolveAsterism (logger, options) {
+  if (logger) logger.info('Resolving asterism.')
+  const filePath = path.resolve(join(process.cwd(), options.outputDir))
+  /* c8 ignore next 4 */
+  if (!fs.existsSync(filePath)) {
+    logger.warn(`The directory "${filePath}" does not exist. Please run "falcon migrate" first.`)
+    return
+  }
+  const asterism = {}
+  for (const file of fs.readdirSync(filePath)) {
+    if (file.endsWith('.json')) {
+      const lyra = restoreFromFile('json', `${filePath}/${file}`)
+      asterism[file.replace('.json', '')] = lyra
+    }
+  }
+  return asterism
+}
+
+function searchOnAsterism (logger, asterism, term) {
+  if (logger) logger.info('Searching on asterism.')
+  const results = {}
+  for (const key of Object.keys(asterism)) {
+    results[key] = search(asterism[key], { term })
+  }
+  return results
+}
+
 module.exports = {
   generateSchema,
   generateAsterism,
-  populateAsterism
+  populateAsterism,
+  resolveAsterism,
+  searchOnAsterism
 }

@@ -3,7 +3,7 @@ import pretty from 'pino-pretty'
 import setupDatabase, { killDatabase, resolveTables, resolveData } from '@mateonunez/asterism-drill'
 import { allowedDatabases } from '@mateonunez/asterism-drill/lib/database.js'
 import validateOptions from '@mateonunez/asterism-drill/lib/validate-options.js'
-import { generateSchema, generateAsterism, populateAsterism } from '@mateonunez/asterism-rover'
+import { generateSchema, generateAsterism, populateAsterism, resolveAsterism, searchOnAsterism } from '@mateonunez/asterism-rover'
 
 const logger = pino(
   pretty({
@@ -12,7 +12,7 @@ const logger = pino(
   })
 )
 
-export default async function (database, options) {
+export async function falconMigrate (database, options) {
   if (!database) {
     logger.warn(`The argument "${database}" is not valid. Defaulting to 'mysql'. Allowed values are ${allowedDatabases.join(', ')}.`)
     database = 'mysql'
@@ -34,4 +34,18 @@ export default async function (database, options) {
   logger.info('Done!')
 
   return { db, asterism }
+}
+
+export function falconSearch (term, options) {
+  if (!term) {
+    logger.warn('The term cannot be empty. Please provide a term to search for.')
+    return
+  }
+
+  const asterism = resolveAsterism(logger, options)
+  const results = searchOnAsterism(logger, asterism, term)
+
+  logger.info(results)
+  logger.info('Done!')
+  return results
 }

@@ -3,7 +3,7 @@
 import { program } from 'commander'
 import version from './lib/version.js'
 import { allowedDatabases } from '@mateonunez/asterism-drill/lib/database.js'
-import falcon from '@mateonunez/asterism-falcon'
+import { falconMigrate, falconSearch } from '@mateonunez/asterism-falcon'
 
 program.name('asterism').description('Asterism CLI').version(version, '-v, --version', 'output the current version')
 
@@ -18,6 +18,13 @@ program
   .option('-u, --user <user>', 'Database user', 'root')
   .option('-w, --password <password>', 'Database password', 'toor')
   .option('-o, --outputDir <outputDir>', 'Output directory', './out')
-  .action(falcon)
+  .action(falconMigrate)
+
+program
+  .command('search')
+  .description('Search for a Lyra instance in your instances')
+  .argument('[term]', 'The term to search for')
+  .option('-o, --outputDir <outputDir>', 'Output directory', './out')
+  .action(falconSearch)
 
 program.parse()

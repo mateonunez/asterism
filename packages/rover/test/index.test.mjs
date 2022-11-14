@@ -1,5 +1,5 @@
 import { test } from 'tap'
-import { generateSchema, generateAsterism, populateAsterism } from '../rover.js'
+import { generateSchema, generateAsterism, populateAsterism, resolveAsterism, searchOnAsterism } from '../rover.js'
 import huston from '@mateonunez/asterism-huston'
 
 const { logger } = huston
@@ -74,4 +74,15 @@ test('should persist an asterism', async ({ ok }) => {
   const asterism = generateAsterism(logger, data, schema)
   populateAsterism(logger, asterism, { outputDir: './out' })
   ok(asterism)
+})
+
+test('should resolve asterism', async ({ ok }) => {
+  const asterism = resolveAsterism(logger, { outputDir: './out' })
+  ok(asterism)
+})
+
+test('should search on asterism', async ({ ok }) => {
+  const asterism = resolveAsterism(logger, { outputDir: './out' })
+  const results = searchOnAsterism(logger, asterism, 'John')
+  ok(results)
 })
