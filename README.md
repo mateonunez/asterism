@@ -25,6 +25,24 @@ pnpm add -g @mateonunez/asterism
 Asterism provides a CLI that can be used to generate a Lyra instance from a database. The CLI can be used as follows:
 
 ```bash
+Usage: asterism [options] [command]
+
+Asterism CLI
+
+Options:
+  -v, --version                 output the current version
+  -h, --help                    display help for command
+
+Commands:
+  migrate [options] [database]  Initialize a new Lyra instance from your
+                                current database
+  search [options] [term]       Search for a Lyra instance in your instances
+  help [command]                display help for command
+```
+
+### Migrate
+
+```bash
 asterism migrate --help
 ```
 
@@ -51,6 +69,31 @@ The CLI provides a `migrate` command that can be used to generate a Lyra instanc
 
 ```bash
 > asterism migrate
+```
+
+### Search
+
+```bash
+asterism search --help
+```
+
+```bash
+Usage: asterism search [options] [term]
+
+Search for a Lyra instance in your instances
+
+Arguments:
+  term                         The term to search for
+
+Options:
+  -o, --outputDir <outputDir>  Output directory (default: "./out")
+  -h, --help                   display help for command
+```
+
+The CLI provides a `search` command that can be used to search for a Lyra instance in your instances. The command can be used as follows:
+
+```bash
+> asterism search "john"
 ```
 
 ## Testing
