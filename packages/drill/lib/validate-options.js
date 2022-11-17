@@ -1,28 +1,34 @@
-export default function validateOptions (logger, options) {
-  const { host, port, user, password, outputDir } = options
+export default function validateOptions (logger, database, options) {
+  if (logger) logger.info('Validating options...')
 
-  if (!host) {
-    logger.error('Host is required')
-    process.exit(1)
+  let validatedOptions = {}
+  switch (database) {
+    case 'mysql':
+      validatedOptions = validateMysqlOptions(options)
+      break
+    case 'postgres':
+      validatedOptions = validatePostgresOptions(options)
+      break
+    default:
+      throw new Error(`The database "${database}" is not supported.`)
   }
 
-  if (!port) {
-    logger.error('Port is required')
-    process.exit(1)
-  }
+  if (!options.host) validatedOptions.host = '127.0.0.1'
+  if (!options.outputDir) validatedOptions.outputDir = './out'
 
-  if (!user) {
-    logger.error('User is required')
-    process.exit(1)
-  }
+  return validatedOptions
+}
 
-  if (!password) {
-    logger.error('Password is required')
-    process.exit(1)
-  }
+function validateMysqlOptions (options) {
+  if (!options.port) options.port = 3306
+  if (!options.user) options.user = 'root'
+  if (!options.password) options.password = 'toor'
+  return options
+}
 
-  if (!outputDir) {
-    logger.error('Output dir is required')
-    process.exit(1)
-  }
+function validatePostgresOptions (options) {
+  if (!options.port) options.port = 5432
+  if (!options.user) options.user = 'postgres'
+  if (!options.password) options.password = 'postgres'
+  return options
 }

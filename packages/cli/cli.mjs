@@ -10,13 +10,13 @@ program.name('asterism').description('Asterism CLI').version(version, '-v, --ver
 program
   .command('migrate')
   .description('Initialize a new Lyra instance from your current database')
-  .argument('[database]', 'The database to migrate', (value) => (allowedDatabases.includes(value) ? value : undefined))
-  .option('-H, --host <host>', 'Database host', '127.0.0.1')
-  .option('-h, --port <port>', 'Port to run the server on', '3306')
+  .argument('[database]', 'The database to migrate (mysql or postgres)', (value) => (allowedDatabases.includes(value) ? value : undefined))
+  .option('-H, --host <host>', 'Database host')
+  .option('-p, --port <port>', 'Port to run the server on')
   .option('-d, --databaseName <databaseName>', 'Database connection string')
   .option('-t, --tableName <tableName>', 'Table name')
-  .option('-u, --user <user>', 'Database user', 'root')
-  .option('-w, --password <password>', 'Database password', 'toor')
+  .option('-u, --user <user>', 'Database user')
+  .option('-w, --password <password>', 'Database password')
   .option('-o, --outputDir <outputDir>', 'Output directory', './out')
   .action(falconMigrate)
 
