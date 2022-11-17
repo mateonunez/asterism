@@ -18,18 +18,18 @@ export async function falconMigrate (database, options) {
     database = 'mysql'
   }
 
-  validateOptions(logger, options)
+  const validatedOptions = validateOptions(logger, database, options)
 
-  const { db, queryer } = await setupDatabase(logger, database, options)
-  const tables = await resolveTables(logger, queryer, options)
-  const data = await resolveData(logger, queryer, tables, options)
+  const { db, queryer } = await setupDatabase(logger, database, validatedOptions)
+  const tables = await resolveTables(logger, queryer, validatedOptions)
+  const data = await resolveData(logger, queryer, tables, validatedOptions)
 
   await killDatabase(db)
 
   const schema = generateSchema(logger, data)
   const asterism = generateAsterism(logger, data, schema)
 
-  populateAsterism(logger, asterism, options)
+  populateAsterism(logger, asterism, validatedOptions)
 
   logger.info('Done!')
 
