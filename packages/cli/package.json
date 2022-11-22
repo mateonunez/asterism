@@ -32,7 +32,7 @@
     "execa": "^6.1.0",
     "snazzy": "^9.0.0",
     "standard": "^17.0.0",
-    "tap": "^16.3.0"
+    "tap": "^16.3.2"
   },
   "author": {
     "email": "mateonunez95@gmail.com",
