@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/mateonunez/asterism#readme",
   "dependencies": {
-    "@mateonunez/asterism-drill": "^0.0.1-beta.0",
+    "@mateonunez/asterism-drill": "^0.0.1-beta.1",
     "@mateonunez/asterism-huston": "^0.0.1-beta.0",
     "@mateonunez/asterism-rover": "^0.0.1-beta.0",
     "pino": "^8.7.0",
@@ -28,7 +28,7 @@
     "c8": "^7.12.0",
     "snazzy": "^9.0.0",
     "standard": "^17.0.0",
-    "tap": "^16.3.0"
+    "tap": "^16.3.2"
   },
   "author": {
     "email": "mateonunez95@gmail.com",
