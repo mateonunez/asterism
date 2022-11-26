@@ -8,7 +8,7 @@ const fs = require('fs')
 const path = require('path')
 const { join } = path
 
-function generateSchema (logger, data) {
+function generateSchema (logger, data, options) {
   if (logger) logger.info('Generating schema.')
 
   const schema = {}
@@ -19,13 +19,16 @@ function generateSchema (logger, data) {
       continue
     }
 
-    schema[entry] = lyraSchemaResolver(data[entry])
+    schema[entry] = lyraSchemaResolver(data[entry], options)
   }
   return schema
 }
 
-function generateAsterism (logger, data, schema) {
+function generateAsterism (logger, data, schema, options) {
   if (logger) logger.info('Generating asterism.')
+
+  /* c8 ignore next */
+  const strict = options?.strict ?? true
 
   const asterism = {}
   for (const key of Object.keys(schema)) {
@@ -33,7 +36,20 @@ function generateAsterism (logger, data, schema) {
     asterism[key] = lyra
 
     for (const entry of data[key]) {
-      insert(lyra, entry)
+      const document = entry
+
+      /* c8 ignore next 9 */
+      if (!strict) {
+        for (const field of Object.keys(entry)) {
+          if (typeof entry[field] === 'object') {
+            document[field] = JSON.stringify(entry[field])
+          } else {
+            document[field] = String(entry[field])
+          }
+        }
+      }
+
+      insert(lyra, document)
     }
   }
 

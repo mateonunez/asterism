@@ -19,6 +19,7 @@ export async function falconMigrate (database, options) {
   }
 
   const validatedOptions = validateOptions(logger, database, options)
+  const { strict } = validatedOptions
 
   const { db, queryer } = await setupDatabase(logger, database, validatedOptions)
   const tables = await resolveTables(logger, queryer, validatedOptions)
@@ -26,8 +27,8 @@ export async function falconMigrate (database, options) {
 
   await killDatabase(db)
 
-  const schema = generateSchema(logger, data)
-  const asterism = generateAsterism(logger, data, schema)
+  const schema = generateSchema(logger, data, { strict })
+  const asterism = generateAsterism(logger, data, schema, { strict })
 
   populateAsterism(logger, asterism, validatedOptions)
 
