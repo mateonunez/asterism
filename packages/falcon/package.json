@@ -1,6 +1,6 @@
 {
   "name": "@mateonunez/asterism-falcon",
-  "version": "0.0.1-beta.0",
+  "version": "0.0.1",
   "description": "falcon migrates your database data to a Lyra instance",
   "main": "falcon.js",
   "type": "module",

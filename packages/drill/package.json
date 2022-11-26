@@ -1,6 +1,6 @@
 {
   "name": "@mateonunez/asterism-drill",
-  "version": "0.0.1-beta.1",
+  "version": "0.0.1",
   "description": "Drill is a helper to comunicates with databases",
   "main": "drill.js",
   "type": "module",

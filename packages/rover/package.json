@@ -1,6 +1,6 @@
 {
   "name": "@mateonunez/asterism-rover",
-  "version": "0.0.1-beta.0",
+  "version": "0.0.1",
   "description": "Rover is the tool to explore Lyra",
   "main": "rover.js",
   "scripts": {
