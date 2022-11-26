@@ -56,7 +56,7 @@ Arguments:
 
 Options:
   -H, --host <host>                  Database host (default: "127.0.0.1")
-  -h, --port <port>                  Port to run the server on (default: "3306")
+  -p, --port <port>                  Port to run the server on (default: "3306")
   -d, --databaseName <databaseName>  Database connection string
   -t, --tableName <tableName>        Table name
   -u, --user <user>                  Database user (default: "root")
