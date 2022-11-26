@@ -18,6 +18,7 @@ program
   .option('-u, --user <user>', 'Database user')
   .option('-w, --password <password>', 'Database password')
   .option('-o, --outputDir <outputDir>', 'Output directory', './out')
+  .option('-s --strict', 'Strict mode', false)
   .action(falconMigrate)
 
 program
