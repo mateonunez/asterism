@@ -37,14 +37,14 @@ export async function falconMigrate (database, options) {
   return { db, asterism }
 }
 
-export function falconSearch (term, options) {
+export async function falconSearch (term, options) {
   if (!term) {
     logger.warn('The term cannot be empty. Please provide a term to search for.')
     return
   }
 
   const asterism = resolveAsterism(logger, options)
-  const results = searchOnAsterism(logger, asterism, term)
+  const results = await searchOnAsterism(logger, asterism, term, options)
 
   logger.info(results)
   logger.info('Done!')

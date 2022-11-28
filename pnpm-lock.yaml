@@ -88,6 +88,7 @@ importers:
       '@lyrasearch/lyra': ^0.3.1
       '@lyrasearch/plugin-data-persistence': ^0.0.4
       '@mateonunez/asterism-huston': ^0.0.1-beta.0
+      '@mateonunez/lyra-cache': ^0.0.1-beta.0
       '@mateonunez/lyra-schema-resolver': ^0.1.1
       c8: ^7.12.0
       snazzy: ^9.0.0
@@ -97,6 +98,7 @@ importers:
       '@lyrasearch/lyra': 0.3.1
       '@lyrasearch/plugin-data-persistence': 0.0.4
       '@mateonunez/asterism-huston': link:../huston
+      '@mateonunez/lyra-cache': 0.0.1-beta.0
       '@mateonunez/lyra-schema-resolver': 0.1.1
     devDependencies:
       c8: 7.12.0
@@ -528,6 +530,13 @@ packages:
       dpack: 0.6.22
     dev: false
 
+  /@mateonunez/lyra-cache/0.0.1-beta.0:
+    resolution: {integrity: sha512-SLynyQ3KJY99ClutkOBSvIBhd22QtLZdttpEv3se3O+sEK1Js3UbH+LphWjorfy3rZW2iA4rSOrf48cjNopsMw==}
+    dependencies:
+      '@lyrasearch/lyra': 0.3.1
+      async-cache-dedupe: 1.6.0
+    dev: false
+
   /@mateonunez/lyra-schema-resolver/0.1.1:
     resolution: {integrity: sha512-Y7DbnTYYvpJYPwG9VIkBPDl0V9x4l8Dwi/neXgB6dT7z8iveVyQRjG1zda7fNoZOorgUjqsKLepLXTyvqIwaNw==}
     dependencies:
@@ -587,6 +596,10 @@ packages:
     engines: {node: '>=6.5'}
     dependencies:
       event-target-shim: 5.0.1
+    dev: false
+
+  /abstract-logging/2.0.1:
+    resolution: {integrity: sha512-2BjRTZxTPvheOvGbBslFSYOUkr+SjPtOnrLP33f+VIWLzezQpZcqVg7ja3L4dBXmzzgwT+a029jRx5PCi3JuiA==}
     dev: false
 
   /acorn-jsx/5.3.2_acorn@8.8.1:
@@ -699,6 +712,14 @@ packages:
 
   /assert-never/1.2.1:
     resolution: {integrity: sha512-TaTivMB6pYI1kXwrFlEhLeGfOqoDNdTxjCdwRfFFkEA30Eu+k48W34nlok2EYWJfFFzqaEmichdNM7th6M5HNw==}
+    dev: false
+
+  /async-cache-dedupe/1.6.0:
+    resolution: {integrity: sha512-yB0FT8pEQ60+CVY4moyYrqF6eo/sVcsH/bW0cRF0tN3DFqcjYlGMH8ALhNLHy3NXFD/5u5DfAR2rrwAk4/3HgQ==}
+    dependencies:
+      abstract-logging: 2.0.1
+      mnemonist: 0.39.5
+      safe-stable-stringify: 2.4.1
     dev: false
 
   /async-hook-domain/2.0.4:
@@ -2263,6 +2284,12 @@ packages:
     hasBin: true
     dev: true
 
+  /mnemonist/0.39.5:
+    resolution: {integrity: sha512-FPUtkhtJ0efmEFGpU14x7jGbTB+s18LrzRL2KgoWz9YvcY3cPomz8tih01GbHwnGk/OmkOKfqd/RAQoc8Lm7DQ==}
+    dependencies:
+      obliterator: 2.0.4
+    dev: false
+
   /ms/2.0.0:
     resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
     dev: true
@@ -2416,6 +2443,10 @@ packages:
       define-properties: 1.1.4
       es-abstract: 1.20.4
     dev: true
+
+  /obliterator/2.0.4:
+    resolution: {integrity: sha512-lgHwxlxV1qIg1Eap7LgIeoBWIMFibOjbrYPIPJZcI1mmGAI2m3lNYpK12Y+GBdPQ0U1hRwSord7GIaawz962qQ==}
+    dev: false
 
   /on-exit-leak-free/2.1.0:
     resolution: {integrity: sha512-VuCaZZAjReZ3vUwgOB8LxAosIurDiAW0s13rI1YwmaP++jvcxP77AWoQvenZebpCA2m8WC1/EosPYPMjnRAp/w==}
