@@ -21,13 +21,13 @@ t.test('postgres database selected', async ({ ok }) => {
 
 t.test('falcon search with no term should terminate the process', async ({ same }) => {
   await falconMigrate(undefined, mysqlOptions)
-  const results = falconSearch(undefined, { outputDir: './out' })
+  const results = await falconSearch(undefined, { outputDir: './out' })
   same(results, undefined)
 })
 
 t.test('falcon search should return results', async ({ ok }) => {
   await falconMigrate(undefined, mysqlOptions)
-  const results = falconSearch('John', mysqlOptions)
+  const results = await falconSearch('John', mysqlOptions)
   ok(results)
 })
 
