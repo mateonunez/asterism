@@ -2,7 +2,8 @@
 
 const { removeNulls } = require('@mateonunez/asterism-huston')
 const { default: lyraSchemaResolver } = require('@mateonunez/lyra-schema-resolver')
-const { create, insert, search } = require('@lyrasearch/lyra')
+const { create, insert, search: searchLyra } = require('@lyrasearch/lyra')
+const { searchCache } = require('@mateonunez/lyra-cache')
 const { persistToFile, restoreFromFile } = require('@lyrasearch/plugin-data-persistence')
 const fs = require('fs')
 const path = require('path')
@@ -86,11 +87,19 @@ function resolveAsterism (logger, options) {
   return asterism
 }
 
-function searchOnAsterism (logger, asterism, term) {
+async function searchOnAsterism (logger, asterism, term, options) {
   if (logger) logger.info('Searching on asterism.')
+
+  const cacheEnabled = options?.cacheEnabled || false
+  const search = cacheEnabled ? searchCache : searchLyra
   const results = {}
   for (const key of Object.keys(asterism)) {
-    results[key] = search(asterism[key], { term })
+    if (cacheEnabled) {
+      results[key] = await search({ db: asterism[key], term })
+      results[key] = { ...results[key], cached: true }
+    } else {
+      results[key] = search(asterism[key], { term })
+    }
   }
   return results
 }
