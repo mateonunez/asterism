@@ -71,7 +71,7 @@ function populateAsterism (logger, asterism, options) {
 
 function resolveAsterism (logger, options) {
   if (logger) logger.info('Resolving asterism.')
-  const filePath = path.resolve(join(process.cwd(), options.outputDir))
+  const filePath = path.resolve(join(process.cwd(), options.inputDir))
   /* c8 ignore next 4 */
   if (!fs.existsSync(filePath)) {
     logger.warn(`The directory "${filePath}" does not exist. Please run "falcon migrate" first.`)

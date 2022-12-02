@@ -6,7 +6,8 @@ const mysqlOptions = {
   user: 'root',
   // deepcode ignore NoHardcodedPasswords/test: example data
   password: 'toor',
-  outputDir: '../out'
+  outputDir: '../lyra',
+  inputDir: '../lyra'
 }
 
 const postgresOptions = {

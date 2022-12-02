@@ -17,7 +17,7 @@ program
   .option('-t, --tablename <tableName>', 'Table name')
   .option('-u, --user <user>', 'Database user')
   .option('-w, --password <password>', 'Database password')
-  .option('-o, --output-dir <outputDir>', 'Output directory', './out')
+  .option('-o, --output-dir <outputDir>', 'Lyra migrated databases directory', './lyra')
   .option('-s --strict', 'Strict mode', false)
   .action(falconMigrate)
 
@@ -26,7 +26,8 @@ program
   .description('Search for a Lyra instance in your instances')
   .argument('[term]', 'The term to search for')
   .option('-c, --cache-enabled', 'Use cache')
-  .option('-o, --output-dir <outputDir>', 'Output directory', './out')
+  .option('-i, --input-dir <inputDir>', 'Lyra databases directory', './lyra')
+  .option('-o, --output-dir <outputDir>', 'Output directory to save results in a JSON', './out')
   .action(falconSearch)
 
 program.parse()

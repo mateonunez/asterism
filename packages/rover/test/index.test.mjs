@@ -77,18 +77,18 @@ test('should persist an asterism', async ({ ok }) => {
 })
 
 test('should resolve asterism', async ({ ok }) => {
-  const asterism = resolveAsterism(logger, { outputDir: './out' })
+  const asterism = resolveAsterism(logger, { inputDir: './out' })
   ok(asterism)
 })
 
 test('should search on asterism', async ({ ok }) => {
-  const asterism = resolveAsterism(logger, { outputDir: './out' })
+  const asterism = resolveAsterism(logger, { inputDir: './out' })
   const results = await searchOnAsterism(logger, asterism, 'John')
   ok(results)
 })
 
 test('should perform a cached search', async ({ ok }) => {
-  const asterism = resolveAsterism(logger, { outputDir: './out' })
+  const asterism = resolveAsterism(logger, { inputDir: './out' })
   const results = await searchOnAsterism(logger, asterism, 'John', { cacheEnabled: true })
   ok(results[Object.keys(results)[0]].cached)
 })
