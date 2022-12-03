@@ -13,7 +13,8 @@ test('should validate options', async ({ end }) => {
       port: 3306,
       user: 'root',
       password: 'toor',
-      outputDir: './out'
+      outputDir: './out',
+      inputDir: './lyra'
     })
   })
 
@@ -25,7 +26,8 @@ test('should validate options', async ({ end }) => {
       port: 5432,
       user: 'postgres',
       password: 'postgres',
-      outputDir: './out'
+      outputDir: './out',
+      inputDir: './lyra'
     })
   })
 
