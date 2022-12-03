@@ -72,23 +72,38 @@ test('should persist an asterism', async ({ ok }) => {
   }
   const schema = generateSchema(logger, data)
   const asterism = generateAsterism(logger, data, schema)
-  populateAsterism(logger, asterism, { outputDir: './out' })
+  populateAsterism(logger, asterism, { outputDir: './lyra' })
   ok(asterism)
 })
 
 test('should resolve asterism', async ({ ok }) => {
-  const asterism = resolveAsterism(logger, { inputDir: './out' })
+  const asterism = resolveAsterism(logger, { inputDir: './lyra' })
   ok(asterism)
 })
 
 test('should search on asterism', async ({ ok }) => {
-  const asterism = resolveAsterism(logger, { inputDir: './out' })
+  const asterism = resolveAsterism(logger, { inputDir: './lyra' })
   const results = await searchOnAsterism(logger, asterism, 'John')
   ok(results)
 })
 
 test('should perform a cached search', async ({ ok }) => {
-  const asterism = resolveAsterism(logger, { inputDir: './out' })
+  const asterism = resolveAsterism(logger, { inputDir: './lyra' })
   const results = await searchOnAsterism(logger, asterism, 'John', { cacheEnabled: true })
   ok(results[Object.keys(results)[0]].cached)
+})
+
+test('should save search results in a json file', async ({ ok }) => {
+  const asterism = resolveAsterism(logger, { inputDir: './lyra' })
+  await searchOnAsterism(logger, asterism, 'John', { outputDir: './' })
+  ok(true)
+})
+
+test('throws an error with invalid outputDir', async ({ error }) => {
+  const asterism = resolveAsterism(logger, { inputDir: './lyra' })
+  try {
+    await searchOnAsterism(logger, asterism, 'John', {})
+  } catch (err) {
+    error(err)
+  }
 })

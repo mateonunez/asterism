@@ -9,6 +9,9 @@ const fs = require('fs')
 const path = require('path')
 const { join } = path
 
+// eslint-disable-next-line no-extend-native
+BigInt.prototype.toJSON = function () { return this.toString() }
+
 function generateSchema (logger, data, options) {
   if (logger) logger.info('Generating schema.')
 
@@ -101,7 +104,34 @@ async function searchOnAsterism (logger, asterism, term, options) {
       results[key] = search(asterism[key], { term })
     }
   }
+
+  if (options?.outputDir) {
+    saveSearchResults(logger, results, options)
+  }
+
   return results
+}
+
+function saveSearchResults (logger, results, options) {
+  if (logger) logger.info('Saving search results.')
+
+  /* c8 ignore next 4 */
+  if (!options.outputDir) {
+    logger.error('You must provide a valid path')
+    return
+  }
+
+  const filePath = path.resolve(join(process.cwd(), options.outputDir))
+  /* c8 ignore next */
+  if (!fs.existsSync(filePath)) fs.mkdirSync(filePath, { recursive: true })
+
+  const filename = `${filePath}/search-results-${Date.now()}.json`
+  const stringified = JSON.stringify(results, null, 2)
+  fs.writeFileSync(filename, stringified)
+
+  if (logger) logger.info(`Search results saved to ${filename}`)
+
+  return filename
 }
 
 module.exports = {
