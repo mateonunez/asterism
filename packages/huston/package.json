@@ -1,6 +1,6 @@
 {
   "name": "@mateonunez/asterism-huston",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Huston is the place where you can find all the utilities",
   "main": "huston.js",
   "scripts": {
