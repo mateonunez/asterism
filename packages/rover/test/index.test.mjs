@@ -95,7 +95,7 @@ test('should perform a cached search', async ({ ok }) => {
 
 test('should save search results in a json file', async ({ ok }) => {
   const asterism = resolveAsterism(logger, { inputDir: './lyra' })
-  await searchOnAsterism(logger, asterism, 'John', { outputDir: './' })
+  await searchOnAsterism(logger, asterism, 'John', { outputDir: './out' })
   ok(true)
 })
 
