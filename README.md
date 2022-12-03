@@ -84,11 +84,14 @@ Usage: asterism search [options] [term]
 Search for a Lyra instance in your instances
 
 Arguments:
-  term                         The term to search for
+  term                          The term to search for
 
 Options:
-  -o, --outputDir <outputDir>  Output directory (default: "./out")
-  -h, --help                   display help for command
+  -c, --cache-enabled           Use cache
+  -i, --input-dir <inputDir>    Lyra databases directory (default: "./lyra")
+  -o, --output-dir <outputDir>  Output directory to save results in a JSON
+                                (default: "./out")
+  -h, --help                    display help for command
 ```
 
 The CLI provides a `search` command that can be used to search for a Lyra instance in your instances. The command can be used as follows:
