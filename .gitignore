@@ -234,4 +234,7 @@ $RECYCLE.BIN/
 # Synk
 .dccache
 
+# Lyra output
+lyra/
+
 # End of https://www.toptal.com/developers/gitignore/api/node,osx,windows,linux,visualstudiocode
