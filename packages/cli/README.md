@@ -1,5 +1,1 @@
-# Asterism
-
-## License
-
-[MIT](/LICENSE)
+../../README.md
