@@ -87,7 +87,7 @@ importers:
     specifiers:
       '@lyrasearch/lyra': ^0.3.1
       '@lyrasearch/plugin-data-persistence': ^0.0.4
-      '@mateonunez/asterism-huston': ^0.0.2
+      '@mateonunez/asterism-huston': ^0.0.3
       '@mateonunez/lyra-cache': 0.0.1-beta.1
       '@mateonunez/lyra-schema-resolver': ^0.1.2
       c8: ^7.12.0
