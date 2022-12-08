@@ -20,7 +20,7 @@
   "dependencies": {
     "@databases/mysql": "^5.2.1",
     "@databases/pg": "^5.4.1",
-    "@mateonunez/asterism-huston": "^0.0.2"
+    "@mateonunez/asterism-huston": "workspace:*"
   },
   "devDependencies": {
     "c8": "^7.12.0",
