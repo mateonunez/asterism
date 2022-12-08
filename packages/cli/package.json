@@ -23,8 +23,8 @@
     "PostgreSQL"
   ],
   "dependencies": {
-    "@mateonunez/asterism-drill": "^0.0.2",
-    "@mateonunez/asterism-falcon": "^0.0.2",
+    "@mateonunez/asterism-drill": "workspace:*",
+    "@mateonunez/asterism-falcon": "workspace:*",
     "commander": "^9.4.1"
   },
   "devDependencies": {

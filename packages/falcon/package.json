@@ -18,9 +18,9 @@
   },
   "homepage": "https://github.com/mateonunez/asterism#readme",
   "dependencies": {
-    "@mateonunez/asterism-drill": "^0.0.2",
-    "@mateonunez/asterism-huston": "^0.0.2",
-    "@mateonunez/asterism-rover": "^0.0.2",
+    "@mateonunez/asterism-drill": "workspace:*",
+    "@mateonunez/asterism-huston": "workspace:*",
+    "@mateonunez/asterism-rover": "workspace:*",
     "pino": "^8.7.0",
     "pino-pretty": "^9.1.1"
   },
