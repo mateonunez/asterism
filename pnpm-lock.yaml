@@ -97,7 +97,7 @@ importers:
     dependencies:
       '@lyrasearch/lyra': 0.3.1
       '@lyrasearch/plugin-data-persistence': 0.0.4
-      '@mateonunez/asterism-huston': link:../huston
+      '@mateonunez/asterism-huston': 0.0.2
       '@mateonunez/lyra-cache': 0.0.1-beta.1
       '@mateonunez/lyra-schema-resolver': 0.1.2
     devDependencies:
@@ -528,6 +528,10 @@ packages:
       '@lyrasearch/lyra': 0.3.1
       '@msgpack/msgpack': 2.8.0
       dpack: 0.6.22
+    dev: false
+
+  /@mateonunez/asterism-huston/0.0.2:
+    resolution: {integrity: sha512-rI2X3pXhFYqICwo2YGTTqRtMBopEcD1rQmkKJxGOo1QyhNnf318lOTPT7i+phorbXaVgfualzyfP5/9qMKgzOg==}
     dev: false
 
   /@mateonunez/lyra-cache/0.0.1-beta.1:
