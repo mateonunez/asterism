@@ -84,7 +84,7 @@ function resolveAsterism (logger, options) {
   for (const file of fs.readdirSync(filePath)) {
     if (file.endsWith('.json')) {
       const lyra = restoreFromFile('json', `${filePath}/${file}`)
-      asterism[file.replace('.json', '')] = lyra
+      asterism[file.replace(/\.js$/, '')] = lyra
     }
   }
   return asterism
