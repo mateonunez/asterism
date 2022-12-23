@@ -54,7 +54,7 @@ importers:
       '@mateonunez/asterism-huston': workspace:*
       '@mateonunez/asterism-rover': workspace:*
       c8: ^7.12.0
-      pino: ^8.7.0
+      pino: ^8.8.0
       pino-pretty: ^9.1.1
       snazzy: ^9.0.0
       standard: ^17.0.0
@@ -63,7 +63,7 @@ importers:
       '@mateonunez/asterism-drill': link:../drill
       '@mateonunez/asterism-huston': link:../huston
       '@mateonunez/asterism-rover': link:../rover
-      pino: 8.7.0
+      pino: 8.8.0
       pino-pretty: 9.1.1
     devDependencies:
       c8: 7.12.0
@@ -87,7 +87,7 @@ importers:
     specifiers:
       '@lyrasearch/lyra': ^0.3.1
       '@lyrasearch/plugin-data-persistence': ^0.0.4
-      '@mateonunez/asterism-huston': ^0.0.2
+      '@mateonunez/asterism-huston': workspace:*
       '@mateonunez/lyra-cache': 0.0.1-beta.1
       '@mateonunez/lyra-schema-resolver': ^0.1.2
       c8: ^7.12.0
@@ -97,7 +97,7 @@ importers:
     dependencies:
       '@lyrasearch/lyra': 0.3.1
       '@lyrasearch/plugin-data-persistence': 0.0.4
-      '@mateonunez/asterism-huston': 0.0.2
+      '@mateonunez/asterism-huston': link:../huston
       '@mateonunez/lyra-cache': 0.0.1-beta.1
       '@mateonunez/lyra-schema-resolver': 0.1.2
     devDependencies:
@@ -528,10 +528,6 @@ packages:
       '@lyrasearch/lyra': 0.3.1
       '@msgpack/msgpack': 2.8.0
       dpack: 0.6.22
-    dev: false
-
-  /@mateonunez/asterism-huston/0.0.2:
-    resolution: {integrity: sha512-rI2X3pXhFYqICwo2YGTTqRtMBopEcD1rQmkKJxGOo1QyhNnf318lOTPT7i+phorbXaVgfualzyfP5/9qMKgzOg==}
     dev: false
 
   /@mateonunez/lyra-cache/0.0.1-beta.1:
@@ -2726,8 +2722,8 @@ packages:
     resolution: {integrity: sha512-mMMOwSKrmyl+Y12Ri2xhH1lbzQxwwpuru9VjyJpgFIH4asSj88F2csdMwN6+M5g1Ll4rmsYghHLQJw81tgZ7LQ==}
     dev: false
 
-  /pino/8.7.0:
-    resolution: {integrity: sha512-l9sA5uPxmZzwydhMWUcm1gI0YxNnYl8MfSr2h8cwLvOAzQLBLewzF247h/vqHe3/tt6fgtXeG9wdjjoetdI/vA==}
+  /pino/8.8.0:
+    resolution: {integrity: sha512-cF8iGYeu2ODg2gIwgAHcPrtR63ILJz3f7gkogaHC/TXVVXxZgInmNYiIpDYEwgEkxZti2Se6P2W2DxlBIZe6eQ==}
     hasBin: true
     dependencies:
       atomic-sleep: 1.0.0
