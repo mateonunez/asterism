@@ -1,8 +1,6 @@
 import { test } from 'tap'
 import { generateSchema, generateAsterism, populateAsterism, resolveAsterism, searchOnAsterism } from '../rover.js'
-import huston from '@mateonunez/asterism-huston'
-
-const { logger } = huston
+import { logger } from '@mateonunez/asterism-huston'
 
 test('should generate schema', async ({ ok }) => {
   const data = {
