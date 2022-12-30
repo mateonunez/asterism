@@ -1,8 +1,6 @@
 import { test } from 'tap'
 import validateOptions from '@mateonunez/asterism-drill/lib/validate-options.js'
-import huston from '@mateonunez/asterism-huston'
-
-const { logger } = huston
+import { logger } from '@mateonunez/asterism-huston'
 
 test('should validate options', async ({ end }) => {
   test('mysql', async ({ same }) => {

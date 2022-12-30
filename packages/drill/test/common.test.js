@@ -1,9 +1,9 @@
 import { test } from 'tap'
 import setupDatabase, { killDatabase } from './../drill.js'
 import symbols from '../lib/symbols.js'
-import huston from '@mateonunez/asterism-huston'
+import { logger, database } from '@mateonunez/asterism-huston'
 
-const { mysqlOptions, postgresOptions, logger } = huston
+const { mysqlOptions, postgresOptions } = database
 const { privateMethods } = symbols
 
 async function createTable (queryer, tableName) {

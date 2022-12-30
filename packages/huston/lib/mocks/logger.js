@@ -1,7 +1,5 @@
-const logger = {
-  info: () => {},
-  warn: () => {},
-  error: () => {}
-}
+function info () {}
+function warn () {}
+function error () {}
 
-module.exports = { logger }
+module.exports = { info, warn, error }

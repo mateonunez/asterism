@@ -1,9 +1,9 @@
 import seeder, { dropSeed } from '@mateonunez/asterism-drill/lib/seeder.js'
 import t from 'tap'
 import { falconMigrate, falconSearch } from '../falcon.js'
-import huston from '@mateonunez/asterism-huston'
+import { database } from '@mateonunez/asterism-huston'
 
-const { mysqlOptions, postgresOptions } = huston
+const { mysqlOptions, postgresOptions } = database
 
 t.before(async () => {
   await seeder(undefined, 'mysql', { ...mysqlOptions, outputDir: './lyra' })

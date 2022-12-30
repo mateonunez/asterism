@@ -1,6 +1,7 @@
 'use strict'
 
-const { removeNulls } = require('@mateonunez/asterism-huston')
+const { normalizers } = require('@mateonunez/asterism-huston')
+const { removeNulls } = normalizers
 const { default: lyraSchemaResolver } = require('@mateonunez/lyra-schema-resolver')
 const { create, insert, search: searchLyra } = require('@lyrasearch/lyra')
 const { searchCache } = require('@mateonunez/lyra-cache')

@@ -1,6 +1,8 @@
 import { generateConnectionString } from './lib/database.js'
 import queries from './lib/queries/index.js'
-import { removeNulls, removeReservedWords } from '@mateonunez/asterism-huston/lib/normalizers.js'
+import { normalizers } from '@mateonunez/asterism-huston'
+
+const { removeNulls, removeReservedWords } = normalizers
 
 export default async function setupDatabase (logger, database, options) {
   if (logger) logger.info(`Setting up ${database} database.`)
