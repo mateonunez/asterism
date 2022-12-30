@@ -1,8 +1,8 @@
 import { test } from 'tap'
 import { generateConnectionString } from '../lib/database.js'
-import huston from '@mateonunez/asterism-huston'
+import { database } from '@mateonunez/asterism-huston'
 
-const { mysqlOptions, postgresOptions } = huston
+const { mysqlOptions, postgresOptions } = database
 
 test('should generate correctly the connection string', ({ end }) => {
   test('mysql', async ({ same }) => {
