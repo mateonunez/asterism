@@ -59,7 +59,7 @@ Options:
   -t, --tableName <tableName>        Table name
   -u, --user <user>                  Database user (default: "root")
   -w, --password <password>          Database password (default: "toor")
-  -o, --output <output>              Output directory (default: "./out")
+  -o, --outputDir <outputDir>        Output directory (default: "./out")
   -s, --strict <strict>              Strict mode (default: "false")
   --help                             display help for command
 ```
@@ -85,9 +85,9 @@ Arguments:
   term                          The term to search for
 
 Options:
-  -c, --cache-enabled           Use cache
-  -i, --input-dir <inputDir>    Lyra databases directory (default: "./lyra")
-  -o, --output-dir <outputDir>  Output directory to save results in a JSON
+  -c, --cacheEnabled            Use cache
+  -i, --inputDir <inputDir>     Lyra databases directory (default: "./lyra")
+  -o, --outputDir <outputDir>   Output directory to save results in a JSON
                                 (default: "./out")
   -h, --help                    display help for command
 ```
