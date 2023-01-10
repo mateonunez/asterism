@@ -88,7 +88,7 @@ importers:
       '@lyrasearch/lyra': ^0.3.1
       '@lyrasearch/plugin-data-persistence': ^0.0.4
       '@mateonunez/asterism-huston': workspace:*
-      '@mateonunez/lyra-cache': 0.0.1-beta.1
+      '@mateonunez/lyra-cache': 0.1.0
       '@mateonunez/lyra-schema-resolver': ^0.1.2
       c8: ^7.12.0
       snazzy: ^9.0.0
@@ -98,7 +98,7 @@ importers:
       '@lyrasearch/lyra': 0.3.1
       '@lyrasearch/plugin-data-persistence': 0.0.4
       '@mateonunez/asterism-huston': link:../huston
-      '@mateonunez/lyra-cache': 0.0.1-beta.1
+      '@mateonunez/lyra-cache': 0.1.0
       '@mateonunez/lyra-schema-resolver': 0.1.2
     devDependencies:
       c8: 7.12.0
@@ -531,8 +531,8 @@ packages:
       dpack: 0.6.22
     dev: false
 
-  /@mateonunez/lyra-cache/0.0.1-beta.1:
-    resolution: {integrity: sha512-p7Ck7cPz7acDMFJTmYM4NT8MIOygHaS6HMOwxTfucsgWMGyruzG4Djw0nlFtuxzuOLg5wxRHCLwnV4CJtN196w==}
+  /@mateonunez/lyra-cache/0.1.0:
+    resolution: {integrity: sha512-kCvw4uHKAdg4Cw+htQibTGTiZeXVxV1kIBdVFeHdsEJ7NthI+9J4OQcyJDhx2F9nOUkzLufmy9oBTa7P6w9r9A==}
     dependencies:
       '@lyrasearch/lyra': 0.3.1
       async-cache-dedupe: 1.6.0
