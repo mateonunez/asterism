@@ -25,7 +25,7 @@
   "dependencies": {
     "@mateonunez/asterism-drill": "workspace:*",
     "@mateonunez/asterism-falcon": "workspace:*",
-    "commander": "^9.4.1"
+    "commander": "^10.0.0"
   },
   "devDependencies": {
     "c8": "^7.12.0",
