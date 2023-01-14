@@ -85,7 +85,7 @@ importers:
 
   packages/rover:
     specifiers:
-      '@lyrasearch/lyra': ^0.3.1
+      '@lyrasearch/lyra': ^0.4.0
       '@lyrasearch/plugin-data-persistence': ^0.0.4
       '@mateonunez/asterism-huston': workspace:*
       '@mateonunez/lyra-cache': 0.0.1-beta.1
@@ -95,7 +95,7 @@ importers:
       standard: ^17.0.0
       tap: ^16.3.2
     dependencies:
-      '@lyrasearch/lyra': 0.3.1
+      '@lyrasearch/lyra': 0.4.1
       '@lyrasearch/plugin-data-persistence': 0.0.4
       '@mateonunez/asterism-huston': link:../huston
       '@mateonunez/lyra-cache': 0.0.1-beta.1
@@ -521,6 +521,11 @@ packages:
 
   /@lyrasearch/lyra/0.3.1:
     resolution: {integrity: sha512-c0k8R026nfXu/FhA9xgh7jo/+HM4I7XCn5J+us32mQEmqNBmGpD0CEyJ8PiJxmsDapyeYwpMNQgT2lNmnIL86w==}
+    dev: false
+
+  /@lyrasearch/lyra/0.4.1:
+    resolution: {integrity: sha512-ZGy+fD01PB/hmM0xvcSg/C/NQFmen04fLRNtSYPRpYvQelC6jdnhYNIX46qpfSBdxN0I1D0DcR1fmkw7aDLHoA==}
+    engines: {node: '>= 16.0.0'}
     dev: false
 
   /@lyrasearch/plugin-data-persistence/0.0.4:

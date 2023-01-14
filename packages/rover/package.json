@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/mateonunez/asterism#readme",
   "dependencies": {
-    "@lyrasearch/lyra": "^0.3.1",
+    "@lyrasearch/lyra": "^0.4.0",
     "@lyrasearch/plugin-data-persistence": "^0.0.4",
     "@mateonunez/asterism-huston": "workspace:*",
     "@mateonunez/lyra-cache": "0.0.1-beta.1",
