@@ -3,8 +3,8 @@
 const { normalizers } = require('@mateonunez/asterism-huston')
 const { removeNulls } = normalizers
 const { default: lyraSchemaResolver } = require('@mateonunez/lyra-schema-resolver')
-const { create, insert, search: searchLyra } = require('@lyrasearch/lyra')
-const { searchCache } = require('@mateonunez/lyra-cache')
+const { create, insert, search } = require('@lyrasearch/lyra')
+const { createLyraCache } = require('lyra-cache')
 const { persistToFile, restoreFromFile } = require('@lyrasearch/plugin-data-persistence')
 const fs = require('fs')
 const path = require('path')
@@ -29,7 +29,7 @@ function generateSchema (logger, data, options) {
   return schema
 }
 
-function generateAsterism (logger, data, schema, options) {
+async function generateAsterism (logger, data, schema, options) {
   if (logger) logger.info('Generating asterism.')
 
   /* c8 ignore next */
@@ -37,7 +37,7 @@ function generateAsterism (logger, data, schema, options) {
 
   const asterism = {}
   for (const key of Object.keys(schema)) {
-    const lyra = create({ schema: schema[key] })
+    const lyra = await create({ schema: schema[key] })
     asterism[key] = lyra
 
     for (const entry of data[key]) {
@@ -54,14 +54,14 @@ function generateAsterism (logger, data, schema, options) {
         }
       }
 
-      insert(lyra, document)
+      await insert(lyra, document)
     }
   }
 
   return asterism
 }
 
-function populateAsterism (logger, asterism, options) {
+async function populateAsterism (logger, asterism, options) {
   if (logger) logger.info('Populating asterism.')
   const filePath = path.resolve(join(process.cwd(), options.outputDir))
   /* c8 ignore next */
@@ -69,11 +69,11 @@ function populateAsterism (logger, asterism, options) {
 
   for (const key of Object.keys(asterism)) {
     if (logger) logger.info(`Persisting "${key}.json" to disk: ${filePath}`)
-    persistToFile(asterism[key], 'json', `${filePath}/${key}.json`)
+    await persistToFile(asterism[key], 'json', `${filePath}/${key}.json`)
   }
 }
 
-function resolveAsterism (logger, options) {
+async function resolveAsterism (logger, options) {
   if (logger) logger.info('Resolving asterism.')
   const filePath = path.resolve(join(process.cwd(), options.inputDir))
   /* c8 ignore next 4 */
@@ -84,25 +84,31 @@ function resolveAsterism (logger, options) {
   const asterism = {}
   for (const file of fs.readdirSync(filePath)) {
     if (file.endsWith('.json')) {
-      const lyra = restoreFromFile('json', `${filePath}/${file}`)
+      const lyra = await restoreFromFile('json', `${filePath}/${file}`)
       asterism[file.replace(/\.js$/, '')] = lyra
     }
   }
   return asterism
 }
 
+const caches = {}
+
 async function searchOnAsterism (logger, asterism, term, options) {
   if (logger) logger.info('Searching on asterism.')
 
   const cacheEnabled = options?.cacheEnabled || false
-  const search = cacheEnabled ? searchCache : searchLyra
   const results = {}
+
   for (const key of Object.keys(asterism)) {
     if (cacheEnabled) {
-      results[key] = await search({ db: asterism[key], term })
+      if (!caches[key]) {
+        caches[key] = await createLyraCache(asterism[key])
+      }
+
+      results[key] = await caches[key].search({ term })
       results[key] = { ...results[key], cached: true }
     } else {
-      results[key] = search(asterism[key], { term })
+      results[key] = await search(asterism[key], { term })
     }
   }
 

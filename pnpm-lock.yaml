@@ -85,21 +85,21 @@ importers:
 
   packages/rover:
     specifiers:
-      '@lyrasearch/lyra': ^0.3.1
-      '@lyrasearch/plugin-data-persistence': ^0.0.4
+      '@lyrasearch/lyra': ^0.4.1
+      '@lyrasearch/plugin-data-persistence': ^0.0.5
       '@mateonunez/asterism-huston': workspace:*
-      '@mateonunez/lyra-cache': 0.0.1-beta.1
-      '@mateonunez/lyra-schema-resolver': ^0.1.2
+      '@mateonunez/lyra-schema-resolver': ^0.1.3
       c8: ^7.12.0
+      lyra-cache: ^0.3.0
       snazzy: ^9.0.0
       standard: ^17.0.0
       tap: ^16.3.2
     dependencies:
-      '@lyrasearch/lyra': 0.3.1
-      '@lyrasearch/plugin-data-persistence': 0.0.4
+      '@lyrasearch/lyra': 0.4.1
+      '@lyrasearch/plugin-data-persistence': 0.0.5
       '@mateonunez/asterism-huston': link:../huston
-      '@mateonunez/lyra-cache': 0.0.1-beta.1
       '@mateonunez/lyra-schema-resolver': 0.1.3
+      lyra-cache: 0.3.1
     devDependencies:
       c8: 7.12.0
       snazzy: 9.0.0
@@ -519,28 +519,17 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
-  /@lyrasearch/lyra/0.3.1:
-    resolution: {integrity: sha512-c0k8R026nfXu/FhA9xgh7jo/+HM4I7XCn5J+us32mQEmqNBmGpD0CEyJ8PiJxmsDapyeYwpMNQgT2lNmnIL86w==}
-    dev: false
-
   /@lyrasearch/lyra/0.4.1:
     resolution: {integrity: sha512-ZGy+fD01PB/hmM0xvcSg/C/NQFmen04fLRNtSYPRpYvQelC6jdnhYNIX46qpfSBdxN0I1D0DcR1fmkw7aDLHoA==}
     engines: {node: '>= 16.0.0'}
     dev: false
 
-  /@lyrasearch/plugin-data-persistence/0.0.4:
-    resolution: {integrity: sha512-//LnHDVN41CTEWYvO/5iZ+75O57e9u6e2JDs/jB4NPSbQHY7HtYGK1pdAb2G516r2DubXaPesGtpXjiobwn8cA==}
+  /@lyrasearch/plugin-data-persistence/0.0.5:
+    resolution: {integrity: sha512-F8dLkbL8iwEbSCVxTTZeQq8md1yrjNfOv3UXzcxQfqVOQQ2GzFzXjQ4OljUYa0YpkpELrOjqzW8OZuxe1v1WoA==}
     dependencies:
-      '@lyrasearch/lyra': 0.3.1
+      '@lyrasearch/lyra': 0.4.1
       '@msgpack/msgpack': 2.8.0
       dpack: 0.6.22
-    dev: false
-
-  /@mateonunez/lyra-cache/0.0.1-beta.1:
-    resolution: {integrity: sha512-p7Ck7cPz7acDMFJTmYM4NT8MIOygHaS6HMOwxTfucsgWMGyruzG4Djw0nlFtuxzuOLg5wxRHCLwnV4CJtN196w==}
-    dependencies:
-      '@lyrasearch/lyra': 0.3.1
-      async-cache-dedupe: 1.7.0
     dev: false
 
   /@mateonunez/lyra-schema-resolver/0.1.3:
@@ -730,8 +719,8 @@ packages:
     resolution: {integrity: sha512-TaTivMB6pYI1kXwrFlEhLeGfOqoDNdTxjCdwRfFFkEA30Eu+k48W34nlok2EYWJfFFzqaEmichdNM7th6M5HNw==}
     dev: false
 
-  /async-cache-dedupe/1.7.0:
-    resolution: {integrity: sha512-122/FgmgiYDX9Pkie1S6EDqOWSvQBKDgD9NNmtBvfmtXDVxw1qLufzigh1isLMEl3Mz1iXiUTAvulv1DoS8uBw==}
+  /async-cache-dedupe/1.8.0:
+    resolution: {integrity: sha512-igRdbMUs8JeDP8niH6E2/QYPhrch85sO/JM5OXFz2QzME6PJJ046aMc3mCkMTL38l8kQHIh0mNqoSSwKLyihCg==}
     dependencies:
       abstract-logging: 2.0.1
       mnemonist: 0.39.5
@@ -2316,6 +2305,13 @@ packages:
   /lru-cache/7.14.1:
     resolution: {integrity: sha512-ysxwsnTKdAx96aTRdhDOCQfDgbHnt8SK0KY8SEjO0wHinhWOFTESbjVCMPbU1uGXg/ch4lifqx0wfjOawU2+WA==}
     engines: {node: '>=12'}
+    dev: false
+
+  /lyra-cache/0.3.1:
+    resolution: {integrity: sha512-5F+XmVp8unvVdQe8aoI6Xkf/h3EGo1gtta5eEfIm358pxSEjB6VYcVnzHtoGwIsYP7/Iy1FTb+UuOcmXDkSHKg==}
+    dependencies:
+      '@lyrasearch/lyra': 0.4.1
+      async-cache-dedupe: 1.8.0
     dev: false
 
   /make-dir/3.1.0:
