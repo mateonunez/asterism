@@ -21,13 +21,13 @@
     "@lyrasearch/plugin-data-persistence": "^0.0.5",
     "@mateonunez/asterism-huston": "workspace:*",
     "@mateonunez/lyra-schema-resolver": "^0.1.3",
-    "lyra-cache": "^0.3.0"
+    "lyra-cache": "^0.3.1"
   },
   "devDependencies": {
     "c8": "^7.12.0",
     "snazzy": "^9.0.0",
     "standard": "^17.0.0",
-    "tap": "^16.3.2"
+    "tap": "^16.3.4"
   },
   "author": {
     "email": "mateonunez95@gmail.com",
