@@ -86,7 +86,7 @@ importers:
   packages/rover:
     specifiers:
       '@lyrasearch/lyra': ^0.4.1
-      '@lyrasearch/plugin-data-persistence': ^0.0.5
+      '@lyrasearch/plugin-data-persistence': ^0.0.6
       '@mateonunez/asterism-huston': workspace:*
       '@mateonunez/lyra-schema-resolver': ^0.1.3
       c8: ^7.12.0
@@ -96,7 +96,7 @@ importers:
       tap: ^16.3.4
     dependencies:
       '@lyrasearch/lyra': 0.4.1
-      '@lyrasearch/plugin-data-persistence': 0.0.5
+      '@lyrasearch/plugin-data-persistence': 0.0.6
       '@mateonunez/asterism-huston': link:../huston
       '@mateonunez/lyra-schema-resolver': 0.1.3
       lyra-cache: 0.3.1
@@ -524,10 +524,15 @@ packages:
     engines: {node: '>= 16.0.0'}
     dev: false
 
-  /@lyrasearch/plugin-data-persistence/0.0.5:
-    resolution: {integrity: sha512-F8dLkbL8iwEbSCVxTTZeQq8md1yrjNfOv3UXzcxQfqVOQQ2GzFzXjQ4OljUYa0YpkpELrOjqzW8OZuxe1v1WoA==}
+  /@lyrasearch/lyra/0.4.3:
+    resolution: {integrity: sha512-uHKDX3ZFYyhU79d5AvmLk0Y3PadBDaIHrnb8wrZS3xb/pBuRDMQrG9IhVxGSkSdsUrtV0CSxbE+eZZS/5CYyKQ==}
+    engines: {node: '>= 16.0.0'}
+    dev: false
+
+  /@lyrasearch/plugin-data-persistence/0.0.6:
+    resolution: {integrity: sha512-LtuVETNhzv8TTWSsRBtYXn8jqTGD3Wz7ocLinMnmRCA2y18z7SJWVmywjdSrRSKI5hD0ofzWOmplZUIf0A9udg==}
     dependencies:
-      '@lyrasearch/lyra': 0.4.1
+      '@lyrasearch/lyra': 0.4.3
       '@msgpack/msgpack': 2.8.0
       dpack: 0.6.22
     dev: false
