@@ -12,7 +12,7 @@ importers:
     specifiers:
       '@mateonunez/asterism-drill': workspace:*
       '@mateonunez/asterism-falcon': workspace:*
-      c8: ^7.12.0
+      c8: ^7.13.0
       commander: ^10.0.0
       execa: ^7.0.0
       snazzy: ^9.0.0
@@ -23,7 +23,7 @@ importers:
       '@mateonunez/asterism-falcon': link:../falcon
       commander: 10.0.0
     devDependencies:
-      c8: 7.12.0
+      c8: 7.13.0
       execa: 7.0.0
       snazzy: 9.0.0
       standard: 17.0.0
@@ -34,7 +34,7 @@ importers:
       '@databases/mysql': ^5.2.1
       '@databases/pg': ^5.4.1
       '@mateonunez/asterism-huston': workspace:*
-      c8: ^7.12.0
+      c8: ^7.13.0
       snazzy: ^9.0.0
       standard: ^17.0.0
       tap: ^16.3.4
@@ -43,7 +43,7 @@ importers:
       '@databases/pg': 5.4.1
       '@mateonunez/asterism-huston': link:../huston
     devDependencies:
-      c8: 7.12.0
+      c8: 7.13.0
       snazzy: 9.0.0
       standard: 17.0.0
       tap: 16.3.4
@@ -53,9 +53,9 @@ importers:
       '@mateonunez/asterism-drill': workspace:*
       '@mateonunez/asterism-huston': workspace:*
       '@mateonunez/asterism-rover': workspace:*
-      c8: ^7.12.0
-      pino: ^8.8.0
-      pino-pretty: ^9.1.1
+      c8: ^7.13.0
+      pino: ^8.10.0
+      pino-pretty: ^9.3.0
       snazzy: ^9.0.0
       standard: ^17.0.0
       tap: ^16.3.4
@@ -63,45 +63,45 @@ importers:
       '@mateonunez/asterism-drill': link:../drill
       '@mateonunez/asterism-huston': link:../huston
       '@mateonunez/asterism-rover': link:../rover
-      pino: 8.8.0
-      pino-pretty: 9.1.1
+      pino: 8.10.0
+      pino-pretty: 9.3.0
     devDependencies:
-      c8: 7.12.0
+      c8: 7.13.0
       snazzy: 9.0.0
       standard: 17.0.0
       tap: 16.3.4
 
   packages/huston:
     specifiers:
-      c8: ^7.12.0
+      c8: ^7.13.0
       snazzy: ^9.0.0
       standard: ^17.0.0
       tap: ^16.3.4
     devDependencies:
-      c8: 7.12.0
+      c8: 7.13.0
       snazzy: 9.0.0
       standard: 17.0.0
       tap: 16.3.4
 
   packages/rover:
     specifiers:
-      '@lyrasearch/lyra': ^0.4.1
-      '@lyrasearch/plugin-data-persistence': ^0.0.6
+      '@lyrasearch/lyra': ^0.4.9
+      '@lyrasearch/plugin-data-persistence': ^0.1.1
       '@mateonunez/asterism-huston': workspace:*
-      '@mateonunez/lyra-schema-resolver': ^0.1.3
-      c8: ^7.12.0
+      c8: ^7.13.0
       lyra-cache: ^0.3.1
+      lyra-schema-resolver: ^0.2.0
       snazzy: ^9.0.0
       standard: ^17.0.0
       tap: ^16.3.4
     dependencies:
-      '@lyrasearch/lyra': 0.4.5
-      '@lyrasearch/plugin-data-persistence': 0.0.6
+      '@lyrasearch/lyra': 0.4.9
+      '@lyrasearch/plugin-data-persistence': 0.1.1
       '@mateonunez/asterism-huston': link:../huston
-      '@mateonunez/lyra-schema-resolver': 0.1.3
       lyra-cache: 0.3.1
+      lyra-schema-resolver: 0.2.0
     devDependencies:
-      c8: 7.12.0
+      c8: 7.13.0
       snazzy: 9.0.0
       standard: 17.0.0
       tap: 16.3.4
@@ -519,23 +519,17 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
-  /@lyrasearch/lyra/0.4.5:
-    resolution: {integrity: sha512-2cOgkx5oc45uDYPPTV4IsOLYbbybTU/23ul9fhEOVH9HI3H2waHXweB2HlAYOGuZ+2G8lSYIHsARdEnHaOaC8Q==}
+  /@lyrasearch/lyra/0.4.9:
+    resolution: {integrity: sha512-PMx26K67qZu65Ddran/jF62iiE0fmjQ4ZnVwCDJwjVZoNI3/O9xRUnfzalHEcM8t9SwBxK+uvLqOBlzjXHCxMg==}
     engines: {node: '>= 16.0.0'}
     dev: false
 
-  /@lyrasearch/plugin-data-persistence/0.0.6:
-    resolution: {integrity: sha512-LtuVETNhzv8TTWSsRBtYXn8jqTGD3Wz7ocLinMnmRCA2y18z7SJWVmywjdSrRSKI5hD0ofzWOmplZUIf0A9udg==}
+  /@lyrasearch/plugin-data-persistence/0.1.1:
+    resolution: {integrity: sha512-zVxQzw4nSMANrvPAjtvigL1fT9bcNV3J/Zo+ugg0Rs/68Hx0cKeMM6sCIMBF2VC4osx8KfppCVAwsPy7xv7anQ==}
     dependencies:
-      '@lyrasearch/lyra': 0.4.5
+      '@lyrasearch/lyra': 0.4.9
       '@msgpack/msgpack': 2.8.0
       dpack: 0.6.22
-    dev: false
-
-  /@mateonunez/lyra-schema-resolver/0.1.3:
-    resolution: {integrity: sha512-oh2SSC4roCFK2Ps5pntGsmB3K2tqVB/EDkUndTA4saZm4q8Y1vhnaOIgjXSSCE1AvCvSEXgUBgKftb15X8i4fA==}
-    dependencies:
-      '@lyrasearch/lyra': 0.4.5
     dev: false
 
   /@msgpack/msgpack/2.8.0:
@@ -812,8 +806,8 @@ packages:
       semver: 7.3.8
     dev: true
 
-  /c8/7.12.0:
-    resolution: {integrity: sha512-CtgQrHOkyxr5koX1wEUmN/5cfDa2ckbHRA4Gy5LAL0zaCFtVWJS5++n+w4/sr2GWGerBxgTjpKeDclk/Qk6W/A==}
+  /c8/7.13.0:
+    resolution: {integrity: sha512-/NL4hQTv1gBL6J6ei80zu3IiTrmePDKXKXOTLpHvcIWZTVYQlDhVWjjWvkhICylE8EwwnMVzDZugCvdx0/DIIA==}
     engines: {node: '>=10.12.0'}
     hasBin: true
     dependencies:
@@ -2311,8 +2305,14 @@ packages:
   /lyra-cache/0.3.1:
     resolution: {integrity: sha512-5F+XmVp8unvVdQe8aoI6Xkf/h3EGo1gtta5eEfIm358pxSEjB6VYcVnzHtoGwIsYP7/Iy1FTb+UuOcmXDkSHKg==}
     dependencies:
-      '@lyrasearch/lyra': 0.4.5
+      '@lyrasearch/lyra': 0.4.9
       async-cache-dedupe: 1.8.0
+    dev: false
+
+  /lyra-schema-resolver/0.2.0:
+    resolution: {integrity: sha512-Q8rL4LCGaRhxlLKjctx8fDwnSo1R28od9xvIpusMRR90H7zf+a8fOy3WaXNP0erxLGoX24Utog2irtePKpV17A==}
+    dependencies:
+      '@lyrasearch/lyra': 0.4.9
     dev: false
 
   /make-dir/3.1.0:
@@ -2752,8 +2752,8 @@ packages:
       split2: 4.1.0
     dev: false
 
-  /pino-pretty/9.1.1:
-    resolution: {integrity: sha512-iJrnjgR4FWQIXZkUF48oNgoRI9BpyMhaEmihonHeCnZ6F50ZHAS4YGfGBT/ZVNsPmd+hzkIPGzjKdY08+/yAXw==}
+  /pino-pretty/9.3.0:
+    resolution: {integrity: sha512-T3FIzVc2sQfDY6FSjhvAEOeA1sby0YKI4he4VsI+d8q3MyYnfsPT+7OI3W/99v0v3TfJN/nMJradEvJWjbjRaQ==}
     hasBin: true
     dependencies:
       colorette: 2.0.19
@@ -2776,8 +2776,8 @@ packages:
     resolution: {integrity: sha512-KO0m2f1HkrPe9S0ldjx7za9BJjeHqBku5Ch8JyxETxT8dEFGz1PwgrHaOQupVYitpzbFSYm7nnljxD8dik2c+g==}
     dev: false
 
-  /pino/8.8.0:
-    resolution: {integrity: sha512-cF8iGYeu2ODg2gIwgAHcPrtR63ILJz3f7gkogaHC/TXVVXxZgInmNYiIpDYEwgEkxZti2Se6P2W2DxlBIZe6eQ==}
+  /pino/8.10.0:
+    resolution: {integrity: sha512-ODfIe+giJtQGsvNAEj5/sHHpL3TFBg161JBH4W62Hc0l0PJjsDFD1R7meLI4PZ2aoHDJznxFNShkJcaG/qJToQ==}
     hasBin: true
     dependencies:
       atomic-sleep: 1.0.0
