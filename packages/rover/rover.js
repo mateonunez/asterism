@@ -2,7 +2,7 @@
 
 const { normalizers } = require('@mateonunez/asterism-huston')
 const { removeNulls } = normalizers
-const { default: lyraSchemaResolver } = require('@mateonunez/lyra-schema-resolver')
+const { default: lyraSchemaResolver } = require('lyra-schema-resolver')
 const { create, insert, search } = require('@lyrasearch/lyra')
 const { createLyraCache } = require('lyra-cache')
 const { persistToFile, restoreFromFile } = require('@lyrasearch/plugin-data-persistence')
