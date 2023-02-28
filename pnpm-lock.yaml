@@ -85,21 +85,21 @@ importers:
 
   packages/rover:
     specifiers:
-      '@lyrasearch/lyra': ^0.4.9
+      '@lyrasearch/lyra': ^0.4.10
       '@lyrasearch/plugin-data-persistence': ^0.1.1
       '@mateonunez/asterism-huston': workspace:*
       c8: ^7.13.0
       lyra-cache: ^0.3.1
-      lyra-schema-resolver: ^0.2.0
+      lyra-schema-resolver: ^0.2.2
       snazzy: ^9.0.0
       standard: ^17.0.0
       tap: ^16.3.4
     dependencies:
-      '@lyrasearch/lyra': 0.4.9
+      '@lyrasearch/lyra': 0.4.10
       '@lyrasearch/plugin-data-persistence': 0.1.1
       '@mateonunez/asterism-huston': link:../huston
       lyra-cache: 0.3.1
-      lyra-schema-resolver: 0.2.0
+      lyra-schema-resolver: 0.2.2
     devDependencies:
       c8: 7.13.0
       snazzy: 9.0.0
@@ -519,15 +519,15 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
-  /@lyrasearch/lyra/0.4.9:
-    resolution: {integrity: sha512-PMx26K67qZu65Ddran/jF62iiE0fmjQ4ZnVwCDJwjVZoNI3/O9xRUnfzalHEcM8t9SwBxK+uvLqOBlzjXHCxMg==}
+  /@lyrasearch/lyra/0.4.10:
+    resolution: {integrity: sha512-1SEe6Jmc6XfPjR6/HCd5+4RXPcNirnudjHOWlhPvG7neBorX4s/plhvRumd/+yxn9JdNc5fCf7lWxx2tRfQivg==}
     engines: {node: '>= 16.0.0'}
     dev: false
 
   /@lyrasearch/plugin-data-persistence/0.1.1:
     resolution: {integrity: sha512-zVxQzw4nSMANrvPAjtvigL1fT9bcNV3J/Zo+ugg0Rs/68Hx0cKeMM6sCIMBF2VC4osx8KfppCVAwsPy7xv7anQ==}
     dependencies:
-      '@lyrasearch/lyra': 0.4.9
+      '@lyrasearch/lyra': 0.4.10
       '@msgpack/msgpack': 2.8.0
       dpack: 0.6.22
     dev: false
@@ -2300,14 +2300,14 @@ packages:
   /lyra-cache/0.3.1:
     resolution: {integrity: sha512-5F+XmVp8unvVdQe8aoI6Xkf/h3EGo1gtta5eEfIm358pxSEjB6VYcVnzHtoGwIsYP7/Iy1FTb+UuOcmXDkSHKg==}
     dependencies:
-      '@lyrasearch/lyra': 0.4.9
+      '@lyrasearch/lyra': 0.4.10
       async-cache-dedupe: 1.9.0
     dev: false
 
-  /lyra-schema-resolver/0.2.0:
-    resolution: {integrity: sha512-Q8rL4LCGaRhxlLKjctx8fDwnSo1R28od9xvIpusMRR90H7zf+a8fOy3WaXNP0erxLGoX24Utog2irtePKpV17A==}
+  /lyra-schema-resolver/0.2.2:
+    resolution: {integrity: sha512-K8TG4pTQkLQQeDbKzZJM3aDHUPQRD9C79knzXCC+LuJcwu+Uxkr89pRmuCsRocyJaWdbLo1wtJKmDtuOvusfGQ==}
     dependencies:
-      '@lyrasearch/lyra': 0.4.9
+      '@lyrasearch/lyra': 0.4.10
     dev: false
 
   /make-dir/3.1.0:

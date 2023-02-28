@@ -17,10 +17,10 @@
   },
   "homepage": "https://github.com/mateonunez/asterism#readme",
   "dependencies": {
-    "@lyrasearch/lyra": "^0.4.9",
+    "@lyrasearch/lyra": "^0.4.10",
     "@lyrasearch/plugin-data-persistence": "^0.1.1",
     "@mateonunez/asterism-huston": "workspace:*",
-    "lyra-schema-resolver": "^0.2.0",
+    "lyra-schema-resolver": "^0.2.2",
     "lyra-cache": "^0.3.1"
   },
   "devDependencies": {
