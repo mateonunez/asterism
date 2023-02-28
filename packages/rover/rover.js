@@ -96,11 +96,11 @@ const caches = {}
 async function searchOnAsterism (logger, asterism, term, options) {
   if (logger) logger.info('Searching on asterism.')
 
-  const cacheEnabled = options?.cacheEnabled || false
+  const cacheDisabled = options?.cacheDisabled ?? false
   const results = {}
 
   for (const key of Object.keys(asterism)) {
-    if (cacheEnabled) {
+    if (!cacheDisabled) {
       if (!caches[key]) {
         caches[key] = await createLyraCache(asterism[key])
       }

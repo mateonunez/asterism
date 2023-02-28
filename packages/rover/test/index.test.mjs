@@ -87,8 +87,15 @@ test('should search on asterism', async ({ ok }) => {
 
 test('should perform a cached search', async ({ ok }) => {
   const asterism = await resolveAsterism(logger, { inputDir: './lyra' })
-  const results = await searchOnAsterism(logger, asterism, 'John', { cacheEnabled: true })
+  const results = await searchOnAsterism(logger, asterism, 'John')
   ok(results[Object.keys(results)[0]].cached)
+})
+
+test('should perform a non-cached search', async ({ equal }) => {
+  const asterism = await resolveAsterism(logger, { inputDir: './lyra' })
+  const results = await searchOnAsterism(logger, asterism, 'John', { cacheDisabled: true })
+
+  equal(results[Object.keys(results)[0]].cached, undefined)
 })
 
 test('should save search results in a json file', async ({ ok }) => {

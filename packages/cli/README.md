@@ -76,7 +76,7 @@ Arguments:
   term                          The term to search for
 
 Options:
-  -c, --cacheEnabled            Use cache
+  -c, --cacheDisabled            Disable cache
   -i, --inputDir <inputDir>     Lyra databases directory (default: "./lyra")
   -o, --outputDir <outputDir>   Output directory to save results in a JSON
                                 (default: "./out")
