@@ -25,7 +25,7 @@ program
   .command('search')
   .description('Search for a Lyra instance in your instances')
   .argument('[term]', 'The term to search for')
-  .option('-c, --cacheEnabled', 'Use cache')
+  .option('-c, --cacheDisabled', 'Disable cache')
   .option('-i, --inputDir <inputDir>', 'Lyra databases directory', './lyra')
   .option('-o, --outputDir <outputDir>', 'Output directory to save results in a JSON', './out')
   .action(falconSearch)
