@@ -2,6 +2,7 @@ import { test } from 'tap'
 import setupDatabase, { killDatabase } from './../drill.js'
 import symbols from '../lib/symbols.js'
 import { logger, database } from '@mateonunez/asterism-huston'
+import { allowedDatabases } from '../lib/database.js'
 
 const { mysqlOptions, postgresOptions } = database
 const { privateMethods } = symbols
@@ -26,131 +27,114 @@ async function insertIntoTable (queryer, tableName) {
   })
 }
 
+function getOptions (database) {
+  return database === 'mysql' ? mysqlOptions : database === 'postgres' ? postgresOptions : {}
+}
+
 test('should drop a database', ({ end }) => {
-  test('mysql', async ({ ok }) => {
-    const { db, queryer } = await setupDatabase(logger, 'mysql', mysqlOptions)
-    const databaseName = 'test'
-    await queryer[privateMethods].createDatabase(databaseName, { dropIfExists: true })
+  allowedDatabases.forEach((supportedDatabase) => {
+    test(supportedDatabase, async ({ equal, teardown }) => {
+      teardown(async () => {
+        await killDatabase(db)
+      })
 
-    await queryer[privateMethods].dropDatabase(databaseName)
-    await killDatabase(db)
-    ok(db)
+      const { db, queryer } = await setupDatabase(logger, supportedDatabase, getOptions(supportedDatabase))
+      const databaseName = 'test'
+      await queryer[privateMethods].createDatabase(databaseName, { dropIfExists: true })
+      await queryer[privateMethods].dropDatabase(databaseName)
+
+      equal(await queryer[privateMethods].databaseExists(databaseName), false)
+    })
   })
-
-  test('postgres', async ({ ok }) => {
-    const { db, queryer } = await setupDatabase(logger, 'postgres', postgresOptions)
-    const databaseName = 'test'
-    await queryer[privateMethods].createDatabase(databaseName, { dropIfExists: true })
-
-    await queryer[privateMethods].dropDatabase(databaseName)
-    await killDatabase(db)
-    ok(db)
-  })
-
   end()
 })
 
 test('should create a new table', ({ end }) => {
-  test('mysql', async ({ ok }) => {
-    const { db, queryer } = await setupDatabase(logger, 'mysql', mysqlOptions)
-    const tableName = 'common_table_test'
-    await createTable(queryer, tableName)
-    await queryer[privateMethods].dropTable(tableName)
-    await killDatabase(db)
+  allowedDatabases.forEach((supportedDatabase) => {
+    test(supportedDatabase, async ({ same, teardown }) => {
+      teardown(async () => {
+        await queryer[privateMethods].dropTable(tableName)
+        await killDatabase(db)
+      })
 
-    ok(db)
-  })
+      const { db, queryer } = await setupDatabase(logger, supportedDatabase, getOptions(supportedDatabase))
+      const tableName = 'common_table_test'
+      await createTable(queryer, tableName)
+      const data = await queryer.selectData(tableName)
 
-  test('postgres', async ({ ok }) => {
-    const { db, queryer } = await setupDatabase(logger, 'postgres', postgresOptions)
-    const tableName = 'common_table_test'
-    await createTable(queryer, tableName)
-    await queryer[privateMethods].dropTable(tableName)
-    await killDatabase(db)
-
-    ok(db)
+      same(data, [])
+    })
   })
 
   end()
 })
 
 test('should insert data into a table', ({ end }) => {
-  test('mysql', async ({ ok }) => {
-    const { db, queryer } = await setupDatabase(logger, 'mysql', mysqlOptions)
-    const tableName = 'common_table_test'
-    await createTable(queryer, tableName)
-    await insertIntoTable(queryer, tableName)
-    await queryer[privateMethods].dropTable(tableName)
-    await killDatabase(db)
+  allowedDatabases.forEach((supportedDatabase) => {
+    test(supportedDatabase, async ({ same, teardown }) => {
+      teardown(async () => {
+        await queryer[privateMethods].dropTable(tableName)
+        await killDatabase(db)
+      })
 
-    ok(db)
-  })
+      const { db, queryer } = await setupDatabase(logger, supportedDatabase, getOptions(supportedDatabase))
+      const tableName = 'common_table_test'
+      await createTable(queryer, tableName)
+      await insertIntoTable(queryer, tableName)
+      const data = await queryer.selectData(tableName)
 
-  test('postgres', async ({ ok }) => {
-    const { db, queryer } = await setupDatabase(logger, 'postgres', postgresOptions)
-    const tableName = 'common_table_test'
-    await createTable(queryer, tableName)
-    await insertIntoTable(queryer, tableName)
-    await queryer[privateMethods].dropTable(tableName)
-    await killDatabase(db)
-
-    ok(db)
+      same(data, [{
+        id: 1,
+        name: 'test'
+      }])
+    })
   })
 
   end()
 })
 
 test('should delete data', ({ end }) => {
-  test('mysql', async ({ ok }) => {
-    const { db, queryer } = await setupDatabase(logger, 'mysql', mysqlOptions)
-    const tableName = 'common_table_test'
-    await createTable(queryer, tableName)
-    await insertIntoTable(queryer, tableName)
-    await queryer[privateMethods].deleteData(tableName, { id: 1 })
-    await queryer[privateMethods].dropTable(tableName)
-    await killDatabase(db)
+  allowedDatabases.forEach((supportedDatabase) => {
+    test(supportedDatabase, async ({ same, teardown }) => {
+      teardown(async () => {
+        await queryer[privateMethods].dropTable(tableName)
+        await killDatabase(db)
+      })
 
-    ok(db)
-  })
+      const { db, queryer } = await setupDatabase(logger, supportedDatabase, getOptions(supportedDatabase))
+      const tableName = 'common_table_test'
+      await createTable(queryer, tableName)
+      await insertIntoTable(queryer, tableName)
+      await queryer[privateMethods].deleteData(tableName, { id: 1 })
+      const data = await queryer.selectData(tableName)
 
-  test('postgres', async ({ ok }) => {
-    const { db, queryer } = await setupDatabase(logger, 'postgres', postgresOptions)
-    const tableName = 'common_table_test'
-    await createTable(queryer, tableName)
-    await insertIntoTable(queryer, tableName)
-    await queryer[privateMethods].deleteData(tableName, { id: 1 })
-    await queryer[privateMethods].dropTable(tableName)
-    await killDatabase(db)
-
-    ok(db)
+      same(data, [])
+    })
   })
 
   end()
 })
 
 test('should update data', ({ end }) => {
-  test('mysql', async ({ ok }) => {
-    const { db, queryer } = await setupDatabase(logger, 'mysql', mysqlOptions)
-    const tableName = 'common_table_test'
-    await createTable(queryer, tableName)
-    await insertIntoTable(queryer, tableName)
-    await queryer[privateMethods].updateData(tableName, { id: 1 }, { name: 'test2' })
-    await queryer[privateMethods].dropTable(tableName)
-    await killDatabase(db)
+  allowedDatabases.forEach((supportedDatabase) => {
+    test(supportedDatabase, async ({ same, teardown }) => {
+      teardown(async () => {
+        await queryer[privateMethods].dropTable(tableName)
+        await killDatabase(db)
+      })
 
-    ok(db)
-  })
+      const { db, queryer } = await setupDatabase(logger, supportedDatabase, getOptions(supportedDatabase))
+      const tableName = 'common_table_test'
+      await createTable(queryer, tableName)
+      await insertIntoTable(queryer, tableName)
+      await queryer[privateMethods].updateData(tableName, { name: 'test2' }, { id: 1 })
+      const data = await queryer.selectData(tableName)
 
-  test('postgres', async ({ ok }) => {
-    const { db, queryer } = await setupDatabase(logger, 'postgres', postgresOptions)
-    const tableName = 'common_table_test'
-    await createTable(queryer, tableName)
-    await insertIntoTable(queryer, tableName)
-    await queryer[privateMethods].updateData(tableName, { id: 1 }, { name: 'test2' })
-    await queryer[privateMethods].dropTable(tableName)
-    await killDatabase(db)
-
-    ok(db)
+      same(data, [{
+        id: 1,
+        name: 'test2'
+      }])
+    })
   })
 
   end()
