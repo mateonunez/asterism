@@ -6,6 +6,7 @@ export default async function (logger, db, sql) {
   return {
     selectData: (tableName, columns, where) => selectData(logger, db, sql, tableName, columns, where),
     [symbols.privateMethods]: {
+      databaseExists: (database) => databaseExists(logger, db, sql, database),
       createDatabase: (database, options) => createDatabase(logger, db, sql, database, options),
       dropDatabase: (database, options) => dropDatabase(logger, db, sql, database),
       createTable: (tableName, columns, options) => createTable(logger, db, sql, tableName, columns, options),
@@ -15,6 +16,16 @@ export default async function (logger, db, sql) {
       updateData: (tableName, data, where, options) => updateData(logger, db, sql, tableName, data, where)
     }
   }
+}
+
+async function databaseExists (logger, db, sql, database) {
+  if (logger) logger.info(`Checking if database "${database}" exists.`)
+  const response = await db.query(sql`
+    SELECT SCHEMA_NAME
+    FROM INFORMATION_SCHEMA.SCHEMATA
+    WHERE SCHEMA_NAME = ${database}
+  `)
+  return response.length > 0
 }
 
 async function selectData (logger, db, sql, tableName, columns = '*', where = {}) {
