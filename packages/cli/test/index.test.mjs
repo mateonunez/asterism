@@ -19,3 +19,9 @@ test('migrate', async ({ ok }) => {
 
   ok(stdout.includes('Usage: asterism migrate [options] [database]'))
 })
+
+test('search', async ({ ok }) => {
+  const { stdout } = await execa('node', [cliPath, 'search', '--help'])
+
+  ok(stdout.includes('Usage: asterism search [options] [term]'))
+})
