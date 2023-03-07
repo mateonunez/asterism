@@ -9,6 +9,10 @@ t.before(async () => {
   await seeder(undefined, 'mysql', { ...mysqlOptions, outputDir: './orama' })
 })
 
+t.afterEach(async () => {
+  await dropSeed(undefined, 'mysql', { ...mysqlOptions, outputDir: './lyra' })
+})
+
 t.test('no database selected should default to mysql', async ({ ok }) => {
   const { db } = await falconMigrate(undefined, { ...mysqlOptions, outputDir: './orama' })
   ok(db.isMysql)
