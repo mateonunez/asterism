@@ -38,9 +38,10 @@ test('should drop a database', ({ end }) => {
         await killDatabase(db)
       })
 
-      const { db, queryer } = await setupDatabase(logger, supportedDatabase, getOptions(supportedDatabase))
       const databaseName = 'test'
-      await queryer[privateMethods].createDatabase(databaseName, { dropIfExists: true })
+
+      const { db, queryer } = await setupDatabase(logger, supportedDatabase, getOptions(supportedDatabase))
+      await queryer[privateMethods].createDatabase('test', { dropIfExists: true })
       await queryer[privateMethods].dropDatabase(databaseName)
 
       equal(await queryer[privateMethods].databaseExists(databaseName), false)
@@ -54,10 +55,14 @@ test('should create a new table', ({ end }) => {
     test(supportedDatabase, async ({ same, teardown }) => {
       teardown(async () => {
         await queryer[privateMethods].dropTable(tableName)
+        await queryer[privateMethods].dropDatabase('test')
         await killDatabase(db)
       })
-
-      const { db, queryer } = await setupDatabase(logger, supportedDatabase, getOptions(supportedDatabase))
+      const { db, queryer } = await setupDatabase(logger, supportedDatabase, {
+        ...getOptions(supportedDatabase),
+        database: 'test'
+      })
+      await queryer[privateMethods].createDatabase('test', { dropIfExists: true })
       const tableName = 'common_table_test'
       await createTable(queryer, tableName)
       const data = await queryer.selectData(tableName)
