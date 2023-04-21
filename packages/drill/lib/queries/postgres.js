@@ -25,7 +25,7 @@ async function getTables (logger, db, sql) {
     WHERE table_schema = 'public'
     AND table_type = 'BASE TABLE'
   `)
-  /* c8 ignore next 3 */
+  console.log({ response })
   if (response.length === 0) {
     if (logger) logger.warn('No tables found.')
   }
