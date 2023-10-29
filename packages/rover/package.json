@@ -1,6 +1,6 @@
 {
   "name": "@mateonunez/asterism-rover",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Rover is the tool to explore Orama",
   "main": "rover.mjs",
   "type": "module",
