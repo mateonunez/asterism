@@ -1,6 +1,12 @@
 name: ci
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '*'
 
 jobs:
   setup-dependencies:
@@ -8,7 +14,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node-version: [16, 18]
+        node-version: [16, 18, 20]
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2.2.4

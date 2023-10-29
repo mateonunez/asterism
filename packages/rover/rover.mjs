@@ -1,13 +1,14 @@
 'use strict'
 
-const { normalizers } = require('@mateonunez/asterism-huston')
+import fs from 'node:fs'
+import path from 'node:path'
+import { normalizers } from '@mateonunez/asterism-huston'
+import { create, insert, search } from '@orama/orama'
+import { persistToFile, restoreFromFile } from '@orama/plugin-data-persistence/server'
+import oramaSchemaResolver from 'orama-schema-resolver'
+import createOramaCache from 'orama-cache'
+
 const { removeNulls } = normalizers
-const { default: lyraSchemaResolver } = require('lyra-schema-resolver')
-const { create, insert, search } = require('@lyrasearch/lyra')
-const { createLyraCache } = require('lyra-cache')
-const { persistToFile, restoreFromFile } = require('@lyrasearch/plugin-data-persistence')
-const fs = require('fs')
-const path = require('path')
 const { join } = path
 
 // eslint-disable-next-line no-extend-native
@@ -24,7 +25,7 @@ function generateSchema (logger, data, options) {
       continue
     }
 
-    schema[entry] = lyraSchemaResolver(data[entry], options)
+    schema[entry] = oramaSchemaResolver(data[entry], options)
   }
   return schema
 }
@@ -37,8 +38,8 @@ async function generateAsterism (logger, data, schema, options) {
 
   const asterism = {}
   for (const key of Object.keys(schema)) {
-    const lyra = await create({ schema: schema[key] })
-    asterism[key] = lyra
+    const orama = await create({ schema: schema[key] })
+    asterism[key] = orama
 
     for (const entry of data[key]) {
       const document = entry
@@ -54,7 +55,7 @@ async function generateAsterism (logger, data, schema, options) {
         }
       }
 
-      await insert(lyra, document)
+      await insert(orama, document)
     }
   }
 
@@ -84,8 +85,8 @@ async function resolveAsterism (logger, options) {
   const asterism = {}
   for (const file of fs.readdirSync(filePath)) {
     if (file.endsWith('.json')) {
-      const lyra = await restoreFromFile('json', `${filePath}/${file}`)
-      asterism[file.replace(/\.js$/, '')] = lyra
+      const orama = await restoreFromFile('json', `${filePath}/${file}`)
+      asterism[file.replace(/\.js$/, '')] = orama
     }
   }
   return asterism
@@ -102,7 +103,7 @@ async function searchOnAsterism (logger, asterism, term, options) {
   for (const key of Object.keys(asterism)) {
     if (!cacheDisabled) {
       if (!caches[key]) {
-        caches[key] = await createLyraCache(asterism[key])
+        caches[key] = createOramaCache(asterism[key])
       }
 
       results[key] = await caches[key].search({ term })
@@ -141,10 +142,11 @@ function saveSearchResults (logger, results, options) {
   return filename
 }
 
-module.exports = {
+export {
   generateSchema,
   generateAsterism,
   populateAsterism,
   resolveAsterism,
-  searchOnAsterism
+  searchOnAsterism,
+  saveSearchResults
 }

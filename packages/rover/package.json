@@ -1,11 +1,13 @@
 {
   "name": "@mateonunez/asterism-rover",
   "version": "0.0.5",
-  "description": "Rover is the tool to explore Lyra",
-  "main": "rover.js",
+  "description": "Rover is the tool to explore Orama",
+  "main": "rover.mjs",
+  "type": "module",
   "scripts": {
     "lint": "standard | snazzy",
-    "test": "npm run lint && c8 --100 tap --no-coverage test/**/*.test.mjs"
+    "lint:fix": "standard --fix | snazzy",
+    "test": "npm run lint && c8 tap --no-coverage test/**/*.test.mjs"
   },
   "repository": {
     "type": "git",
@@ -20,8 +22,8 @@
     "@orama/orama": "2.0.0-beta.3",
     "@orama/plugin-data-persistence": "2.0.0-beta.3",
     "@mateonunez/asterism-huston": "workspace:*",
-    "orama-schema-resolver": "^0.3.0",
-    "orama-cache": "^0.7.0"
+    "orama-schema-resolver": "^0.4.0",
+    "orama-cache": "^0.8.0"
   },
   "devDependencies": {
     "c8": "^8.0.1",

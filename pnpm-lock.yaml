@@ -123,11 +123,11 @@ importers:
         specifier: 2.0.0-beta.3
         version: 2.0.0-beta.3
       orama-cache:
-        specifier: ^0.7.0
-        version: 0.7.0
+        specifier: ^0.8.0
+        version: 0.8.0
       orama-schema-resolver:
-        specifier: ^0.3.0
-        version: 0.3.0
+        specifier: ^0.4.0
+        version: 0.4.0
     devDependencies:
       c8:
         specifier: ^8.0.1
@@ -2630,15 +2630,15 @@ packages:
       type-check: 0.4.0
     dev: true
 
-  /orama-cache@0.7.0:
-    resolution: {integrity: sha512-EC+ze5npqExUgXN0judDo5/0nMFnfm6uxbiqcIYDuWdMa8cEDN7w66JWDLfwB4z3ME//sqZXAjUi3sC+dP/5xQ==}
+  /orama-cache@0.8.0:
+    resolution: {integrity: sha512-Yr9KFF69KKJ7m1LE493z35oFbCuCc1NKiqczeZnxY7QqOyz7fizA1oOB+ritySpR1F95NdKA4veSqJUR+QZ9JQ==}
     dependencies:
       '@orama/orama': 2.0.0-beta.3
       async-cache-dedupe: 2.0.0
     dev: false
 
-  /orama-schema-resolver@0.3.0:
-    resolution: {integrity: sha512-fQT0Y0IOG64uj8ltMQFf7XyiM+qxgJ00+noMcKC0qDN8/eLuCEF+X9Af9kOYwILLPOodzkHXsp1rjsPrM8r5FQ==}
+  /orama-schema-resolver@0.4.0:
+    resolution: {integrity: sha512-DfRpC+JdE5m3p8JBZMDbDCdntgRWZMau9b/cckqyX78wJ6TUTUg9qvg0OlduooutbrrA4Q0AAqu3TB1IpIGgaQ==}
     dependencies:
       '@orama/orama': 2.0.0-beta.3
     dev: false

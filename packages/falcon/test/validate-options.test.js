@@ -12,7 +12,7 @@ test('should validate options', async ({ end }) => {
       user: 'root',
       password: 'toor',
       outputDir: './out',
-      inputDir: './lyra'
+      inputDir: './orama'
     })
   })
 
@@ -25,7 +25,7 @@ test('should validate options', async ({ end }) => {
       user: 'postgres',
       password: 'postgres',
       outputDir: './out',
-      inputDir: './lyra'
+      inputDir: './orama'
     })
   })
 

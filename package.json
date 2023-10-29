@@ -1,11 +1,12 @@
 {
   "name": "@masteonunez/asterism",
   "version": "0.0.5",
-  "description": "Asterism is a CLI that provides a set of tools to build a Lyra instance from your favorite database.",
+  "description": "Asterism is a CLI that provides a set of tools to build a Orama instance from your favorite database.",
   "scripts": {
     "asterism": "node ./packages/cli/cli.mjs",
     "prepare": "husky install",
     "lint": "pnpm -r --workspace-concurrency=1 lint",
+    "lint:fix": "pnpm -r --workspace-concurrency=1 lint:fix",
     "test": "pnpm -r --workspace-concurrency=1 test",
     "services": "docker-compose up -d"
   },
