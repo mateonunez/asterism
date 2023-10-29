@@ -15,7 +15,7 @@ export default function validateOptions (logger, database, options) {
 
   if (!options.host) validatedOptions.host = '127.0.0.1'
   if (!options.outputDir) validatedOptions.outputDir = './out'
-  if (!options.inputDir) validatedOptions.inputDir = './lyra'
+  if (!options.inputDir) validatedOptions.inputDir = './orama'
 
   return validatedOptions
 }

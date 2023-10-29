@@ -1,6 +1,6 @@
 # 🌠 Asterism
 
-Asterism is a CLI that provides a set of tools to build a [Lyra](https://github.com/lyrasearch/lyra) instance from your favorite database.
+Asterism is a CLI that provides a set of tools to build a [Orama](https://github.com/orama/orama) instance from your favorite database.
 
 [![Tests](https://github.com/mateonunez/asterism/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/mateonunez/asterism/actions/workflows/ci.yml)
 
@@ -9,13 +9,13 @@ Asterism is a CLI that provides a set of tools to build a [Lyra](https://github.
 ### 📦 Installation
 
 ```bash
-# You can install Lyra using `npm`, `yarn`, `pnpm`:
+# You can install Orama using `npm`, `yarn`, `pnpm`:
 npm install -g @mateonunez/asterism
 ```
 
 ### 📝 Usage
 
-> Asterism provides a CLI that can be used to generate a Lyra instance from a database. The CLI can be used as follows:
+> Asterism provides a CLI that can be used to generate a Orama instance from a database. The CLI can be used as follows:
 
 ```bash
 Usage: asterism [options] [command]
@@ -27,9 +27,9 @@ Options:
   -h, --help                    display help for command
 
 Commands:
-  migrate [options] [database]  Initialize a new Lyra instance from your
+  migrate [options] [database]  Initialize a new Orama instance from your
                                 current database
-  search [options] [term]       Search for a Lyra instance in your instances
+  search [options] [term]       Search for a Orama instance in your instances
   help [command]                display help for command
 ```
 
@@ -40,7 +40,7 @@ Commands:
 
 Usage: asterism migrate [options] [database]
 
-Initialize a new Lyra instance from your current database
+Initialize a new Orama instance from your current database
 
 Arguments:
   database                           The database to migrate
@@ -57,7 +57,7 @@ Options:
   --help                             display help for command
 ```
 
-The CLI provides a `migrate` command that can be used to generate a Lyra instance from a database. The command can be used as follows:
+The CLI provides a `migrate` command that can be used to generate a Orama instance from a database. The command can be used as follows:
 
 ```bash
 > asterism migrate
@@ -70,14 +70,14 @@ The CLI provides a `migrate` command that can be used to generate a Lyra instanc
 
 Usage: asterism search [options] [term]
 
-Search for a Lyra instance in your instances
+Search for a Orama instance in your instances
 
 Arguments:
   term                          The term to search for
 
 Options:
   -c, --cacheDisabled            Disable cache
-  -i, --inputDir <inputDir>     Lyra databases directory (default: "./lyra")
+  -i, --inputDir <inputDir>     Orama databases directory (default: "./orama")
   -o, --outputDir <outputDir>   Output directory to save results in a JSON
                                 (default: "./out")
   -h, --help                    display help for command
