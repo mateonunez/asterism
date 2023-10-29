@@ -1,0 +1,12 @@
+.dccache
+.github/
+.husky/
+orama/
+out/
+node_modules/
+coverage/
+scripts/
+.gitignore
+.nvmrc
+docker-compose.yml
+
