@@ -1,5 +1,5 @@
 {
-  "name": "@masteonunez/asterism",
+  "name": "@mateonunez/asterism",
   "version": "0.0.6",
   "description": "Asterism is a CLI that provides a set of tools to build a Orama instance from your favorite database.",
   "scripts": {
