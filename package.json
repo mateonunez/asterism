@@ -6,7 +6,8 @@
     "asterism": "node ./packages/cli/cli.mjs",
     "prepare": "husky install",
     "lint": "pnpm -r --workspace-concurrency=1 lint",
-    "test": "pnpm -r --workspace-concurrency=1 test"
+    "test": "pnpm -r --workspace-concurrency=1 test",
+    "services": "docker-compose up -d"
   },
   "devDependencies": {
     "husky": "^8.0.3"
