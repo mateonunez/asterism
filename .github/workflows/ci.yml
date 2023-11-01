@@ -43,5 +43,10 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install
       - run: docker-compose up -d
-      - run: sleep 10
+      - name: Wait for databases to be healthy
+        run: |
+          while [ "$(docker-compose ps mysql | grep '(healthy)')" == "" ] || [ "$(docker-compose ps postgres | grep '(healthy)')" == "" ]; do
+            echo "Waiting for databases to be healthy..."
+            sleep 5
+          done
       - run: cd packages/${{matrix.package}} && pnpm test

@@ -11,6 +11,11 @@ services:
       MYSQL_ROOT_PASSWORD: toor
     networks:
       - asterism_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "--password=toor"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
   
   postgres:
     image: postgres:15-alpine
@@ -22,6 +27,11 @@ services:
       POSTGRES_PASSWORD: toor
     networks:
       - asterism_network
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres", "-d", "db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 networks:
   asterism_network:
