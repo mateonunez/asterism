@@ -1,17 +1,15 @@
 'use strict'
 
-function removeNulls (obj) {
-  if (typeof obj !== 'object') {
-    return obj
-  }
+function removeNulls (object) {
+  if (object === null) return ''
+  if (typeof object !== 'object') return object
 
-  /* c8 ignore next 3 */
-  if (Array.isArray(obj)) {
-    return obj.map(removeNulls)
+  if (Array.isArray(object)) {
+    return object.map(removeNulls)
   }
 
   const newObj = {}
-  for (const [key, value] of Object.entries(obj)) {
+  for (const [key, value] of Object.entries(object)) {
     if (value === null) {
       newObj[key] = ''
     } else {
@@ -22,18 +20,17 @@ function removeNulls (obj) {
   return newObj
 }
 
-function removeReservedWords (obj) {
-  if (typeof obj !== 'object') {
-    return obj
+function removeReservedWords (object) {
+  if (typeof object !== 'object') {
+    return object
   }
 
-  /* c8 ignore next 3 */
-  if (Array.isArray(obj)) {
-    return obj.map(removeReservedWords)
+  if (Array.isArray(object)) {
+    return object.map(removeReservedWords)
   }
 
   const newObj = {}
-  for (const [key, value] of Object.entries(obj)) {
+  for (const [key, value] of Object.entries(object)) {
     if (key !== 'id') {
       newObj[key] = removeReservedWords(value)
     }
