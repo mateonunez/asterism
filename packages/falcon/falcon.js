@@ -5,14 +5,14 @@ import { allowedDatabases } from '@mateonunez/asterism-drill/lib/database.js'
 import validateOptions from '@mateonunez/asterism-drill/lib/validate-options.js'
 import { generateSchema, generateAsterism, populateAsterism, resolveAsterism, searchOnAsterism } from '@mateonunez/asterism-rover'
 
-const logger = pino(
+const defaultLogger = pino(
   pretty({
     translateTime: 'yyyy-mm-dd HH:MM:ss.l',
     ignore: 'pid,hostname'
   })
 )
 
-export async function falconMigrate (database, options) {
+export async function falconMigrate (database, options, logger = defaultLogger) {
   if (!database) {
     logger.warn(`The argument "${database}" is not valid. Defaulting to 'mysql'. Allowed values are ${allowedDatabases.join(', ')}.`)
     database = 'mysql'
@@ -28,25 +28,21 @@ export async function falconMigrate (database, options) {
   await killDatabase(db)
 
   const schema = generateSchema(logger, data, { strict })
-  const asterism = generateAsterism(logger, data, schema, { strict })
+  const asterism = await generateAsterism(logger, data, schema, { strict })
 
-  populateAsterism(logger, asterism, validatedOptions)
-
-  logger.info('Done!')
+  await populateAsterism(logger, asterism, validatedOptions)
 
   return { db, asterism }
 }
 
-export async function falconSearch (term, options) {
+export async function falconSearch (term, options, logger = defaultLogger) {
   if (!term) {
     logger.warn('The term cannot be empty. Please provide a term to search for.')
     return
   }
 
-  const asterism = resolveAsterism(logger, options)
+  const asterism = await resolveAsterism(logger, options)
   const results = await searchOnAsterism(logger, asterism, term, options)
 
-  logger.info(results)
-  logger.info('Done!')
   return results
 }
