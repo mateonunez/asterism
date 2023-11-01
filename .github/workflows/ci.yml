@@ -12,105 +12,36 @@ jobs:
   setup-dependencies:
     runs-on: ${{matrix.os}}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        node-version: [16, 18, 20]
+        node: [18, 20]
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v2.4.0
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: ${{matrix.node}}
           cache: 'pnpm'
       - run: pnpm fetch
 
-  ci-cli:
+  package-tests:
     needs: setup-dependencies
     runs-on: ${{matrix.os}}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        node-version: [16, 18]
+        node: [18, 20]
+        package: [cli, drill, falcon, huston, rover]
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v2.4.0
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: ${{matrix.node}}
           cache: 'pnpm'
       - run: pnpm install
-      - run: cd packages/cli && pnpm test
-
-  ci-drill:
-    needs: setup-dependencies
-    runs-on: ${{matrix.os}}
-    timeout-minutes: 20
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node-version: [16, 18]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2.4.0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: 'pnpm'
       - run: docker-compose up -d
-      - run: pnpm install
       - run: sleep 10
-      - run: cd packages/drill && pnpm test
-
-  ci-falcon:
-    needs: setup-dependencies
-    runs-on: ${{matrix.os}}
-    timeout-minutes: 20
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node-version: [16, 18]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2.4.0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: 'pnpm'
-      - run: docker-compose up -d
-      - run: pnpm install
-      - run: sleep 10
-      - run: cd packages/falcon && pnpm test
-
-  ci-huston:
-    needs: setup-dependencies
-    runs-on: ${{matrix.os}}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node-version: [16, 18]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2.4.0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: 'pnpm'
-      - run: pnpm install
-      - run: cd packages/huston && pnpm test
-
-  ci-rover:
-    needs: setup-dependencies
-    runs-on: ${{matrix.os}}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node-version: [16, 18]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2.4.0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: 'pnpm'
-      - run: pnpm install
-      - run: cd packages/rover && pnpm test
+      - run: cd packages/${{matrix.package}} && pnpm test
