@@ -1,12 +1,13 @@
-import { test } from 'tap'
-import validateOptions from '@mateonunez/asterism-drill/lib/validate-options.js'
+import test from 'node:test'
+import assert from 'node:assert'
 import { logger } from '@mateonunez/asterism-huston'
+import validateOptions from '../lib/validate-options'
 
-test('should validate options', async ({ end }) => {
-  test('mysql', async ({ same }) => {
+test.describe('validate options', () => {
+  test.it('mysql', async () => {
     const validatedOptions = validateOptions(logger, 'mysql', {})
 
-    same(validatedOptions, {
+    assert.deepStrictEqual(validatedOptions, {
       host: '127.0.0.1',
       port: 3306,
       user: 'root',
@@ -16,10 +17,10 @@ test('should validate options', async ({ end }) => {
     })
   })
 
-  test('postgres', async ({ same }) => {
+  test.it('postgres', () => {
     const validatedOptions = validateOptions(logger, 'postgres', {})
 
-    same(validatedOptions, {
+    assert.deepStrictEqual(validatedOptions, {
       host: '127.0.0.1',
       port: 5432,
       user: 'postgres',
@@ -28,6 +29,4 @@ test('should validate options', async ({ end }) => {
       inputDir: './orama'
     })
   })
-
-  end()
 })
