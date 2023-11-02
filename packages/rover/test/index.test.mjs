@@ -2,7 +2,9 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { test } from 'tap'
 import { generateSchema, generateAsterism, populateAsterism, resolveAsterism, searchOnAsterism, saveSearchResults } from '../rover.mjs'
-import { logger } from '@mateonunez/asterism-huston'
+import huston from '@mateonunez/asterism-huston'
+
+const { logger } = huston
 
 test('should generate schema', async ({ ok }) => {
   const data = {

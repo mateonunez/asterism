@@ -2,9 +2,9 @@ import test from 'node:test'
 import assert from 'node:assert'
 import seeder, { dropSeed } from '@mateonunez/asterism-drill/lib/seeder.js'
 import { falconMigrate, falconSearch } from '../falcon.js'
-import { database } from '@mateonunez/asterism-huston'
+import huston from '@mateonunez/asterism-huston'
 
-const { mysqlOptions, postgresOptions } = database
+const { mysqlOptions, postgresOptions } = huston
 
 const logger = {
   info: () => {},

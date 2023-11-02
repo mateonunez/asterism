@@ -1,7 +1,9 @@
 import test from 'node:test'
 import assert from 'node:assert'
-import { logger } from '@mateonunez/asterism-huston'
-import validateOptions from '../lib/validate-options'
+import huston from '@mateonunez/asterism-huston'
+import validateOptions from '../lib/validate-options.js'
+
+const { logger } = huston
 
 test.describe('validate options', () => {
   test.it('mysql', async () => {

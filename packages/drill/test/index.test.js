@@ -1,8 +1,8 @@
 import { test, beforeEach, afterEach } from 'tap'
 import setupDatabase, { killDatabase, resolveTables, resolveData } from '../drill.js'
-import { database, logger } from '@mateonunez/asterism-huston'
+import huston from '@mateonunez/asterism-huston'
 
-const { mysqlOptions, postgresOptions } = database
+const { mysqlOptions, postgresOptions, logger } = huston
 
 let dbMysql, queryerMysql
 let dbPostgres, queryerPostgres

@@ -2,13 +2,13 @@
 
 import fs from 'node:fs'
 import path from 'node:path'
-import { normalizers } from '@mateonunez/asterism-huston'
+import huston from '@mateonunez/asterism-huston'
 import { create, insert, search } from '@orama/orama'
 import { persistToFile, restoreFromFile } from '@orama/plugin-data-persistence/server'
 import oramaSchemaResolver from 'orama-schema-resolver'
 import createOramaCache from 'orama-cache'
 
-const { removeNulls } = normalizers
+const { removeNulls } = huston
 const { join } = path
 
 // eslint-disable-next-line no-extend-native

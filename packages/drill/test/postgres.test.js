@@ -1,9 +1,9 @@
 import { test } from 'tap'
 import setupDatabase, { killDatabase } from './../drill.js'
 import symbols from '../lib/symbols.js'
-import { database, logger } from '@mateonunez/asterism-huston'
+import huston from '@mateonunez/asterism-huston'
 
-const { postgresOptions } = database
+const { postgresOptions, logger } = huston
 const { privateMethods } = symbols
 
 test('should create a new database', async ({ ok, end }) => {
