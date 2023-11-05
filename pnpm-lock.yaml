@@ -129,9 +129,6 @@ importers:
       standard:
         specifier: ^17.1.0
         version: 17.1.0
-      tap:
-        specifier: ^16.3.9
-        version: 16.3.9
 
 packages:
 
