@@ -86,7 +86,8 @@ async function resolveAsterism (logger, options) {
   for (const file of fs.readdirSync(filePath)) {
     if (file.endsWith('.json')) {
       const orama = await restoreFromFile('json', `${filePath}/${file}`)
-      asterism[file.replace(/\.js$/, '')] = orama
+      const key = file.replace(/\.json$/, '')
+      asterism[key] = orama
     }
   }
   return asterism
@@ -147,6 +148,5 @@ export {
   generateAsterism,
   populateAsterism,
   resolveAsterism,
-  searchOnAsterism,
-  saveSearchResults
+  searchOnAsterism
 }
