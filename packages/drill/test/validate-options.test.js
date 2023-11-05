@@ -31,4 +31,13 @@ test.describe('validate options', () => {
       inputDir: './orama'
     })
   })
+
+  test.it('should throw if the database is not supported', () => {
+    assert.throws(() => {
+      validateOptions(logger, 'cassandra', {})
+    }, {
+      name: 'Error',
+      message: 'The database "cassandra" is not supported.'
+    })
+  })
 })
