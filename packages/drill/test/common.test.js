@@ -1,9 +1,10 @@
-import { test } from 'tap'
+import { test } from 'node:test'
+import { tspl } from '@matteo.collina/tspl'
 import setupDatabase, { killDatabase } from './../drill.js'
 import symbols from '../lib/symbols.js'
-import { logger, database } from '@mateonunez/asterism-huston'
+import huston from '@mateonunez/asterism-huston'
 
-const { mysqlOptions, postgresOptions } = database
+const { logger, mysqlOptions, postgresOptions } = huston
 const { privateMethods } = symbols
 
 async function createTable (queryer, tableName) {
@@ -26,132 +27,125 @@ async function insertIntoTable (queryer, tableName) {
   })
 }
 
-test('should drop a database', ({ end }) => {
-  test('mysql', async ({ ok }) => {
-    const { db, queryer } = await setupDatabase(logger, 'mysql', mysqlOptions)
-    const databaseName = 'test'
-    await queryer[privateMethods].createDatabase(databaseName, { dropIfExists: true })
+const supportedDatabases = [
+  { name: 'mysql', options: mysqlOptions },
+  { name: 'postgres', options: postgresOptions }
+]
 
-    await queryer[privateMethods].dropDatabase(databaseName)
-    await killDatabase(db)
-    ok(db)
-  })
+test('should drop a database', async (t) => {
+  const { ok } = tspl(t, { plan: 2 })
 
-  test('postgres', async ({ ok }) => {
-    const { db, queryer } = await setupDatabase(logger, 'postgres', postgresOptions)
-    const databaseName = 'test'
-    await queryer[privateMethods].createDatabase(databaseName, { dropIfExists: true })
+  for (const database of supportedDatabases) {
+    await t.test(database.name, async () => {
+      const { db, queryer } = await setupDatabase(logger, database.name, database.options)
+      const databaseName = 'test'
+      await queryer[privateMethods].createDatabase(databaseName, { dropIfExists: true })
 
-    await queryer[privateMethods].dropDatabase(databaseName)
-    await killDatabase(db)
-    ok(db)
-  })
-
-  end()
+      await queryer[privateMethods].dropDatabase(databaseName)
+      await killDatabase(db)
+      ok(db._disposed)
+    })
+  }
 })
 
-test('should create a new table', ({ end }) => {
-  test('mysql', async ({ ok }) => {
-    const { db, queryer } = await setupDatabase(logger, 'mysql', mysqlOptions)
-    const tableName = 'common_table_test'
-    await createTable(queryer, tableName)
-    await queryer[privateMethods].dropTable(tableName)
-    await killDatabase(db)
+test('should create a new table', async (t) => {
+  const { ok } = tspl(t, { plan: 2 })
 
-    ok(db)
-  })
+  for (const database of supportedDatabases) {
+    await t.test(database.name, async () => {
+      const { db, queryer } = await setupDatabase(logger, database.name, database.options)
+      const tableName = 'common_table_test'
+      await createTable(queryer, tableName)
+      await queryer[privateMethods].dropTable(tableName)
+      await killDatabase(db)
 
-  test('postgres', async ({ ok }) => {
-    const { db, queryer } = await setupDatabase(logger, 'postgres', postgresOptions)
-    const tableName = 'common_table_test'
-    await createTable(queryer, tableName)
-    await queryer[privateMethods].dropTable(tableName)
-    await killDatabase(db)
-
-    ok(db)
-  })
-
-  end()
+      ok(db)
+    })
+  }
 })
 
-test('should insert data into a table', ({ end }) => {
-  test('mysql', async ({ ok }) => {
-    const { db, queryer } = await setupDatabase(logger, 'mysql', mysqlOptions)
-    const tableName = 'common_table_test'
-    await createTable(queryer, tableName)
-    await insertIntoTable(queryer, tableName)
-    await queryer[privateMethods].dropTable(tableName)
-    await killDatabase(db)
+test('should insert data into a table', async (t) => {
+  const { ok, deepStrictEqual } = tspl(t, { plan: 4 })
 
-    ok(db)
-  })
+  for (const database of supportedDatabases) {
+    await t.test(database.name, async () => {
+      const { db, queryer } = await setupDatabase(logger, database.name, database.options)
+      const tableName = 'common_table_test'
+      await createTable(queryer, tableName)
+      await insertIntoTable(queryer, tableName)
+      const data = await queryer.selectData(tableName)
 
-  test('postgres', async ({ ok }) => {
-    const { db, queryer } = await setupDatabase(logger, 'postgres', postgresOptions)
-    const tableName = 'common_table_test'
-    await createTable(queryer, tableName)
-    await insertIntoTable(queryer, tableName)
-    await queryer[privateMethods].dropTable(tableName)
-    await killDatabase(db)
+      deepStrictEqual(data, [{ id: 1, name: 'test' }])
 
-    ok(db)
-  })
+      await queryer[privateMethods].dropTable(tableName)
+      await killDatabase(db)
 
-  end()
+      ok(db)
+    })
+  }
 })
 
-test('should delete data', ({ end }) => {
-  test('mysql', async ({ ok }) => {
-    const { db, queryer } = await setupDatabase(logger, 'mysql', mysqlOptions)
-    const tableName = 'common_table_test'
-    await createTable(queryer, tableName)
-    await insertIntoTable(queryer, tableName)
-    await queryer[privateMethods].deleteData(tableName, { id: 1 })
-    await queryer[privateMethods].dropTable(tableName)
-    await killDatabase(db)
+test('should select data from a table', async (t) => {
+  const { ok, deepStrictEqual } = tspl(t, { plan: 4 })
 
-    ok(db)
-  })
+  for (const database of supportedDatabases) {
+    await t.test(database.name, async () => {
+      const { db, queryer } = await setupDatabase(logger, database.name, database.options)
+      const tableName = 'common_table_test'
+      await createTable(queryer, tableName)
+      await insertIntoTable(queryer, tableName)
+      const data = await queryer.selectData(tableName)
 
-  test('postgres', async ({ ok }) => {
-    const { db, queryer } = await setupDatabase(logger, 'postgres', postgresOptions)
-    const tableName = 'common_table_test'
-    await createTable(queryer, tableName)
-    await insertIntoTable(queryer, tableName)
-    await queryer[privateMethods].deleteData(tableName, { id: 1 })
-    await queryer[privateMethods].dropTable(tableName)
-    await killDatabase(db)
+      deepStrictEqual(data, [{ id: 1, name: 'test' }])
 
-    ok(db)
-  })
+      await queryer[privateMethods].dropTable(tableName)
+      await killDatabase(db)
 
-  end()
+      ok(db)
+    })
+  }
 })
 
-test('should update data', ({ end }) => {
-  test('mysql', async ({ ok }) => {
-    const { db, queryer } = await setupDatabase(logger, 'mysql', mysqlOptions)
-    const tableName = 'common_table_test'
-    await createTable(queryer, tableName)
-    await insertIntoTable(queryer, tableName)
-    await queryer[privateMethods].updateData(tableName, { id: 1 }, { name: 'test2' })
-    await queryer[privateMethods].dropTable(tableName)
-    await killDatabase(db)
+test('should delete data from a table', async (t) => {
+  const { ok, deepStrictEqual } = tspl(t, { plan: 4 })
 
-    ok(db)
-  })
+  for (const database of supportedDatabases) {
+    await t.test(database.name, async () => {
+      const { db, queryer } = await setupDatabase(logger, database.name, database.options)
+      const tableName = 'common_table_test'
+      await createTable(queryer, tableName)
+      await insertIntoTable(queryer, tableName)
+      await queryer[privateMethods].deleteData(tableName, { id: 1 })
+      const data = await queryer.selectData(tableName)
 
-  test('postgres', async ({ ok }) => {
-    const { db, queryer } = await setupDatabase(logger, 'postgres', postgresOptions)
-    const tableName = 'common_table_test'
-    await createTable(queryer, tableName)
-    await insertIntoTable(queryer, tableName)
-    await queryer[privateMethods].updateData(tableName, { id: 1 }, { name: 'test2' })
-    await queryer[privateMethods].dropTable(tableName)
-    await killDatabase(db)
+      deepStrictEqual(data, [])
 
-    ok(db)
-  })
+      await queryer[privateMethods].dropTable(tableName)
+      await killDatabase(db)
 
-  end()
+      ok(db)
+    })
+  }
+})
+
+test('should update data from a table', async (t) => {
+  const { ok, deepStrictEqual } = tspl(t, { plan: 4 })
+
+  for (const database of supportedDatabases) {
+    await t.test(database.name, async () => {
+      const { db, queryer } = await setupDatabase(logger, database.name, database.options)
+      const tableName = 'common_table_test'
+      await createTable(queryer, tableName)
+      await insertIntoTable(queryer, tableName)
+      await queryer[privateMethods].updateData(tableName, { name: 'test2' }, { id: 1 })
+      const data = await queryer.selectData(tableName)
+
+      deepStrictEqual(data, [{ id: 1, name: 'test2' }])
+
+      await queryer[privateMethods].dropTable(tableName)
+      await killDatabase(db)
+
+      ok(db)
+    })
+  }
 })

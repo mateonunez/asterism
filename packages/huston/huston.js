@@ -3,4 +3,9 @@ const normalizers = require('./lib/normalizers.js')
 const database = require('./lib/helpers/database.js')
 const logger = require('./lib/mocks/logger.js')
 
-module.exports = { time, normalizers, database, logger }
+module.exports = {
+  ...time,
+  ...normalizers,
+  ...database,
+  logger
+}

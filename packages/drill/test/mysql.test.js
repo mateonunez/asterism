@@ -1,12 +1,15 @@
-import { test } from 'tap'
+import { test } from 'node:test'
+import { tspl } from '@matteo.collina/tspl'
 import setupDatabase, { killDatabase } from './../drill.js'
 import symbols from '../lib/symbols.js'
-import { database, logger } from '@mateonunez/asterism-huston'
+import huston from '@mateonunez/asterism-huston'
 
-const { mysqlOptions } = database
+const { mysqlOptions, logger } = huston
 const { privateMethods } = symbols
 
-test('should create a new database', async ({ ok, end }) => {
+test('should create a new database', async (t) => {
+  const { ok } = tspl(t, { plan: 4 })
+
   const { db: _db, queryer } = await setupDatabase(logger, 'mysql', mysqlOptions)
   const databaseName = 'new_database'
   await queryer[privateMethods].createDatabase(databaseName, { dropIfExists: true })
@@ -15,10 +18,18 @@ test('should create a new database', async ({ ok, end }) => {
   await killDatabase(db)
 
   ok(db)
-  end()
+  ok(_db)
+  ok(db._disposed)
+  ok(_db._disposed)
 })
 
-test('should retrieve tables', async ({ ok, end }) => {
+test('should create and retrieve a new table', async (t) => {
+  t.after(async () => {
+    await killDatabase(db)
+  })
+
+  const { ok } = tspl(t, { plan: 2 })
+
   const { db, queryer } = await setupDatabase(logger, 'mysql', mysqlOptions)
   const tableName = 'test'
   await queryer[privateMethods].createTable(tableName, {
@@ -33,13 +44,18 @@ test('should retrieve tables', async ({ ok, end }) => {
   }, { dropIfExists: true })
 
   const tables = await queryer.getTables()
-  await killDatabase(db)
 
   ok(tables.length > 0)
-  end()
+  ok(tables.includes(tableName))
 })
 
-test('should retrieve single table', async ({ ok, end }) => {
+test('should create and retrieve a single table', async (t) => {
+  t.after(async () => {
+    await killDatabase(db)
+  })
+
+  const { ok } = tspl(t, { plan: 1 })
+
   const { db, queryer } = await setupDatabase(logger, 'mysql', mysqlOptions)
   const tableName = 'test'
   await queryer[privateMethods].createTable(tableName, {
@@ -53,9 +69,7 @@ test('should retrieve single table', async ({ ok, end }) => {
     }
   }, { dropIfExists: true })
 
-  const tables = await queryer.getTable('test')
-  await killDatabase(db)
+  const table = await queryer.getTable(tableName)
 
-  ok(tables)
-  end()
+  ok(table === tableName)
 })

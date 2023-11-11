@@ -1,21 +1,26 @@
-import { test } from 'tap'
+import test from 'node:test'
+import assert from 'node:assert'
 import { execa } from 'execa'
 import cliPath from '../lib/cli-path.js'
 import version from '../lib/version.js'
 
-test('version', async ({ same }) => {
-  const { stdout } = await execa('node', [cliPath, '--version'])
-  same(stdout, version)
+test.describe('version', async () => {
+  test.it('should match package.json version', async () => {
+    const { stdout } = await execa('node', [cliPath, '--version'])
+    assert.equal(stdout, version)
+  })
 })
 
-test('help', async ({ ok }) => {
-  const { stdout } = await execa('node', [cliPath, '--help'])
-
-  ok(stdout.includes('Usage: asterism [options] [command]'))
+test.describe('help', async () => {
+  test.it('should display help', async () => {
+    const { stdout } = await execa('node', [cliPath, '--help'])
+    assert.ok(stdout.includes('Usage: asterism [options] [command]'))
+  })
 })
 
-test('migrate', async ({ ok }) => {
-  const { stdout } = await execa('node', [cliPath, 'migrate', '--help'])
-
-  ok(stdout.includes('Usage: asterism migrate [options] [database]'))
+test.describe('migrate', async () => {
+  test.it('should display help', async () => {
+    const { stdout } = await execa('node', [cliPath, 'migrate', '--help'])
+    assert.ok(stdout.includes('Usage: asterism migrate [options] [database]'))
+  })
 })

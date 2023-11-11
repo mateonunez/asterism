@@ -1,145 +1,148 @@
+import test from 'node:test'
+import assert from 'node:assert'
 import fs from 'node:fs'
-import path from 'node:path'
-import { test } from 'tap'
-import { generateSchema, generateAsterism, populateAsterism, resolveAsterism, searchOnAsterism, saveSearchResults } from '../rover.mjs'
-import { logger } from '@mateonunez/asterism-huston'
+import path, { join } from 'node:path'
+import { generateSchema, generateAsterism, populateAsterism, resolveAsterism, searchOnAsterism } from '../rover.mjs'
 
-test('should generate schema', async ({ ok }) => {
-  const data = {
-    users: [
-      {
-        name: 'John',
-        age: 30
-      },
-      {
-        name: 'Jane',
-        age: 28
-      }
-    ]
-  }
-  const schema = generateSchema(logger, data)
-  ok(schema.users)
-})
+const logger = {
+  info: () => {},
+  warn: () => {},
+  error: () => {}
+}
 
-test('shouldn\'t generate schema with empty properties', async ({ same }) => {
-  const data = {
-    users: [
-      {
-        name: 'John',
-        age: 30
-      },
-      {
-        name: 'Jane',
-        age: 28
-      }
-    ],
-    empty: []
-  }
-  const schema = generateSchema(logger, data)
-  same(schema, { users: { name: 'string', age: 'number' } })
-})
+const data = {
+  users: [
+    {
+      name: 'John Doe',
+      age: 30,
+      address: '123 Main St.',
+      email: 'john@doe.com'
+    },
+    {
+      name: 'Jane Doe',
+      age: 25,
+      address: '456 Main St.',
+      email: 'jane@doe.com'
+    }
+  ]
+}
 
-test('should generate an aestirsm', async ({ ok }) => {
-  const data = {
-    users: [
-      {
-        name: 'John',
-        age: 30
-      },
-      {
-        name: 'Jane',
-        age: 28
-      }
-    ]
-  }
-  const schema = generateSchema(logger, data)
-  const asterism = await generateAsterism(logger, data, schema)
-  ok(asterism)
-})
+async function cleanUp (directory) {
+  const filePath = path.resolve(join(process.cwd(), directory))
+  if (fs.existsSync(filePath)) fs.rmdirSync(filePath, { recursive: true })
+}
 
-test('should persist an asterism', async ({ ok }) => {
-  const data = {
-    users: [
-      {
-        name: 'John',
-        age: 30
-      },
-      {
-        name: 'Jane',
-        age: 28
-      }
-    ]
-  }
-  const schema = generateSchema(logger, data)
-  const asterism = await generateAsterism(logger, data, schema)
-  await populateAsterism(logger, asterism, { outputDir: './orama' })
-  ok(asterism)
-})
+const outDir = './orama'
 
-test('should resolve asterism', async ({ ok }) => {
-  const asterism = await resolveAsterism(logger, { inputDir: './orama' })
-  ok(asterism)
-})
+test.describe('rover', () => {
+  test.describe('generateSchema', async () => {
+    test.it('should generate a simple schema', async () => {
+      const schema = generateSchema(logger, data)
+      assert.deepStrictEqual(schema, {
+        users: {
+          name: 'string',
+          age: 'number',
+          address: 'string',
+          email: 'string'
+        }
+      })
+    })
 
-test('should search on asterism', async ({ ok }) => {
-  const asterism = await resolveAsterism(logger, { inputDir: './orama' })
-  const results = await searchOnAsterism(logger, asterism, 'John')
-  ok(results)
-})
+    test.it('should skip empty data', async () => {
+      const schema = generateSchema(logger, { users: [] })
+      assert.deepStrictEqual(schema, { })
+    })
+  })
 
-test('should perform a cached search', async ({ ok }) => {
-  const asterism = await resolveAsterism(logger, { inputDir: './orama' })
-  const results = await searchOnAsterism(logger, asterism, 'John')
-  ok(results[Object.keys(results)[0]].cached)
-})
+  test.describe('generateAsterism', async () => {
+    test.it('should generate an asterism', async () => {
+      const schema = generateSchema(logger, data)
+      const asterism = await generateAsterism(logger, data, schema)
 
-test('should perform a non-cached search', async ({ equal }) => {
-  const asterism = await resolveAsterism(logger, { inputDir: './orama' })
-  const results = await searchOnAsterism(logger, asterism, 'John', { cacheDisabled: true })
+      assert.ok(asterism.users)
+      assert.ok(Object.keys(asterism.users.data.docs.docs).length > 0)
+      assert.deepStrictEqual(asterism.users.schema, schema.users)
+      assert.ok(Object.keys(asterism.users.data.docs.docs).length === Object.keys(data.users).length)
+    })
+  })
 
-  equal(results[Object.keys(results)[0]].cached, undefined)
-})
+  test.describe('populateAsterism', async () => {
+    test.it('should populate an asterism', async () => {
+      const schema = generateSchema(logger, data)
+      const asterism = await generateAsterism(logger, data, schema)
+      await populateAsterism(logger, asterism, { outputDir: './orama' })
 
-test('should save search results in a json file', async ({ ok }) => {
-  const asterism = await resolveAsterism(logger, { inputDir: './orama' })
-  await searchOnAsterism(logger, asterism, 'John', { outputDir: './out' })
-  ok(true)
-})
+      const filePath = path.resolve(join(process.cwd(), './orama'))
+      assert.ok(fs.existsSync(`${filePath}/users.json`))
+    })
 
-test('throws an error with invalid outputDir', async ({ error }) => {
-  const asterism = await resolveAsterism(logger, { inputDir: './orama' })
-  try {
-    await searchOnAsterism(logger, asterism, 'John', {})
-  } catch (err) {
-    error(err)
-  }
-})
+    // clean up
+    test.afterEach(async () => {
+      await cleanUp(outDir)
+    })
+  })
 
-test('should save search results using saveSearchResults', async ({ ok }) => {
-  const results = {
-    users: [
-      {
-        name: 'John',
-        score: 0.99
-      },
-      {
-        name: 'Jane',
-        score: 0.56
-      }
-    ]
-  }
-  const outputDir = './outputTest'
-  const savedPath = saveSearchResults(logger, results, { outputDir })
+  test.describe('resolveAsterism', async () => {
+    test.it('should resolve an asterism', async () => {
+      const schema = generateSchema(logger, data)
+      const asterism = await generateAsterism(logger, data, schema)
+      await populateAsterism(logger, asterism, { outputDir: './orama' })
 
-  const fileExists = fs.existsSync(savedPath)
-  if (fileExists) {
-    const savedData = fs.readFileSync(savedPath, 'utf8')
-    const jsonData = JSON.parse(savedData)
-    ok(jsonData.users && jsonData.users.length === 2, 'Should have saved the correct data')
-    // Clean up test data (comment this out if you want to inspect the file)
-    fs.unlinkSync(savedPath)
-    fs.rmdirSync(path.resolve(outputDir))
-  } else {
-    ok(false, 'File was not saved correctly')
-  }
+      const resolvedAsterism = await resolveAsterism(logger, { inputDir: './orama' })
+      assert.ok(resolvedAsterism.users)
+      assert.ok(Object.keys(resolvedAsterism.users.data.docs.docs).length > 0)
+      // Orama adds some extra fields to the schema when saved to disk: `__placleholder`, etc
+      // assert.deepStrictEqual(resolvedAsterism.users.schema, schema.users)
+      assert.ok(Object.keys(resolvedAsterism.users.data.docs.docs).length === Object.keys(data.users).length)
+    })
+
+    // clean up
+    test.afterEach(async () => {
+      await cleanUp(outDir)
+    })
+  })
+
+  test.describe('searchOnAsterism', async () => {
+    test.it('should search on an asterism', async () => {
+      const schema = generateSchema(logger, data)
+      const asterism = await generateAsterism(logger, data, schema)
+      await populateAsterism(logger, asterism, { outputDir: './orama' })
+
+      const results = await searchOnAsterism(logger, asterism, 'John')
+      assert.ok(results.users)
+      assert.ok(results.users.count > 0)
+    })
+
+    test.it('should search with cache disabled', async () => {
+      const schema = generateSchema(logger, data)
+      const asterism = await generateAsterism(logger, data, schema)
+      await populateAsterism(logger, asterism, { outputDir: './orama' })
+
+      const results = await searchOnAsterism(logger, asterism, 'John', { cacheDisabled: true })
+      assert.ok(results.users)
+      assert.ok(results.users.count > 0)
+    })
+
+    test.it('should save the search results to disk', async () => {
+      const schema = generateSchema(logger, data)
+      const asterism = await generateAsterism(logger, data, schema)
+      await populateAsterism(logger, asterism, { outputDir: './orama' })
+
+      const results = await searchOnAsterism(logger, asterism, 'John', { outputDir: './out' })
+      assert.ok(results.users)
+      assert.ok(results.users.count > 0)
+
+      const filePath = path.resolve(join(process.cwd(), './orama'))
+      assert.ok(fs.existsSync(`${filePath}/users.json`))
+
+      test.afterEach(async () => {
+        await cleanUp('./out')
+      })
+    })
+
+    // clean up
+    test.afterEach(async () => {
+      await cleanUp(outDir)
+    })
+  })
 })

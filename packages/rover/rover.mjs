@@ -2,13 +2,13 @@
 
 import fs from 'node:fs'
 import path from 'node:path'
-import { normalizers } from '@mateonunez/asterism-huston'
+import huston from '@mateonunez/asterism-huston'
 import { create, insert, search } from '@orama/orama'
 import { persistToFile, restoreFromFile } from '@orama/plugin-data-persistence/server'
 import oramaSchemaResolver from 'orama-schema-resolver'
 import createOramaCache from 'orama-cache'
 
-const { removeNulls } = normalizers
+const { removeNulls } = huston
 const { join } = path
 
 // eslint-disable-next-line no-extend-native
@@ -86,7 +86,8 @@ async function resolveAsterism (logger, options) {
   for (const file of fs.readdirSync(filePath)) {
     if (file.endsWith('.json')) {
       const orama = await restoreFromFile('json', `${filePath}/${file}`)
-      asterism[file.replace(/\.js$/, '')] = orama
+      const key = file.replace(/\.json$/, '')
+      asterism[key] = orama
     }
   }
   return asterism
@@ -147,6 +148,5 @@ export {
   generateAsterism,
   populateAsterism,
   resolveAsterism,
-  searchOnAsterism,
-  saveSearchResults
+  searchOnAsterism
 }
