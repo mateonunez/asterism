@@ -12,7 +12,6 @@ export default async function setupDatabase (logger, database, options) {
 
 export async function killDatabase (db) {
   await db.dispose()
-  db.isClosed = true
 }
 
 export async function resolveTables (logger, queryer, options) {

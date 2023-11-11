@@ -42,7 +42,7 @@ test.describe('falcon', () => {
 
     test.it('should close the database connection', async () => {
       const { db } = await falconMigrate('mysql', { ...mysqlOptions, outputDir: './orama' }, logger)
-      assert.equal(db.isClosed, true)
+      assert.equal(db._disposed, true)
     })
   })
 
