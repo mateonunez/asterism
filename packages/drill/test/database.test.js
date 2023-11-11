@@ -1,19 +1,18 @@
-import { test } from 'tap'
+import { test } from 'node:test'
+import assert from 'node:assert'
 import { generateConnectionString } from '../lib/database.js'
 import huston from '@mateonunez/asterism-huston'
 
 const { mysqlOptions, postgresOptions } = huston
 
-test('should generate correctly the connection string', ({ end }) => {
-  test('mysql', async ({ same }) => {
+test('should generate correctly the connection string', async (t) => {
+  await t.test('mysql', async () => {
     const { mysql } = generateConnectionString(mysqlOptions)
-    same(mysql, 'mysql://root:toor@127.0.0.1:3306/db')
+    assert.strictEqual(mysql, 'mysql://root:toor@127.0.0.1:3306/db')
   })
 
-  test('postgres', async ({ same }) => {
+  await t.test('postgres', async () => {
     const { postgres } = generateConnectionString(postgresOptions)
-    same(postgres, 'postgres://postgres:toor@127.0.0.1:5432/db')
+    assert.strictEqual(postgres, 'postgres://postgres:toor@127.0.0.1:5432/db')
   })
-
-  end()
 })

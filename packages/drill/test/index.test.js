@@ -1,86 +1,88 @@
-import { test, beforeEach, afterEach } from 'tap'
+import { test } from 'node:test'
+import { tspl } from '@matteo.collina/tspl'
 import setupDatabase, { killDatabase, resolveTables, resolveData } from '../drill.js'
 import huston from '@mateonunez/asterism-huston'
 
 const { mysqlOptions, postgresOptions, logger } = huston
+const supportedDatabases = [
+  { name: 'mysql', options: mysqlOptions },
+  { name: 'postgres', options: postgresOptions }
+]
 
-let dbMysql, queryerMysql
-let dbPostgres, queryerPostgres
-beforeEach(async () => {
-  const { db: _dbMysql, queryer: _queryerMysql } = await setupDatabase(logger, 'mysql', mysqlOptions)
-  dbMysql = _dbMysql
-  queryerMysql = _queryerMysql
+test('database', async (t) => {
+  await t.test('the database should setup correctly', async (t) => {
+    const { ok } = tspl(t, { plan: 4 })
 
-  const { db: _dbPostgres, queryer: _queryerPostgres } = await setupDatabase(logger, 'postgres', postgresOptions)
-  dbPostgres = _dbPostgres
-  queryerPostgres = _queryerPostgres
-})
+    for (const database of supportedDatabases) {
+      await t.test(database.name, async (t) => {
+        t.after(async () => {
+          await killDatabase(db)
+        })
 
-afterEach(async () => {
-  await killDatabase(dbMysql)
-  await killDatabase(dbPostgres)
-})
-
-test('the database should setup correctly', async ({ end }) => {
-  test('mysql', async ({ ok }) => {
-    ok(dbMysql)
-    ok(queryerMysql)
+        const { db, queryer } = await setupDatabase(logger, database.name, database.options)
+        ok(db)
+        ok(queryer)
+      })
+    }
   })
 
-  test('postgres', async ({ ok }) => {
-    ok(dbPostgres)
-    ok(queryerPostgres)
+  await t.test('the database should dispose correctly', async (t) => {
+    const { ok } = tspl(t, { plan: 2 })
+
+    for (const database of supportedDatabases) {
+      await t.test(database.name, async () => {
+        const { db } = await setupDatabase(logger, database.name, database.options)
+        await killDatabase(db)
+        ok(db._disposed)
+      })
+    }
   })
 
-  end()
-})
+  await t.test('the database should resolve tables correctly', async (t) => {
+    const { ok } = tspl(t, { plan: 2 })
 
-test('should resolve all the tables', ({ end }) => {
-  test('mysql', async ({ ok }) => {
-    const tables = await resolveTables(logger, queryerMysql, mysqlOptions)
+    for (const database of supportedDatabases) {
+      await t.test(database.name, async (t) => {
+        t.after(async () => {
+          await killDatabase(db)
+        })
 
-    ok(tables)
+        const { db, queryer } = await setupDatabase(logger, database.name, database.options)
+        const tables = await resolveTables(logger, queryer, database.options)
+        ok(tables.length > 0)
+        await killDatabase(db)
+      })
+    }
   })
 
-  test('postgres', async ({ ok }) => {
-    const tables = await resolveTables(logger, queryerPostgres, postgresOptions)
+  await t.test('the database should resolve single table correctly', async (t) => {
+    const { ok } = tspl(t, { plan: 2 })
 
-    ok(tables)
+    for (const database of supportedDatabases) {
+      await t.test(database.name, async () => {
+        t.after(async () => {
+          await killDatabase(db)
+        })
+
+        const { db, queryer } = await setupDatabase(logger, database.name, database.options)
+        const tables = await resolveTables(logger, queryer, { ...database.options, tableName: 'users' })
+        ok(tables.length === 1)
+        await killDatabase(db)
+      })
+    }
   })
 
-  end()
-})
+  await t.test('the database should resolve data correctly', async (t) => {
+    const { ok } = tspl(t, { plan: 2 })
 
-test('should resolve single table', ({ end }) => {
-  test('mysql', async ({ ok }) => {
-    const tables = await resolveTables(logger, queryerMysql, { mysqlOptions, tableName: 'users' })
-
-    ok(tables)
+    for (const database of supportedDatabases) {
+      await t.test(database.name, async () => {
+        const { db, queryer } = await setupDatabase(logger, database.name, database.options)
+        const tables = await resolveTables(logger, queryer, database.options)
+        const data = await resolveData(logger, queryer, tables, database.options)
+        ok(data)
+        await killDatabase(db)
+      })
+    }
   })
-
-  test('postgres', async ({ ok }) => {
-    const tables = await resolveTables(logger, queryerPostgres, { ...postgresOptions, tableName: 'users' })
-
-    ok(tables)
-  })
-
-  end()
-})
-
-test('should resolve data', ({ end }) => {
-  test('mysql', async ({ ok }) => {
-    const tables = await resolveTables(logger, queryerMysql, mysqlOptions)
-    const data = await resolveData(logger, queryerMysql, tables, mysqlOptions)
-
-    ok(data)
-  })
-
-  test('postgres', async ({ ok }) => {
-    const tables = await resolveTables(logger, queryerPostgres, postgresOptions)
-    const data = await resolveData(logger, queryerPostgres, tables, postgresOptions)
-
-    ok(data)
-  })
-
-  end()
 })

@@ -1,12 +1,12 @@
-import test from 'node:test'
+import { test } from 'node:test'
 import assert from 'node:assert'
 import huston from '@mateonunez/asterism-huston'
 import validateOptions from '../lib/validate-options.js'
 
 const { logger } = huston
 
-test.describe('validate options', () => {
-  test.it('mysql', async () => {
+test('validate options', async (t) => {
+  await t.test('mysql', async () => {
     const validatedOptions = validateOptions(logger, 'mysql', {})
 
     assert.deepStrictEqual(validatedOptions, {
@@ -19,7 +19,7 @@ test.describe('validate options', () => {
     })
   })
 
-  test.it('postgres', () => {
+  await t.test('postgres', () => {
     const validatedOptions = validateOptions(logger, 'postgres', {})
 
     assert.deepStrictEqual(validatedOptions, {
@@ -32,7 +32,7 @@ test.describe('validate options', () => {
     })
   })
 
-  test.it('should throw if the database is not supported', () => {
+  await t.test('should throw if the database is not supported', () => {
     assert.throws(() => {
       validateOptions(logger, 'cassandra', {})
     }, {
