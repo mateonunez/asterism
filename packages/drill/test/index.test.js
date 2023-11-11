@@ -50,7 +50,6 @@ test('database', async (t) => {
         const { db, queryer } = await setupDatabase(logger, database.name, database.options)
         const tables = await resolveTables(logger, queryer, database.options)
         ok(tables.length > 0)
-        await killDatabase(db)
       })
     }
   })
@@ -67,7 +66,6 @@ test('database', async (t) => {
         const { db, queryer } = await setupDatabase(logger, database.name, database.options)
         const tables = await resolveTables(logger, queryer, { ...database.options, tableName: 'users' })
         ok(tables.length === 1)
-        await killDatabase(db)
       })
     }
   })
@@ -76,12 +74,15 @@ test('database', async (t) => {
     const { ok } = tspl(t, { plan: 2 })
 
     for (const database of supportedDatabases) {
-      await t.test(database.name, async () => {
+      await t.test(database.name, async (t) => {
+        t.after(async () => {
+          await killDatabase(db)
+        })
+
         const { db, queryer } = await setupDatabase(logger, database.name, database.options)
         const tables = await resolveTables(logger, queryer, database.options)
         const data = await resolveData(logger, queryer, tables, database.options)
         ok(data)
-        await killDatabase(db)
       })
     }
   })
