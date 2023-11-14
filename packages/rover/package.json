@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/mateonunez/asterism#readme",
   "dependencies": {
-    "@orama/orama": "2.0.0-beta.4",
+    "@orama/orama": "2.0.0-beta.6",
     "@orama/plugin-data-persistence": "2.0.0-beta.6",
     "@mateonunez/asterism-huston": "workspace:*",
     "orama-schema-resolver": "^0.4.0",
