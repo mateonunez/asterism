@@ -26,7 +26,7 @@
     "orama-cache": "^0.8.0"
   },
   "devDependencies": {
-    "c8": "^8.0.1",
+    "c8": "^9.0.0",
     "snazzy": "^9.0.0",
     "standard": "^17.1.0"
   },
