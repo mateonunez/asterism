@@ -18,7 +18,7 @@ jobs:
         node: [18, 20]
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2.4.0
+      - uses: pnpm/action-setup@v3.0.0
       - uses: actions/setup-node@v4
         with:
           node-version: ${{matrix.node}}
@@ -36,7 +36,7 @@ jobs:
         package: [cli, drill, falcon, huston, rover]
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2.4.0
+      - uses: pnpm/action-setup@v3.0.0
       - uses: actions/setup-node@v4
         with:
           node-version: ${{matrix.node}}
