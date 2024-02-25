@@ -51,7 +51,7 @@ importers:
     devDependencies:
       '@matteo.collina/tspl':
         specifier: ^0.1.0
-        version: 0.1.0
+        version: 0.1.1
       c8:
         specifier: ^9.0.0
         version: 9.0.0
@@ -362,8 +362,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@matteo.collina/tspl@0.1.0:
-    resolution: {integrity: sha512-2aMJfoKtuOBosiDEqwJEjjfbfm1q4A621bn8jkuZth6Z6c3AfAp4sS2Y+MnzPEAp7YhiHAvyLp488VB84p3w5A==}
+  /@matteo.collina/tspl@0.1.1:
+    resolution: {integrity: sha512-jJFj8RzdExJGmZOVbyMViYkEgpyxqj/2InjRqnmFvYss+cXQEg47dTjADvL+ZGFRsJf6w5mtI5F+cNUBq1MVvA==}
     dev: true
 
   /@msgpack/msgpack@2.8.0:
