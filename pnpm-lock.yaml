@@ -108,8 +108,8 @@ importers:
         specifier: workspace:*
         version: link:../huston
       '@orama/orama':
-        specifier: 2.0.0-beta.6
-        version: 2.0.0-beta.6
+        specifier: 2.1.1
+        version: 2.1.1
       '@orama/plugin-data-persistence':
         specifier: 2.0.0-beta.6
         version: 2.0.0-beta.6
@@ -399,6 +399,11 @@ packages:
 
   /@orama/orama@2.0.0-beta.6:
     resolution: {integrity: sha512-jYzUdIT9Hq3/sUop0eTK1IFOGw0C6LcsA2z9WzjR/u1PTKCRyOmS2FDxMlvv1OHBq9JAerLBxd0aziTXc6JyRg==}
+    engines: {node: '>= 16.0.0'}
+    dev: false
+
+  /@orama/orama@2.1.1:
+    resolution: {integrity: sha512-euTV/2kya290SNkl5m8e/H1na8iDygk74nNtl4E0YZNyYIrEMwE1JwamoroMKGZw2Uz+in/8gH3m1+2YfP0j1w==}
     engines: {node: '>= 16.0.0'}
     dev: false
 
@@ -2073,7 +2078,7 @@ packages:
   /orama-cache@0.8.0:
     resolution: {integrity: sha512-Yr9KFF69KKJ7m1LE493z35oFbCuCc1NKiqczeZnxY7QqOyz7fizA1oOB+ritySpR1F95NdKA4veSqJUR+QZ9JQ==}
     dependencies:
-      '@orama/orama': 2.0.0-beta.6
+      '@orama/orama': 2.1.1
       async-cache-dedupe: 2.0.0
     dev: false
 
