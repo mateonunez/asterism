@@ -111,8 +111,8 @@ importers:
         specifier: 2.0.0-beta.6
         version: 2.0.0-beta.6
       '@orama/plugin-data-persistence':
-        specifier: 2.0.0-beta.6
-        version: 2.0.0-beta.6
+        specifier: 2.1.1
+        version: 2.1.1
       orama-cache:
         specifier: ^0.8.0
         version: 0.8.0
@@ -402,11 +402,16 @@ packages:
     engines: {node: '>= 16.0.0'}
     dev: false
 
-  /@orama/plugin-data-persistence@2.0.0-beta.6:
-    resolution: {integrity: sha512-lZWf9B/jZnhsH/XgFbfP9JKZmvzigqPxCYT+R6/Vlc1xMfcUZR9U7NzlXo1MHwZrpT75VyFrnh2U1wkS+TAEbg==}
+  /@orama/orama@2.1.1:
+    resolution: {integrity: sha512-euTV/2kya290SNkl5m8e/H1na8iDygk74nNtl4E0YZNyYIrEMwE1JwamoroMKGZw2Uz+in/8gH3m1+2YfP0j1w==}
+    engines: {node: '>= 16.0.0'}
+    dev: false
+
+  /@orama/plugin-data-persistence@2.1.1:
+    resolution: {integrity: sha512-JocJ7Q9mv/2+1jr6194mSiQUvbJ3/7WRZipzg5z8LI6kKcbCFMcYQgJ5RP65bIrXS8EeR36mt5hsRTJdEo+ZbA==}
     dependencies:
       '@msgpack/msgpack': 2.8.0
-      '@orama/orama': 2.0.0-beta.6
+      '@orama/orama': 2.1.1
       dpack: 0.6.22
     dev: false
 
