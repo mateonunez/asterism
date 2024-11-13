@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/mateonunez/asterism#readme",
   "dependencies": {
-    "@databases/mysql": "^6.0.0",
+    "@databases/mysql": "^7.0.0",
     "@databases/pg": "^5.5.0",
     "@mateonunez/asterism-huston": "workspace:*"
   },
