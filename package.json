@@ -11,7 +11,7 @@
     "services": "docker-compose up -d"
   },
   "devDependencies": {
-    "husky": "^8.0.3"
+    "husky": "^9.0.0"
   },
   "author": {
     "email": "mateonunez95@gmail.com",
